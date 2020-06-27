@@ -1,0 +1,58 @@
+#mappingTableArea {
+    max-height: 500px;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+#mappingTable {
+    white-space: normal;
+}
+
+.checked {
+    color: blue;
+}
+
+.fa-times {
+    font-size: 1.5rem;
+}
+
+thead,
+tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+td {
+    vertical-align: middle;
+}
+
+.fontsize-8 {
+    font-size: 0.8rem;
+}
+
+.width-300p {
+    width: 300px;
+}
+
+.width-100p {
+    width: 100px;
+    vertical-align: middle !important;
+}
+
+.navbar-login {
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session {
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size {
+    font-size: 87px;
+}
