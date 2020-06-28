@@ -49,6 +49,14 @@
         <div class="col-sm-9">
           <p> : -</p>
         </div>
+		
+		
+		<pre>
+			  <?php var_dump($msg);?>
+			  <?php var_dump($log);?>
+			  </pre>
+		
+		
       </div>
     </div>
 
