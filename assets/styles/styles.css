@@ -1,58 +1,109 @@
 #mappingTableArea {
-    max-height: 500px;
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: auto;
+	max-height: 500px;
+	max-width: 100%;
+	overflow-x: auto;
+	overflow-y: auto;
 }
 
 #mappingTable {
-    white-space: normal;
+	white-space: normal;
 }
 
 .checked {
-    color: blue;
+	color: blue;
 }
 
 .fa-times {
-    font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 
 thead,
 tbody tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
+	display: table;
+	width: 100%;
+	table-layout: fixed;
 }
 
 td {
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 .fontsize-8 {
-    font-size: 0.8rem;
+	font-size: 0.8rem;
 }
 
 .width-300p {
-    width: 300px;
+	width: 300px;
 }
 
 .width-100p {
-    width: 100px;
-    vertical-align: middle !important;
+	width: 100px;
+	vertical-align: middle !important;
 }
 
 .navbar-login {
-    width: 305px;
-    padding: 10px;
-    padding-bottom: 0px;
+	width: 305px;
+	padding: 10px;
+	padding-bottom: 0px;
 }
 
 .navbar-login-session {
-    padding: 10px;
-    padding-bottom: 0px;
-    padding-top: 0px;
+	padding: 10px;
+	padding-bottom: 0px;
+	padding-top: 0px;
 }
 
 .icon-size {
-    font-size: 87px;
+	font-size: 87px;
+}
+
+.nav-link.active {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 3px solid #fa9430 !important;
+	color: #fa9430 !important;
+}
+
+nav > div a.nav-item.nav-link.active:after {
+	content: "";
+	position: relative;
+	bottom: -40px;
+	left: -40%;
+	border: 10px solid transparent;
+	border-top-color: #fa9430;
+}
+
+a.nav-item.nav-link {
+	border: none;
+	border-radius: 0;
+	border-left: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+}
+
+.bg-headnav {
+	background: rgb(17, 52, 94);
+	background: linear-gradient(
+		0deg,
+		rgba(17, 52, 94, 1) 48%,
+		rgba(16, 66, 100, 1) 52%
+	);
+}
+
+.btn-yellow {
+	background: rgb(253, 187, 45);
+	background: linear-gradient(
+		0deg,
+		rgba(253, 187, 45, 1) 25%,
+		rgba(255, 229, 174, 1) 100%
+	);
+	color: #6f6f6f;
+}
+
+.notify-badge {
+	position: absolute;
+	top: 10px;
+	text-align: center;
+	color: white;
+	font-size: 0.8rem;
 }
