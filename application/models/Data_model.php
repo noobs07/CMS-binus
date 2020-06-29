@@ -34,6 +34,7 @@ class Data_model extends MY_Model{
 			$insDetail = "INSERT INTO courseLObj(stsrc, userIn, courseLObjUUID, code, descIN, descEN, taxonomyID, taxonomyName, taxonomyDesc, taxonomyCode, taxonomyKeyword, taxonomyLevel, courseStudentOutcomeID, CRSE_CODE) VALUES ";
 			$check_ins = false;
 			$check_insDetail = false;
+			$insLObj2LO = [];
 			foreach($data as $d){
 				$ins .= "('I', {$this->db->escape($user_id)}, {$this->db->escape($d->statusStudentOutcomeId)}, {$this->db->escape($d->statusStudentOutcomePM)}, {$this->db->escape($d->statusStudentOutcomeNameIN)}, {$this->db->escape($d->statusStudentOutcomeNameEN)}, {$this->db->escape($course_code)}),";
 				$check_ins = true;
@@ -42,17 +43,24 @@ class Data_model extends MY_Model{
 					$sql = "(SELECT courseStudentOutcomeID FROM courseStudentOutcome WHERE courseStudentOutcomeUUID = {$this->db->escape($d->statusStudentOutcomeId)})";
 					$insDetail .= "('I', {$this->db->escape($user_id)}, {$this->db->escape($r->id)}, {$this->db->escape($r->code)}, {$this->db->escape($r->descIN)}, {$this->db->escape($r->descEN)}, {$this->db->escape($r->bloomTaxonomyId)}, {$this->db->escape($r->bloomTaxonomyName)}, {$this->db->escape($r->bloomTaxonomyDesc)}, {$this->db->escape($r->bloomTaxonomyCode)}, {$this->db->escape($r->bloomTaxonomyKeyword)}, {$this->db->escape($r->bloomTaxonomyLevel)}, {$sql}, {$this->db->escape($course_code)}),";
 					$check_insDetail = true;
+					$insLObj2LO[] = "dbo.courseLObj2LO_Create {$this->db->escape($course_code)}, {$this->db->escape($r->id)}, {$this->db->escape($user_id)} ";
 				}
 			}
 			
 			if($check_ins){
-				$this->db->query(rtrim($ins, ','));
-				$this->setLogQuery('ins');
+				$this->db->simple_query(rtrim($ins, ','));
+				//$this->setLogQuery('ins');
 			}
 			
 			if($check_insDetail){
-				$this->db->query(rtrim($insDetail, ','));
-				$this->setLogQuery('ins_detail');
+				$this->db->simple_query(rtrim($insDetail, ','));
+				//$this->setLogQuery('ins_detail');
+			}
+			
+			if(count($insLObj2LO) > 0){
+				foreach($insLObj2LO as $i){
+					$this->db->simple_query($i);
+				}
 			}
 			
 			if ($this->db->trans_status() === FALSE){
