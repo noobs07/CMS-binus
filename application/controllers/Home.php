@@ -13,27 +13,38 @@ class Home extends MY_Controller {
 	public function index()
 	{	
 		$code = 'FOOD6XXX';
+		
+		// get data SO
 		$so = $this->data->getCourseStudentOutcome($code);
+		
+		// Jika data belum ada, get dari API
 		if(empty($so)){
+			// return dari API SO dan LObj
 			$api_data	= $this->postRequest("get_lobj/{$code}");	
 			
+			// simpan SO dan LObj ke local database
 			$this->data->insertData($this->_userID, $code, $api_data->data);
+			
+			// get data SO
 			$so = $this->data->getCourseStudentOutcome($code);
 		}
 		
 		$data = [];
 		foreach($so as $s){
 			
+			// get data LObj untuk tiap-tiap SO
 			$detail  = $this->data->getCourseLObj($s->courseStudentOutcomeId, $code);
 			foreach($detail as $d){
 				$s->LObj[] = $d;
 			}
 		}
-		$this->d($so); die;
 		
+		// get data mapping LObj dan LO
+		$LObj2LO = $this->data->getCourseLObj2LO($code);
 		
-		echo '<pre>';
-		print_r($so); die;
+		dump($so, 'data SO dan LObj'); 
+		dump($LObj2LO, 'data mapping LObj ke LO');
+		die;
 		
 		if($result){	
 			$data['log'] = $this->data->getLogQuery();
