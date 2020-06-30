@@ -47,9 +47,9 @@ class Home extends MY_Controller {
 		// get data mapping LObj dan LO
 		$LObj2LO = $this->data->getCourseLObj2LO($code);
 		
-		dump($so, 'data SO dan LObj'); 
-		dump($LObj2LO, 'data mapping LObj ke LO');
-		die;
+		//dump($so, 'data SO dan LObj'); 
+		//dump($LObj2LO, 'data mapping LObj ke LO');
+		//die;
 		
 		if($result){	
 			$data['log'] = $this->data->getLogQuery();
@@ -58,6 +58,7 @@ class Home extends MY_Controller {
 		}
 		$data['msg'] 	 = $this->data->getMessage();
 		$data['so'] = $result;
+		$data['mapping']=$LObj2LO;
 		$this->load->view('konten/cms', $data);
 	}
 }

@@ -179,12 +179,11 @@
 										<tr>
 											<th></th>
 											<th class="width-300p"></th>
-											<th class="width-100p">LO 1 </th>
-											<th class="width-100p">LO 2 </th>
-											<th class="width-100p">LO 3 </th>
-											<th class="width-100p">LO 4 </th>
-											<th class="width-100p">LO 5 </th>
-											<th class="width-100p">LO 6 </th>
+											<?php 
+											$LO=$mapping['0']['LO'];
+											foreach($LO as $dataLO){?>
+											<th class="width-100p">LO <?=$dataLO['courseOutlineLearningOutcomeID']?> </th>
+											<?php } ?>
 											<th class="width-100p">Total LO to support </th>
 											<th class="width-100p"> Action </th>
 										</tr>
@@ -192,100 +191,26 @@
 									<tbody>
 
 										<!-- table row -->
-
+<?php foreach($mapping as $dataMapping){?>
 										<tr>
-											<td class="width-100p">LOBj 1.1</td>
-											<td class="width-300p "> Able to Lorem, ipsum dolor sit amet consectetur
-												adipisicing
-												elit. Ab
-												quibusdam
-												consequatur
-												minima, iusto libero, nam dicta doloremque quidem quod fuga quam </td>
+											<td class="width-100p"><?=$dataMapping['code']?></td>
+											<td class="width-300p "> <?=$dataMapping['descIN']?> </td>
+											<?php foreach($dataMapping['LO'] as $data_lo){?>
 											<td class="width-100p">
-												<span class="fa fa-times times1" lobj="1.1" lo="1"
-													onclick="add(this,1)"></span>
-												<span class="fa fa-times times2" lobj="1.1" lo="1"
-													onclick="add(this,2)"></span>
+												<span class="fa fa-times times1" lobj="<?=$dataMapping['courseLObjID']?>" lo="<?=$data_lo['courseOutlineLearningOutcomeID']?>" lolobj="<?=$data_lo['courseLObj2LOID']?>"
+													onclick="add(this,1, <?=$data_lo['courseLObj2LOID']?>)"></span>
+												<span class="fa fa-times times2" lobj="<?=$dataMapping['courseLObjID']?>" lo="<?=$data_lo['courseOutlineLearningOutcomeID']?>" lolobj="<?=$data_lo['courseLObj2LOID']?>"
+													onclick="add(this,2, <?=$data_lo['courseLObj2LOID']?>)"></span>
+													<input type="hidden" value="0" name="mapping<?=$data_lo['courseLObj2LOID']?>" id="mapping<?=$data_lo['courseLObj2LOID']?>">
 											</td>
-											<td class="width-100p">
-												<span class="fa fa-times times1" lobj="1.1" lo="2"
-													onclick="add(this,1)"></span>
-												<span class="fa fa-times times2" lobj="1.1" lo="2"
-													onclick="add(this,2)"></span>
-											</td>
-											<td class="width-100p">
-												<span class="fa fa-times times1" lobj="1.1" lo="3"
-													onclick="add(this,1)"></span>
-												<span class="fa fa-times times2" lobj="1.1" lo="3"
-													onclick="add(this,2)"></span>
-											</td>
-											<td class="width-100p"></td>
-											<td class="width-100p"></td>
-											<td class="width-100p"></td>
+										<?php } ?>
 											<td class="width-100p"></td>
 											<td class="width-100p">
 												<button type="button"
 													class="btn btn-yellow btn-sm  btn-block">Save</button>
 											</td>
 										</tr>
-
-										<!-- end table row -->
-
-										<!-- table row -->
-
-										<tr>
-											<td class="width-100p"> LOBj 1.2</td>
-											<td class="width-300p "> Able to Lorem, ipsum dolor sit amet consectetur
-												adipisicing
-												elit. Ab
-												quibusdam
-												consequatur
-												minima, iusto libero, nam dicta doloremque quidem quod fuga quam </td>
-											<td class="width-100p">
-												<span class="fa fa-times times1" lobj="1.2" lo="1"
-													onclick="add(this,1)"></span>
-												<span class="fa fa-times times2" lobj="1.2" lo="1"
-													onclick="add(this,2)"></span>
-											</td>
-											<td class="width-100p"></td>
-											<td class="width-100p"></td>
-											<td class="width-100p"></td>
-											<td class="width-100p"></td>
-											<td class="width-100p"></td>
-											<td class="width-100p"></td>
-											<td class="width-100p">
-												<button type="button"
-													class="btn btn-yellow btn-sm  btn-block align-middle">Save</button>
-											</td>
-										</tr>
-
-										<!-- end table row -->
-
-										<!-- table row -->
-
-										<tr>
-											<td class="width-100p"> LOBj 1.3</td>
-											<td class="width-300p "> Able to Lorem, ipsum dolor sit amet consectetur
-												adipisicing
-												elit. Ab
-												quibusdam
-												consequatur
-												minima, iusto libero, nam dicta doloremque quidem quod fuga quam </td>
-											<td class="width-100p">
-
-											</td>
-											<td class="width-100p"></td>
-											<td class="width-100p"></td>
-											<td class="width-100p"></td>
-											<td class="width-100p"></td>
-											<td class="width-100p"></td>
-											<td class="width-100p"></td>
-											<td class="width-100p text-center">
-												<button type="button" class="btn btn-yellow btn-sm "> <i
-														class="fa fa-pencil" aria-hidden="true"></i> </button>
-											</td>
-										</tr>
-
+<?php } ?>
 										<!-- end table row -->
 
 
@@ -339,7 +264,7 @@
 	</script>
 
 	<script>
-		function add(ths, sno) {
+		function add(ths, sno, id) {
 			let lobj = (ths.getAttribute("lobj"))
 			let lo = (ths.getAttribute("lo"))
 			let fa = document.getElementsByClassName("fa-times")
@@ -350,17 +275,21 @@
 					console.log(fa[i])
 					if (sno === 1) {
 						if ($(fa[i]).hasClass("times2")) {
-							$(fa[i]).removeClass("checked")
+							$(fa[i]).removeClass("checked");
+							document.getElementById('mapping'+id).value='0' ;
 						} else {
 							if ($(fa[i]).hasClass("checked")) {
-								$(fa[i]).removeClass("checked")
+								$(fa[i]).removeClass("checked");
+								document.getElementById('mapping'+id).value='0';
 							} else {
-								$(fa[i]).addClass("checked")
+								$(fa[i]).addClass("checked");
+								document.getElementById('mapping'+id).value='1' ;
 							}
 						}
 					} else {
 						console.log(fa[i])
-						$(fa[i]).addClass("checked")
+						$(fa[i]).addClass("checked");
+						document.getElementById('mapping'+id).value='2' ;
 					}
 				}
 			}
