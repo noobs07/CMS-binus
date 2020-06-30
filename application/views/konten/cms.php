@@ -100,25 +100,20 @@
 
 							<!-- table references -->
 
-							<ul class="list-group my-4">
+							<?php foreach($so as $data_so){?>
+              <ul class="list-group my-4">
 								<li class="list-group-item">
 									<table class="table table-borderless">
 										<thead>
 											<tr>
-												<td class="w-75">Student Outcome (1) :</td>
+												<td class="w-75">Student Outcome (<?=$data_so->courseStudentOutcomeId?>) :</td>
 												<td class="w-25">Status :</td>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td class="w-75">
-													<p> Able to create Lorem ipsum dolor sit amet consectetur
-														adipisicing elit. Optio dignissimos
-														quo
-														quidem rem consequuntur beatae soluta, distinctio reiciendis
-														tempora repudiandae impedit
-														corrupti! Iste corrupti quaerat molestiae praesentium sunt
-														obcaecati et? </p>
+													<p> <?=$data_so->nameEN?></p>
 												</td>
 												<td class="w-25">
 													<p> Specific Student Outcon </p>
@@ -126,14 +121,7 @@
 											</tr>
 											<tr>
 												<td class="w-75">
-													<i class="text-secondary"> Mampu membuat Lorem ipsum dolor sit amet
-														consectetur adipisicing
-														elit. Optio dignissimos
-														quo
-														quidem rem consequuntur beatae soluta, distinctio reiciendis
-														tempora repudiandae impedit
-														corrupti! Iste corrupti quaerat molestiae praesentium sunt
-														obcaecati et? </i>
+													<i class="text-secondary"> <?=$data_so->nameIN?> </i>
 												</td>
 												<td class="w-25"><i class="text-secondary"> Keterampilan Kerja Khusus
 													</i></td>
@@ -142,11 +130,12 @@
 									</table>
 
 								</li>
-								<li class="list-group-item">
-									<table class="table table-borderless">
+                <li class="list-group-item">
+									<?php $i=0; foreach($data_so->LObj as $lobj){?>
+                  <table class="table table-borderless">
 										<thead>
 											<tr>
-												<th class="text-secondary"> Learning Objective (1) * </th>
+												<th class="text-secondary"> Learning Objective (<?=$lobj->courseLObjID ?>) * </th>
 												<td class="w-25 text-center">Assesment Plan</td>
 												<td class="w-25 text-center">Weight</td>
 											</tr>
@@ -154,65 +143,20 @@
 										<tbody>
 											<tr>
 												<td class="w-50">
-													<p> Able to create Lorem ipsum dolor sit amet consectetur
-														adipisicing elit. Optio dignissimos
-														quo
-														quidem rem consequuntur beatae soluta, distinctio reiciendis
-														tempora repudiandae impedit
-														corrupti! Iste corrupti quaerat molestiae praesentium sunt
-														obcaecati et? </p>
+													<p> <?=$lobj->descEN ?> </p>
 
-													<i class="text-secondary"> Mampu membuat Lorem ipsum dolor sit amet
-														consectetur adipisicing
-														elit. Optio dignissimos
-														quo
-														quidem rem consequuntur beatae soluta, distinctio reiciendis
-														tempora repudiandae impedit
-														corrupti! Iste corrupti quaerat molestiae praesentium sunt
-														obcaecati et? </i>
+													<i class="text-secondary"> <?=$lobj->descIN ?> </i>
 												</td>
 												<td class="w-25 text-center align-middle">Exam Question</td>
 												<td class="w-25 text-center align-middle">40%</td>
 											</tr>
 										</tbody>
 									</table>
-									<hr>
-									<table class="table table-borderless">
-										<thead>
-											<tr>
-												<th class="text-secondary"> Learning Objective (3) * </th>
-												<td class="w-25 text-center">Assesment Plan</td>
-												<td class="w-25 text-center">Weight</td>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="w-50">
-													<p> Able to create Lorem ipsum dolor sit amet consectetur
-														adipisicing elit. Optio dignissimos
-														quo
-														quidem rem consequuntur beatae soluta, distinctio reiciendis
-														tempora repudiandae impedit
-														corrupti! Iste corrupti quaerat molestiae praesentium sunt
-														obcaecati et? </p>
-
-													<i class="text-secondary"> Mampu membuat Lorem ipsum dolor sit amet
-														consectetur adipisicing
-														elit. Optio dignissimos
-														quo
-														quidem rem consequuntur beatae soluta, distinctio reiciendis
-														tempora repudiandae impedit
-														corrupti! Iste corrupti quaerat molestiae praesentium sunt
-														obcaecati et? </i>
-												</td>
-												<td class="w-25 text-center align-middle">Exam Question</td>
-												<td class="w-25 text-center align-middle">40%</td>
-											</tr>
-										</tbody>
-									</table>
+                <?php $i++;} ?>
 									<hr>
 								</li>
 							</ul>
+              <?php }?>
 							<!-- end table references -->
 
 

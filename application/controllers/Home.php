@@ -29,11 +29,11 @@ class Home extends MY_Controller {
 				$s->LObj[] = $d;
 			}
 		}
-		$this->d($so); die;
+		//$this->d($so); die;
+		$result=$so;
 		
-		
-		echo '<pre>';
-		print_r($so); die;
+		//echo '<pre>';
+		//print_r($so); //die;
 		
 		if($result){	
 			$data['log'] = $this->data->getLogQuery();
@@ -41,6 +41,7 @@ class Home extends MY_Controller {
 			$data['log'] = null;
 		}
 		$data['msg'] 	 = $this->data->getMessage();
+		$data['so'] = $result;
 		$this->load->view('konten/cms', $data);
 	}
 }
