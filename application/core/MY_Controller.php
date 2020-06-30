@@ -3,12 +3,6 @@ class MY_Controller extends CI_Controller {
 	private $_token;
 	private $_url;
 	
-	function d($d, $dump = false){
-		echo '<pre>';
-		if($dump){var_dump($d);}else{print_r($d);}
-		echo '</pre>';
-	}
-	
 	public function __construct(){
 		parent::__construct();
 		$this->_token = 'bearer hNtMWKGUxLEEdZu*ulx.W(*JFi[/J6w!FC.*|dcOeq@yeGWhqEVyLS7z4OQdkVeYvecmstHIcSZJGw[d7}$$F[N\'^1f~Sno';
