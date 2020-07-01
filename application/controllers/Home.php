@@ -61,4 +61,18 @@ class Home extends MY_Controller {
 		$data['mapping']=$LObj2LO;
 		$this->load->view('konten/cms', $data);
 	}
+	
+	function saveData(){
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('courseStudentOutlineID', 'SO ID', 'required');
+		$this->form_validation->set_rules('courseLObjID', 'LObj ID', 'required');
+		
+		if($this->form_validation->run() == FALSE){
+			// return to view jika ada validasi yang error (belum diisi)
+        } else {
+		$data['status'] = $this->data->saveStudentLearningOutcome($this->input->post('courseStudentOutlineID'), $this->input->post('courseLObjID'), $this->input->post('map'));
+		$data['pesan']	= $this->data->getMessage();
+		$this->load->view('konten/cms', $data);
+	}
 }

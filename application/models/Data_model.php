@@ -2,7 +2,16 @@
 (defined('BASEPATH')) OR exit('No direct script access allowed');
 
 class Data_model extends MY_Model{
-		
+	private $_msg;
+	
+	public function setMessage($msg = ''){
+		$this->_msg = $msg;
+	}
+	
+	public function getMessage(){
+		return $this->_msg;
+	}
+	
 		
 	public function getCourseLO($course_code){
 		return $this->db->query("dbo.courseLO_getFromCourseCode ?", array($course_code))->result();
@@ -120,6 +129,23 @@ class Data_model extends MY_Model{
 			}
 		}
 		$this->setMessage('Data tidak dikenali. Data yang dimasukkan harus berupa array.');
+		return false;
+	}
+	
+	public function saveStudentLearningOutcome($courseStudentOutlineID, $courseLObjID, $map){
+		if(!empty($map)){
+			$db = $this->db;
+			
+			$ins  = "INSERT INTO courseLObj2LO (courseLObj2LOID, courseStudentOutlineID, courseLObjID, weightLO) VALUES ";
+			foreach($map as $LObj2LOID => $weigth){
+				$ins .= "({$db->escape($LObj2LOID)}, {$db->escape($courseStudentOutlineID)}, {$db->escape($courseLObjID)}, {$db->escape($weigth)}),";	
+			}
+			
+			$this->db->simple_query(rtrim($ins, ','));
+			$this->setMessage('Data berhasil disimpan.');
+		}
+		
+		$this->setMessage('Data gagal disimpan. Input map harus array dan memiliki nilai.');
 		return false;
 	}
 }
