@@ -74,5 +74,6 @@ class Home extends MY_Controller {
 		$data['status'] = $this->data->saveStudentLearningOutcome($this->input->post('courseStudentOutlineID'), $this->input->post('courseLObjID'), $this->input->post('map'));
 		$data['pesan']	= $this->data->getMessage();
 		$this->load->view('konten/cms', $data);
+		}
 	}
 }
