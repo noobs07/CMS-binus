@@ -135,13 +135,16 @@ class Data_model extends MY_Model{
 	public function saveStudentLearningOutcome($courseStudentOutlineID, $courseLObjID, $map){
 		if(!empty($map)){
 			$db = $this->db;
-			
-			$ins  = "INSERT INTO courseLObj2LO (courseLObj2LOID, courseStudentOutlineID, courseLObjID, weightLO) VALUES ";
+
+			$upd  = "UPDATE e SET e.weightLO = t.weightLO FROM courseLObj2LO e JOIN ( VALUES "; //(courseLObj2LOID, courseStudentOutlineID, courseLObjID, weightLO) VALUES ";
 			foreach($map as $LObj2LOID => $weigth){
-				$ins .= "({$db->escape($LObj2LOID)}, {$db->escape($courseStudentOutlineID)}, {$db->escape($courseLObjID)}, {$db->escape($weigth)}),";	
+				$upd .= "({$db->escape($LObj2LOID)}, {$db->escape($weigth)}),";	
 			}
 			
-			$this->db->simple_query(rtrim($ins, ','));
+			$upd  = rtrim($upd, ',');
+			$upd .= ") t (courseLObj2LOID, weightLO) ON t.courseLObj2LOID = e.courseLObj2LOID;";
+			
+			$this->db->simple_query($upd);
 			$this->setMessage('Data berhasil disimpan.');
 		}
 		

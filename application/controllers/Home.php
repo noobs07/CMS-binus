@@ -45,11 +45,10 @@ class Home extends MY_Controller {
 		//print_r($so); //die;
 		
 		// get data mapping LObj dan LO
-		$LObj2LO = $this->data->getCourseLObj2LO($code);
+		$LObj2LO = $this->data->getCourseLObj2LO($code); 
 		
 		//dump($so, 'data SO dan LObj'); 
 		//dump($LObj2LO, 'data mapping LObj ke LO');
-		//die;
 		
 		if($result){	
 			$data['log'] = $this->data->getLogQuery();
@@ -71,6 +70,9 @@ class Home extends MY_Controller {
 		if($this->form_validation->run() == FALSE){
 			// return to view jika ada validasi yang error (belum diisi)
         } else {
+			
+		// contoh post data untuk map parameter ketiga saveStudentLearningOutcome(1,2,3), parameter 1,2 bisa diabaikan (diset null dulu)
+		// $map = array(7 => 0, 8 => 2, 9 => 1);		=> key adalah courseLObj2LOID dan valuenya adalah weigthLO	
 		$data['status'] = $this->data->saveStudentLearningOutcome($this->input->post('courseStudentOutlineID'), $this->input->post('courseLObjID'), $this->input->post('map'));
 		$data['pesan']	= $this->data->getMessage();
 		$this->load->view('konten/cms', $data);
