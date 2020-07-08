@@ -194,7 +194,9 @@
 									<tbody>
 
 										<!-- table row -->
+										
 										<?php foreach($mapping as $dataMapping){?>
+											<form>
 										<tr>
 											<td class="width-100p"><?=$dataMapping['code']?></td>
 											<td class="width-300p "> <?=$dataMapping['descIN']?> </td>
@@ -217,10 +219,13 @@
 											<?php } ?>
 											<td class="width-100p"></td>
 											<td class="width-100p">
-												<button type="button"
-													class="btn btn-yellow btn-sm  btn-block">Save</button>
+											<input type="hidden" value="<?=$dataMapping['courseLObjID']?>" name="courseLObjID" id="courseLObjID">
+												<input type="hidden" value="0" name="courseStudentOutlineID" id="courseStudentOutlineID">
+												<input type="submit"
+													class="btn btn-yellow btn-sm  btn-block" value="save">
 											</td>
 										</tr>
+										</form>
 										<?php } ?>
 										<!-- end table row -->
 
@@ -273,8 +278,26 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 		integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
 	</script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js">
+	</script>
 
 	<script>
+	$("form").submit(function( event ) {
+		console.log( $( this ).serializeArray() );
+		event.preventDefault();
+		dataString = $( this ).serializeArray();
+		$.ajax({
+        	type: "POST",
+        	url: "home/saveData",
+        	data: dataString, 
+        	cache: false,
+
+        	success: function(data){
+            alert(data);
+        }
+    });
+		});
+
 		function add(ths, sno, id) {
 			let lobj = (ths.getAttribute("lobj"))
 			let lo = (ths.getAttribute("lo"))

@@ -69,13 +69,14 @@ class Home extends MY_Controller {
 		
 		if($this->form_validation->run() == FALSE){
 			// return to view jika ada validasi yang error (belum diisi)
+			echo 'pesan';
         } else {
 			
 		// contoh post data untuk map parameter ketiga saveStudentLearningOutcome(1,2,3), parameter 1,2 bisa diabaikan (diset null dulu)
 		// $map = array(7 => 0, 8 => 2, 9 => 1);		=> key adalah courseLObj2LOID dan valuenya adalah weigthLO	
 		$data['status'] = $this->data->saveStudentLearningOutcome($this->input->post('courseStudentOutlineID'), $this->input->post('courseLObjID'), $this->input->post('map'));
 		$data['pesan']	= $this->data->getMessage();
-		$this->load->view('konten/cms', $data);
+		//$this->load->view('konten/cms', $data);
 		}
 	}
 }
