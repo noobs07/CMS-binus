@@ -101,12 +101,13 @@
 							<!-- table references -->
 
 							<?php foreach($so as $data_so){?>
-              <ul class="list-group my-4">
+							<ul class="list-group my-4">
 								<li class="list-group-item">
 									<table class="table table-borderless">
 										<thead>
 											<tr>
-												<td class="w-75">Student Outcome (<?=$data_so->courseStudentOutcomeId?>) :</td>
+												<td class="w-75">Student Outcome (<?=$data_so->courseStudentOutcomeId?>)
+													:</td>
 												<td class="w-25">Status :</td>
 											</tr>
 										</thead>
@@ -130,12 +131,13 @@
 									</table>
 
 								</li>
-                <li class="list-group-item">
+								<li class="list-group-item">
 									<?php $i=0; foreach($data_so->LObj as $lobj){?>
-                  <table class="table table-borderless">
+									<table class="table table-borderless">
 										<thead>
 											<tr>
-												<th class="text-secondary"> Learning Objective (<?=$lobj->courseLObjID ?>) * </th>
+												<th class="text-secondary"> Learning Objective
+													(<?=$lobj->courseLObjID ?>) * </th>
 												<td class="w-25 text-center">Assesment Plan</td>
 												<td class="w-25 text-center">Weight</td>
 											</tr>
@@ -152,11 +154,11 @@
 											</tr>
 										</tbody>
 									</table>
-                <?php $i++;} ?>
+									<?php $i++;} ?>
 									<hr>
 								</li>
 							</ul>
-              <?php }?>
+							<?php }?>
 							<!-- end table references -->
 
 
@@ -182,7 +184,8 @@
 											<?php 
 											$LO=$mapping['0']['LO'];
 											foreach($LO as $dataLO){?>
-											<th class="width-100p">LO <?=$dataLO['courseOutlineLearningOutcomeID']?> </th>
+											<th class="width-100p">LO <?=$dataLO['courseOutlineLearningOutcomeID']?>
+											</th>
 											<?php } ?>
 											<th class="width-100p">Total LO to support </th>
 											<th class="width-100p"> Action </th>
@@ -191,26 +194,34 @@
 									<tbody>
 
 										<!-- table row -->
-<?php foreach($mapping as $dataMapping){?>
+										<?php foreach($mapping as $dataMapping){?>
 										<tr>
 											<td class="width-100p"><?=$dataMapping['code']?></td>
 											<td class="width-300p "> <?=$dataMapping['descIN']?> </td>
 											<?php foreach($dataMapping['LO'] as $data_lo){?>
 											<td class="width-100p">
-												<span class="fa fa-times times1" lobj="<?=$dataMapping['courseLObjID']?>" lo="<?=$data_lo['courseOutlineLearningOutcomeID']?>" lolobj="<?=$data_lo['courseLObj2LOID']?>"
+												<span class="fa fa-times times1"
+													lobj="<?=$dataMapping['courseLObjID']?>"
+													lo="<?=$data_lo['courseOutlineLearningOutcomeID']?>"
+													lolobj="<?=$data_lo['courseLObj2LOID']?>"
 													onclick="add(this,1, <?=$data_lo['courseLObj2LOID']?>)"></span>
-												<span class="fa fa-times times2" lobj="<?=$dataMapping['courseLObjID']?>" lo="<?=$data_lo['courseOutlineLearningOutcomeID']?>" lolobj="<?=$data_lo['courseLObj2LOID']?>"
+												<span class="fa fa-times times2"
+													lobj="<?=$dataMapping['courseLObjID']?>"
+													lo="<?=$data_lo['courseOutlineLearningOutcomeID']?>"
+													lolobj="<?=$data_lo['courseLObj2LOID']?>"
 													onclick="add(this,2, <?=$data_lo['courseLObj2LOID']?>)"></span>
-													<input type="hidden" value="0" name="mapping<?=$data_lo['courseLObj2LOID']?>" id="mapping<?=$data_lo['courseLObj2LOID']?>">
+												<input type="hidden" value="0"
+													name="mapping<?=$data_lo['courseLObj2LOID']?>"
+													id="mapping<?=$data_lo['courseLObj2LOID']?>">
 											</td>
-										<?php } ?>
+											<?php } ?>
 											<td class="width-100p"></td>
 											<td class="width-100p">
 												<button type="button"
 													class="btn btn-yellow btn-sm  btn-block">Save</button>
 											</td>
 										</tr>
-<?php } ?>
+										<?php } ?>
 										<!-- end table row -->
 
 
@@ -272,24 +283,26 @@
 				let fa_lo = fa[i].getAttribute("lo")
 				let fa_lobj = fa[i].getAttribute("lobj")
 				if (fa_lo === lo && fa_lobj === lobj) {
-					console.log(fa[i])
 					if (sno === 1) {
+						// klik silang ke-1
 						if ($(fa[i]).hasClass("times2")) {
+							//   hapus nilai silang ke-2
 							$(fa[i]).removeClass("checked");
-							document.getElementById('mapping'+id).value='0' ;
 						} else {
 							if ($(fa[i]).hasClass("checked")) {
+								// hapus silang pertama jika aktif menjadi 0
 								$(fa[i]).removeClass("checked");
-								document.getElementById('mapping'+id).value='0';
+								$("#mapping" + id).attr("value", 0);
 							} else {
+								// menambah silang pertama jika tidak aktif menjadi 1
 								$(fa[i]).addClass("checked");
-								document.getElementById('mapping'+id).value='1' ;
+								$("#mapping" + id).attr("value", 1);
 							}
 						}
 					} else {
-						console.log(fa[i])
+						// klik silang ke-2
 						$(fa[i]).addClass("checked");
-						document.getElementById('mapping'+id).value='2' ;
+						$("#mapping" + id).attr("value", 2);
 					}
 				}
 			}
