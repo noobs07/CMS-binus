@@ -232,19 +232,12 @@
 										</form>
 										<?php } ?>
 										<!-- end table row -->
-
-
 									</tbody>
 								</table>
 							</div>
 							<!-- end table of mapping -->
-
-
-
 							<!-- end content of mapping LO to LOBj -->
-
 						</div>
-
 						<div class="tab-pane fade" id="nav-resource" role="tabpanel" aria-labelledby="nav-resource-tab">
 							Resource
 						</div>
@@ -262,9 +255,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
 	</div>
 
 	<div class="bottom bg-dark text-center py-3 text-white">
@@ -287,17 +277,18 @@
 
 	<script>
 	$("form").submit(function( event ) {
-		console.log( $( this ).serializeArray() );
+		//console.log( $( this ).serializeArray() );
 		event.preventDefault();
-		dataString = $( this ).serializeArray();
+		dataString = $( this ).serialize();
+		
 		$.ajax({
         	type: "POST",
         	url: "home/saveData",
-        	data: dataString, 
+        	data: "map="+dataString,
         	cache: false,
 
         	success: function(data){
-            alert(data);
+            alert(dataString);
         }
     });
 		});

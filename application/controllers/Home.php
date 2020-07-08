@@ -69,7 +69,7 @@ class Home extends MY_Controller {
 		
 		if($this->form_validation->run() == FALSE){
 			// return to view jika ada validasi yang error (belum diisi)
-			echo 'pesan';
+			//print_r($this->input->post('map'));
         } else {
 			
 		// contoh post data untuk map parameter ketiga saveStudentLearningOutcome(1,2,3), parameter 1,2 bisa diabaikan (diset null dulu)
