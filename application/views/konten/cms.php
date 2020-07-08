@@ -195,19 +195,22 @@
 
 										<!-- table row -->
 										
-										<?php foreach($mapping as $dataMapping){?>
+										<?php foreach($mapping as $dataMapping){$i=0;?>
 											<form>
 										<tr>
 											<td class="width-100p"><?=$dataMapping['code']?></td>
 											<td class="width-300p "> <?=$dataMapping['descIN']?> </td>
 											<?php foreach($dataMapping['LO'] as $data_lo){?>
 											<td class="width-100p">
-												<span class="fa fa-times times1"
+											<?php if($data_lo['weightLO']==2){$check1='checked';$check2='checked';$i++;}
+												elseif ($data_lo['weightLO']==1) {$check1='checked';$check2='';$i++;}
+												elseif ($data_lo['weightLO']==0) {$check1='';$check2='';} ?>
+												<span class="fa fa-times times1 <?php echo $check1 ?>"
 													lobj="<?=$dataMapping['courseLObjID']?>"
 													lo="<?=$data_lo['courseOutlineLearningOutcomeID']?>"
 													lolobj="<?=$data_lo['courseLObj2LOID']?>"
 													onclick="add(this,1, <?=$data_lo['courseLObj2LOID']?>)"></span>
-												<span class="fa fa-times times2"
+												<span class="fa fa-times times2 <?php echo $check2 ?>"
 													lobj="<?=$dataMapping['courseLObjID']?>"
 													lo="<?=$data_lo['courseOutlineLearningOutcomeID']?>"
 													lolobj="<?=$data_lo['courseLObj2LOID']?>"
@@ -215,9 +218,10 @@
 												<input type="hidden" value="0"
 													name="mapping<?=$data_lo['courseLObj2LOID']?>"
 													id="mapping<?=$data_lo['courseLObj2LOID']?>">
+													<input type="hidden" value="<?=$data_lo['weightLO']?>">
 											</td>
 											<?php } ?>
-											<td class="width-100p"></td>
+											<td class="width-100p"><?=$i?></td>
 											<td class="width-100p">
 											<input type="hidden" value="<?=$dataMapping['courseLObjID']?>" name="courseLObjID" id="courseLObjID">
 												<input type="hidden" value="0" name="courseStudentOutlineID" id="courseStudentOutlineID">
