@@ -225,8 +225,16 @@
 											<td class="width-100p">
 											<input type="hidden" value="<?=$dataMapping['courseLObjID']?>" name="courseLObjID" id="courseLObjID">
 												<input type="hidden" value="0" name="courseStudentOutlineID" id="courseStudentOutlineID">
-												<input type="submit"
-													class="btn btn-yellow btn-sm  btn-block" value="save">
+												
+													<button
+														isEditActive="false"
+														lobj="<?=$dataMapping['courseLObjID']?>"
+														type="submit"
+														class="btn btn-yellow btn-sm d-flex p-2 mx-auto"
+														onclick="changeButton(this)"
+													>
+														<i class="fa fa-pencil" aria-hidden="true"></i>
+													</button>
 											</td>
 										</tr>
 										</form>
@@ -296,36 +304,57 @@
 		function add(ths, sno, id) {
 			let lobj = (ths.getAttribute("lobj"))
 			let lo = (ths.getAttribute("lo"))
-			let fa = document.getElementsByClassName("fa-times")
-			for (let i = 0; i < fa.length; i++) {
-				let fa_lo = fa[i].getAttribute("lo")
-				let fa_lobj = fa[i].getAttribute("lobj")
-				if (fa_lo === lo && fa_lobj === lobj) {
-					if (sno === 1) {
-						// klik silang ke-1
-						if ($(fa[i]).hasClass("times2")) {
-							//   hapus nilai silang ke-2
-							$(fa[i]).removeClass("checked");
-						} else {
-							if ($(fa[i]).hasClass("checked")) {
-								// hapus silang pertama jika aktif menjadi 0
-								$(fa[i]).removeClass("checked");
-								$("#" + id).attr("value", 0);
+			let editedLobj = $("button[isEditActive='true']");
+			if (editedLobj.length > 0) {
+				let fix = editedLobj.filter((index, element) => {
+            		return element.getAttribute("lobj") === lobj;
+          		});
+				if ($(fix).attr("lobj") === lobj) {
+				let fa = document.getElementsByClassName("fa-times")
+					for (let i = 0; i < fa.length; i++) {
+						let fa_lo = fa[i].getAttribute("lo")
+						let fa_lobj = fa[i].getAttribute("lobj")
+						if (fa_lo === lo && fa_lobj === lobj) {
+							if (sno === 1) {
+								// klik silang ke-1
+								if ($(fa[i]).hasClass("times2")) {
+									//   hapus nilai silang ke-2
+									$(fa[i]).removeClass("checked");
+								} else {
+									if ($(fa[i]).hasClass("checked")) {
+										// hapus silang pertama jika aktif menjadi 0
+										$(fa[i]).removeClass("checked");
+										$("#mapping" + id).attr("value", 0);
+									} else {
+										// menambah silang pertama jika tidak aktif menjadi 1
+										$(fa[i]).addClass("checked");
+										$("#mapping" + id).attr("value", 1);
+									}
+								}
 							} else {
-								// menambah silang pertama jika tidak aktif menjadi 1
+								// klik silang ke-2
 								$(fa[i]).addClass("checked");
-								$("#" + id).attr("value", 1);
+								$("#mapping" + id).attr("value", 2);
 							}
 						}
-					} else {
-						// klik silang ke-2
-						$(fa[i]).addClass("checked");
-						$("#" + id).attr("value", 2);
 					}
 				}
 			}
 		}
 
+		function changeButton(ths) {
+			let lobj = ths.getAttribute("lobj");
+			let isEditActive = ths.getAttribute("isEditActive");
+			if (isEditActive === "true") {
+			$(ths).attr("isEditActive", "false");
+			$(ths)
+				.empty()
+				.append('<i class="fa fa-pencil" aria-hidden="true"></i>');
+			} else {
+			$(ths).attr("isEditActive", "true");
+			$(ths).empty().append("Save");
+			}
+		}
 	</script>
 
 </body>
