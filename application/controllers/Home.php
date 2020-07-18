@@ -71,11 +71,12 @@ class Home extends MY_Controller {
 			// return to view jika ada validasi yang error (belum diisi)
 			//print_r($this->input->post('map'));
         } else {
-			
+			$data['map']=$_POST;
+			print_r($_POST);
 		// contoh post data untuk map parameter ketiga saveStudentLearningOutcome(1,2,3), parameter 1,2 bisa diabaikan (diset null dulu)
 		// $map = array(7 => 0, 8 => 2, 9 => 1);		=> key adalah courseLObj2LOID dan valuenya adalah weigthLO	
-		$data['status'] = $this->data->saveStudentLearningOutcome($this->input->post('courseStudentOutlineID'), $this->input->post('courseLObjID'), $this->input->post('map'));
-		$data['pesan']	= $this->data->getMessage();
+		$data['status'] = $this->data->saveStudentLearningOutcome($this->input->post('courseStudentOutlineID'), $this->input->post('courseLObjID'), $data['map']);
+		$data['pesan']	= $this->input->post('map');
 		//$this->load->view('konten/cms', $data);
 		}
 	}
