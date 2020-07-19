@@ -216,8 +216,8 @@
 													lolobj="<?=$data_lo['courseLObj2LOID']?>"
 													onclick="add(this,2, <?=$data_lo['courseLObj2LOID']?>)"></span>
 												<input type="hidden" value="0"
-													name="mapping<?=$data_lo['courseLObj2LOID']?>"
-													id="mapping<?=$data_lo['courseLObj2LOID']?>">
+													name="<?=$data_lo['courseLObj2LOID']?>"
+													id="<?=$data_lo['courseLObj2LOID']?>">
 													<input type="hidden" value="<?=$data_lo['weightLO']?>">
 											</td>
 											<?php } ?>
@@ -288,15 +288,15 @@
 		//console.log( $( this ).serializeArray() );
 		event.preventDefault();
 		dataString = $( this ).serialize();
-		
+		var myJSONText = JSON.stringify(dataString);
 		$.ajax({
         	type: "POST",
         	url: "home/saveData",
-        	data: "map="+dataString,
+        	data: dataString,
         	cache: false,
 
         	success: function(data){
-            alert(dataString);
+            alert(data);
         }
     });
 		});
