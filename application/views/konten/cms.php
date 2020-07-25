@@ -284,7 +284,7 @@
 	</script>
 
 	<script>
-	$("form").submit(function( event ) {
+	/*$("form").submit(function( event ) {
 		//console.log( $( this ).serializeArray() );
 		event.preventDefault();
 		dataString = $( this ).serialize();
@@ -299,7 +299,7 @@
             alert(data);
         }
     });
-		});
+		});*/
 
 		function add(ths, sno, id) {
 			let lobj = (ths.getAttribute("lobj"))
@@ -350,7 +350,27 @@
 			$(ths)
 				.empty()
 				.append('<i class="fa fa-pencil" aria-hidden="true"></i>');
+				$("form").submit(function( event ) {
+		event.preventDefault();
+		dataString = $( ths ).serialize();
+		var myJSONText = JSON.stringify(dataString);
+		//var maps = {map1:"1",map2:"0",map3:"2",map4:"1"};
+		var myJSONText = JSON.stringify(myJSONText);
+		$.ajax({
+        	type: "POST",
+        	url: "home/saveData",
+        	data: dataString,
+        	cache: false,
+
+        	success: function(data){
+            alert(data);
+        }
+    });
+		});
 			} else {
+				$("form").submit(function( event ) {
+					event.preventDefault();
+				});
 			$(ths).attr("isEditActive", "true");
 			$(ths).empty().append("Save");
 			}
