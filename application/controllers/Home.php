@@ -72,7 +72,7 @@ class Home extends MY_Controller {
 			//print_r($this->input->post('map'));
         } else {
 			$data['map']=$_POST;
-			print_r($_POST);
+			//print_r($_POST);
 			//echo "tes";
 		// contoh post data untuk map parameter ketiga saveStudentLearningOutcome(1,2,3), parameter 1,2 bisa diabaikan (diset null dulu)
 		// $map = array(7 => 0, 8 => 2, 9 => 1);		=> key adalah courseLObj2LOID dan valuenya adalah weigthLO	
