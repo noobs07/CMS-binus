@@ -1,86 +1,89 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Home extends MY_Controller {
+class Home extends MY_Controller
+{
 	private $_userID = '1';
-	
-	function __construct(){
+
+	function __construct()
+	{
 		parent::__construct();
-		
+
 		$this->load->model('data_model', 'data');
 	}
-	
+
 	public function index()
-	{	
+	{
 		$code = 'FOOD6XXX';
-		
+
 		// get data SO
 		$so = $this->data->getCourseStudentOutcome($code);
-		
+
 		// Jika data belum ada, get dari API
-		if(empty($so)){
+		if (empty($so)) {
 			// return dari API SO dan LObj
-			$api_data	= $this->postRequest("get_lobj/{$code}");	
-			
+			$api_data	= $this->postRequest("get_lobj/{$code}");
+
 			// simpan SO dan LObj ke local database
 			$this->data->insertData($this->_userID, $code, $api_data->data);
-			
+
 			// get data SO
 			$so = $this->data->getCourseStudentOutcome($code);
 		}
-		
+
 		$data = [];
-		foreach($so as $s){
-			
+		foreach ($so as $s) {
+
 			// get data LObj untuk tiap-tiap SO
 			$detail  = $this->data->getCourseLObj($s->courseStudentOutcomeId, $code);
-			foreach($detail as $d){
+			foreach ($detail as $d) {
 				$s->LObj[] = $d;
 			}
 		}
 		//$this->d($so); die;
-		$result=$so;
-		
+		$result = $so;
+
 		//echo '<pre>';
 		//print_r($so); //die;
-		
+
 		// get data mapping LObj dan LO
-		$LObj2LO = $this->data->getCourseLObj2LO($code); 
-		
+		$LObj2LO = $this->data->getCourseLObj2LO($code);
+
 		//dump($so, 'data SO dan LObj'); 
 		//dump($LObj2LO, 'data mapping LObj ke LO');
-		
-		if($result){	
+
+		if ($result) {
 			$data['log'] = $this->data->getLogQuery();
-		}else {
+		} else {
 			$data['log'] = null;
 		}
 		$data['msg'] 	 = $this->data->getMessage();
 		$data['so'] = $result;
-		$data['mapping']=$LObj2LO;
+		$data['mapping'] = $LObj2LO;
 		$this->load->view('konten/cms', $data);
 	}
-	
-	function saveData(){
+
+	function saveData()
+	{
 		$this->load->library('form_validation');
-		
+
 		$this->form_validation->set_rules('courseStudentOutlineID', 'SO ID', 'required');
 		$this->form_validation->set_rules('courseLObjID', 'LObj ID', 'required');
-		
-		if($this->form_validation->run() == FALSE){
+
+		if ($this->form_validation->run() == FALSE) {
 			// return to view jika ada validasi yang error (belum diisi)
 			//print_r($this->input->post('map'));
-        } else {
-			$data['map']=$_POST;
+		} else {
+			$data['map'] = $_POST;
 			//print_r($_POST);
 			//echo "tes";
-		// contoh post data untuk map parameter ketiga saveStudentLearningOutcome(1,2,3), parameter 1,2 bisa diabaikan (diset null dulu)
-		// $map = array(7 => 0, 8 => 2, 9 => 1);		=> key adalah courseLObj2LOID dan valuenya adalah weigthLO	
-		$data['status'] = $this->data->saveStudentLearningOutcome($this->input->post('courseStudentOutlineID'), $this->input->post('courseLObjID'), $data['map']);
-		$data['pesan']	= $this->input->post('map');
-		$data['msg'] 	 = $this->data->getMessage();
-		echo json_encode($data);
-		//$this->load->view('konten/cms', $data);
+			// contoh post data untuk map parameter ketiga saveStudentLearningOutcome(1,2,3), parameter 1,2 bisa diabaikan (diset null dulu)
+			// $map = array(7 => 0, 8 => 2, 9 => 1);		=> key adalah courseLObj2LOID dan valuenya adalah weigthLO	
+			$data['status'] = $this->data->saveStudentLearningOutcome($this->input->post('courseStudentOutlineID'), $this->input->post('courseLObjID'), $data['map']);
+			$data['pesan']	= $this->input->post('map');
+			$data['msg'] 	 = $this->data->getMessage();
+			echo json_encode($data);
+			//$this->load->view('konten/cms', $data);
 		}
 	}
 }
