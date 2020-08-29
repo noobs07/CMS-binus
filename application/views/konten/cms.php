@@ -271,10 +271,19 @@
 	</script>
 
 	<script>
-		function objectifyForm(formArray) {
+		function objectifyForm(formArray = []) {
 			let returnArray = {};
+			let detailObj = {}
 			for (var i = 0; i < formArray.length; i++) {
-				returnArray[formArray[i]['name']] = formArray[i]['value'];
+				if (Number.isInteger(+formArray[i]['name'])) {
+					detailObj = {
+						...detailObj,
+						[formArray[i]['name']]: formArray[i]['value']
+					}
+					returnArray["detail"] = detailObj
+				} else {
+					returnArray[formArray[i]['name']] = formArray[i]['value'];
+				}
 			}
 			return returnArray;
 		}
@@ -290,7 +299,7 @@
 				data: dataStr,
 				cache: false,
 				success: function(data) {
-					alert("SUCCESS");
+					alert(data);
 				},
 				error: function(err) {
 					alert("FAILED")
