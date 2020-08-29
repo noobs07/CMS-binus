@@ -132,11 +132,12 @@ class Data_model extends MY_Model{
 		return false;
 	}
 	
-	public function saveStudentLearningOutcome($courseStudentOutlineID, $courseLObjID, $map){
+	public function saveStudentLearningOutcome($user_id = 1, $courseStudentOutlineID, $courseLObjID, $map){
+		dump($map); die;
 		if(!empty($map)){
 			$db = $this->db;
-
-			$upd  = "UPDATE e SET e.weightLO = t.weightLO FROM courseLObj2LO e JOIN ( VALUES "; //(courseLObj2LOID, courseStudentOutlineID, courseLObjID, weightLO) VALUES ";
+			
+			$upd  = "UPDATE e SET e.weightLO = t.weightLO, e.userUp = {$this->db->escape($user_d)}, e.dateUp = GETDATE() FROM courseLObj2LO e JOIN ( VALUES "; //(courseLObj2LOID, courseStudentOutlineID, courseLObjID, weightLO) VALUES ";
 			foreach($map as $LObj2LOID => $weigth){
 				$upd .= "({$db->escape($LObj2LOID)}, {$db->escape($weigth)}),";	
 			}
@@ -144,8 +145,13 @@ class Data_model extends MY_Model{
 			$upd  = rtrim($upd, ',');
 			$upd .= ") t (courseLObj2LOID, weightLO) ON t.courseLObj2LOID = e.courseLObj2LOID;";
 			
-			$this->db->simple_query($upd);
-			$this->setMessage('Data berhasil disimpan.');
+			if($this->db->simple_query($upd)){
+				$this->setMessage('Data berhasil disimpan.');
+				return true;
+			}else{
+				$this->setMessage('Data gagal disimpan.');
+				return false;
+			}
 		}
 		
 		$this->setMessage('Data gagal disimpan. Input map harus array dan memiliki nilai.');

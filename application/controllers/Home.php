@@ -67,19 +67,18 @@ class Home extends MY_Controller
 	{
 		$this->load->library('form_validation');
 
+		$_POST = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
+		
 		$this->form_validation->set_rules('courseStudentOutlineID', 'SO ID', 'required');
 		$this->form_validation->set_rules('courseLObjID', 'LObj ID', 'required');
-
+		
 		if ($this->form_validation->run() == FALSE) {
-			// return to view jika ada validasi yang error (belum diisi)
-			//print_r($this->input->post('map'));
+			echo json_encode(['status' => false,
+                             'message' => $this->form_validation->error_array()]);
 		} else {
-			$data['map'] = $_POST;
-			//print_r($_POST);
-			//echo "tes";
 			// contoh post data untuk map parameter ketiga saveStudentLearningOutcome(1,2,3), parameter 1,2 bisa diabaikan (diset null dulu)
 			// $map = array(7 => 0, 8 => 2, 9 => 1);		=> key adalah courseLObj2LOID dan valuenya adalah weigthLO	
-			$data['status'] = $this->data->saveStudentLearningOutcome($this->input->post('courseStudentOutlineID'), $this->input->post('courseLObjID'), $data['map']);
+			$data['status'] = $this->data->saveStudentLearningOutcome($this->_userID, $this->input->post('courseStudentOutlineID'), $this->input->post('courseLObjID'), $this->input->post('detail', true));
 			$data['pesan']	= $this->input->post('map');
 			$data['msg'] 	 = $this->data->getMessage();
 			echo json_encode($data);
