@@ -65,8 +65,8 @@
 						<div class="nav nav-tabs border-bottom nav-fill d-flex align-content-center" id="nav-tab" role="tablist">
 							<i class="fa fa-2x fa-chevron-left" aria-hidden="true"></i>
 
-							<a class="nav-item nav-link " id="nav-outcomes-tab" data-toggle="tab" href="#nav-outcomes" role="tab" aria-controls="nav-outcomes" aria-selected="true">Student Outcomes</a>
-							<a class="nav-item nav-link active" id="nav-mapping-tab" data-toggle="tab" href="#nav-mapping" role="tab" aria-controls="nav-mapping" aria-selected="false">Mapping
+							<a class="nav-item nav-link active" id="nav-outcomes-tab" data-toggle="tab" href="#nav-outcomes" role="tab" aria-controls="nav-outcomes" aria-selected="true">Student Outcomes</a>
+							<a class="nav-item nav-link " id="nav-mapping-tab" data-toggle="tab" href="#nav-mapping" role="tab" aria-controls="nav-mapping" aria-selected="false">Mapping
 								LO to LObj</a>
 							<a class="nav-item nav-link" id="nav-resource-tab" data-toggle="tab" href="#nav-resource" role="tab" aria-controls="nav-resource" aria-selected="false">Resource</a>
 							<a class="nav-item nav-link" id="nav-teaching-tab" data-toggle="tab" href="#nav-teaching" role="tab" aria-controls="nav-teaching" aria-selected="false">Teaching and Learning
@@ -78,8 +78,8 @@
 
 						</div>
 					</nav>
-					<div class="tab-content p-3 bg-light" id="nav-tabContent">
-						<div class="tab-pane fade " id="nav-outcomes" role="tabpanel" aria-labelledby="nav-outcomes-tab">
+					<div class="tab-content p-3 bg-light " id="nav-tabContent">
+						<div class="tab-pane fade show active " id="nav-outcomes" role="tabpanel" aria-labelledby="nav-outcomes-tab">
 
 							<!-- content of student outcomes -->
 							<h4>STUDENT OUTCOMES</h4>
@@ -158,7 +158,7 @@
 							<!-- end content of student outcomes -->
 						</div>
 
-						<div class="tab-pane fade show active" id="nav-mapping" role="tabpanel" aria-labelledby="nav-mapping-tab">
+						<div class="tab-pane fade " id="nav-mapping" role="tabpanel" aria-labelledby="nav-mapping-tab">
 
 							<!-- content of mapping LO to LOBj -->
 
@@ -271,10 +271,19 @@
 	</script>
 
 	<script>
-		function objectifyForm(formArray) {
+		function objectifyForm(formArray = []) {
 			let returnArray = {};
+			let detailObj = {}
 			for (var i = 0; i < formArray.length; i++) {
-				returnArray[formArray[i]['name']] = formArray[i]['value'];
+				if (Number.isInteger(+formArray[i]['name'])) {
+					detailObj = {
+						...detailObj,
+						[formArray[i]['name']]: formArray[i]['value']
+					}
+					returnArray["detail"] = detailObj
+				} else {
+					returnArray[formArray[i]['name']] = formArray[i]['value'];
+				}
 			}
 			return returnArray;
 		}
@@ -290,7 +299,7 @@
 				data: dataStr,
 				cache: false,
 				success: function(data) {
-					alert("SUCCESS");
+					alert(data);
 				},
 				error: function(err) {
 					alert("FAILED")
