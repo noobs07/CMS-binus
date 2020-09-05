@@ -133,11 +133,10 @@ class Data_model extends MY_Model{
 	}
 	
 	public function saveStudentLearningOutcome($user_id = 1, $courseStudentOutlineID, $courseLObjID, $map){
-		dump($map); die;
 		if(!empty($map)){
 			$db = $this->db;
 			
-			$upd  = "UPDATE e SET e.weightLO = t.weightLO, e.userUp = {$this->db->escape($user_d)}, e.dateUp = GETDATE() FROM courseLObj2LO e JOIN ( VALUES "; //(courseLObj2LOID, courseStudentOutlineID, courseLObjID, weightLO) VALUES ";
+			$upd  = "UPDATE e SET e.weightLO = t.weightLO, e.userUp = {$this->db->escape($user_id)}, e.dateUp = GETDATE() FROM courseLObj2LO e JOIN ( VALUES "; //(courseLObj2LOID, courseStudentOutlineID, courseLObjID, weightLO) VALUES ";
 			foreach($map as $LObj2LOID => $weigth){
 				$upd .= "({$db->escape($LObj2LOID)}, {$db->escape($weigth)}),";	
 			}
