@@ -210,10 +210,8 @@
 															} ?>
 															<span class="fa fa-times times1 <?php echo $check1 ?>" lobj="<?= $dataMapping['courseLObjID'] ?>" lo="<?= $data_lo['courseOutlineLearningOutcomeID'] ?>" lolobj="<?= $data_lo['courseLObj2LOID'] ?>" onclick="add(this,1, <?= $data_lo['courseLObj2LOID'] ?>)"></span>
 															<span class="fa fa-times times2 <?php echo $check2 ?>" lobj="<?= $dataMapping['courseLObjID'] ?>" lo="<?= $data_lo['courseOutlineLearningOutcomeID'] ?>" lolobj="<?= $data_lo['courseLObj2LOID'] ?>" onclick="add(this,2, <?= $data_lo['courseLObj2LOID'] ?>)"></span>
-															<input type="hidden" value="0" name="<?= $data_lo['courseLObj2LOID'] ?>" id="<?= $data_lo['courseLObj2LOID'] ?>">
+															<input type="hidden" value="<?= $data_lo['weightLO'] ?>" name="<?= $data_lo['courseLObj2LOID'] ?>" id="<?= $data_lo['courseLObj2LOID'] ?>">
 															<input type="hidden" value="<?= $data_lo['weightLO'] ?>">
-															<!-- <p> <?= $data_lo['weightLO'] ?> </p> -->
-
 														</td>
 													<?php } ?>
 													<td class="width-100p"><?= $i ?></td>
@@ -221,7 +219,6 @@
 														<!-- <p> <?= $dataMapping["courseLObjID"] ?> </p> -->
 														<input type="hidden" value="<?= $dataMapping['courseLObjID'] ?>" name="courseLObjID" id="courseLObjID">
 														<input type="hidden" value="0" name="courseStudentOutlineID" id="courseStudentOutlineID">
-
 														<button isEditActive="false" onclick="changeButton(this)" type="reset" lobj="<?= $dataMapping['courseLObjID'] ?>" class="btn btn-yellow btn-sm d-flex p-2 mx-auto">
 															<i class="fa fa-pencil" aria-hidden="true"></i>
 														</button>
@@ -311,6 +308,7 @@
 		function add(ths, sno, id) {
 			let lobj = (ths.getAttribute("lobj"))
 			let lo = (ths.getAttribute("lo"))
+			let inputHidden = $("#" + id)
 			let editedLobj = $("button[isEditActive='true']");
 			if (editedLobj.length > 0) {
 				let fix = editedLobj.filter((index, element) => {
@@ -330,17 +328,21 @@
 								} else {
 									if ($(fa[i]).hasClass("checked")) {
 										// hapus silang pertama jika aktif menjadi 0
+										$(inputHidden).val(0)
 										$(fa[i]).removeClass("checked");
-										$("#mapping" + id).attr("value", 0);
+										$("#mapping" + id).attr("value", "0");
 									} else {
 										// menambah silang pertama jika tidak aktif menjadi 1
 										$(fa[i]).addClass("checked");
+										$(inputHidden).val("1")
 										$("#mapping" + id).attr("value", 1);
 									}
 								}
 							} else {
 								// klik silang ke-2
 								$(fa[i]).addClass("checked");
+								$(inputHidden).val("2")
+
 								$("#mapping" + id).attr("value", 2);
 							}
 						}
