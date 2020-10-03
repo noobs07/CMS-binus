@@ -108,7 +108,7 @@
 														<p> <?= $data_so->nameEN ?></p>
 													</td>
 													<td class="w-25">
-														<p> Specific Student Outcon </p>
+														<p> Specific Student Outcome </p>
 													</td>
 												</tr>
 												<tr>
