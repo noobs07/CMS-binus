@@ -3,6 +3,9 @@
 
 class Data_model extends MY_Model{
 	private $_msg;
+	private $_tableCourseStudentOutcome = 'new_courseStudentOutcome';
+	private $_tableCourseLObj 			= 'new_courseLObj';
+	
 	
 	public function setMessage($msg = ''){
 		$this->_msg = $msg;
@@ -79,12 +82,12 @@ class Data_model extends MY_Model{
 	}
 	
 	
-	public function insertData($user_id = 1, $course_code, $data){
+	public function insertCourseStudentOutcome($user_id = 1, $course_code, $data){
 		if(is_array($data) && !empty($data)){
 			$this->db->trans_begin();
 			
-			$ins = "INSERT INTO courseStudentOutcome(stsrc, userIn, courseStudentOutcomeUUID, PM, nameIN, nameEN, CRSE_CODE) VALUES ";
-			$insDetail = "INSERT INTO courseLObj(stsrc, userIn, courseLObjUUID, code, descIN, descEN, taxonomyID, taxonomyName, taxonomyDesc, taxonomyCode, taxonomyKeyword, taxonomyLevel, courseStudentOutcomeID, CRSE_CODE) VALUES ";
+			$ins = "INSERT INTO {$this->_tableCourseStudentOutcome}(stsrc, userIn, statusStudentOutcomeId, statusStudentOutcomePM, statusStudentOutcomeNameIN, statusStudentOutcomeNameEN, CRSE_CODE) VALUES ";
+			$insDetail = "INSERT INTO {$this->_tableCourseLObj}(stsrc, userIn, id, code, descIN, descEN, bloomTaxonomyId, bloomTaxonomyName, bloomTaxonomyDesc, bloomTaxonomyCode, bloomTaxonomyKeyword, bloomTaxonomyLevel, statusStudentOutcomeId, CRSE_CODE) VALUES ";
 			$check_ins = false;
 			$check_insDetail = false;
 			$insLObj2LO = [];
@@ -93,11 +96,11 @@ class Data_model extends MY_Model{
 				$check_ins = true;
 				
 				foreach($d->lobjData as $r){
-					$sql = "(SELECT courseStudentOutcomeID FROM courseStudentOutcome WHERE courseStudentOutcomeUUID = {$this->db->escape($d->statusStudentOutcomeId)})";
-					$insDetail .= "('I', {$this->db->escape($user_id)}, {$this->db->escape($r->id)}, {$this->db->escape($r->code)}, {$this->db->escape($r->descIN)}, {$this->db->escape($r->descEN)}, {$this->db->escape($r->bloomTaxonomyId)}, {$this->db->escape($r->bloomTaxonomyName)}, {$this->db->escape($r->bloomTaxonomyDesc)}, {$this->db->escape($r->bloomTaxonomyCode)}, {$this->db->escape($r->bloomTaxonomyKeyword)}, {$this->db->escape($r->bloomTaxonomyLevel)}, {$sql}, {$this->db->escape($course_code)}),";
+					$insDetail .= "('I', {$this->db->escape($user_id)}, {$this->db->escape($r->id)}, {$this->db->escape($r->code)}, {$this->db->escape($r->descIN)}, {$this->db->escape($r->descEN)}, {$this->db->escape($r->bloomTaxonomyId)}, {$this->db->escape($r->bloomTaxonomyName)}, {$this->db->escape($r->bloomTaxonomyDesc)}, {$this->db->escape($r->bloomTaxonomyCode)}, {$this->db->escape($r->bloomTaxonomyKeyword)}, {$this->db->escape($r->bloomTaxonomyLevel)}, {$this->db->escape($d->statusStudentOutcomeId)}, {$this->db->escape($course_code)}),";
 					$check_insDetail = true;
-					$insLObj2LO[] = "dbo.courseLObj2LO_Create {$this->db->escape($course_code)}, {$this->db->escape($r->id)}, {$this->db->escape($user_id)} ";
-					//$insLObj2LO[] = "dbo.courseLObj2LO_Create 'M7023', {$this->db->escape($r->id)}, {$this->db->escape($user_id)} ";
+					
+					// Tidak aktif karena tidak ada SP di DB nya
+					//$insLObj2LO[] = "dbo.courseLObj2LO_Create {$this->db->escape($course_code)}, {$this->db->escape($r->id)}, {$this->db->escape($user_id)} ";
 				}
 			}
 			
@@ -112,7 +115,6 @@ class Data_model extends MY_Model{
 			}
 			
 			if(count($insLObj2LO) > 0){
-				print_r($insLObj2LO);
 				foreach($insLObj2LO as $i){
 					$this->db->simple_query($i);
 				}

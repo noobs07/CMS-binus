@@ -15,7 +15,7 @@ class Home extends MY_Controller
 	public function index()
 	{
 		$code = 'FOOD6XXX';
-
+		
 		// get data SO
 		$so = $this->data->getCourseStudentOutcome($code);
 
@@ -25,7 +25,7 @@ class Home extends MY_Controller
 			$api_data	= $this->postRequest("get_lobj/{$code}");
 
 			// simpan SO dan LObj ke local database
-			$this->data->insertData($this->_userID, $code, $api_data->data);
+			$this->data->insertCourseStudentOutcome($this->_userID, $code, $api_data->data);
 
 			// get data SO
 			$so = $this->data->getCourseStudentOutcome($code);
