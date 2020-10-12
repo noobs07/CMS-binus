@@ -14,8 +14,9 @@ class Home extends MY_Controller
 
 	public function index()
 	{
-		$code = 'FOOD6XXX';
-		
+		//$code = 'FOOD6XXX';
+		$code = $_GET['course_code'];
+
 		// get data SO
 		$so = $this->data->getCourseStudentOutcome($code);
 
@@ -44,7 +45,7 @@ class Home extends MY_Controller
 		$result = $so;
 
 		//echo '<pre>';
-		//print_r($so); //die;
+		print_r($so); //die;
 
 		// get data mapping LObj dan LO
 		$LObj2LO = $this->data->getCourseLObj2LO($code);
