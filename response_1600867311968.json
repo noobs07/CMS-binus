@@ -1,0 +1,61 @@
+{
+  "alert": {
+    "code": 200,
+    "message": "Ok",
+    "inner_message": null
+  },
+  "data": [
+    {
+      "statusStudentOutcomeId": "0788a66c-2491-4fcc-a210-247d305794bb",
+      "statusStudentOutcomeNameIN": "Keterampilan Kerja Multidisiplin",
+      "statusStudentOutcomeNameEN": "Multidisciplinary Student Outcome",
+      "statusStudentOutcomePM": false,
+      "lobjData": [
+        {
+          "id": "f242ca85-c1f6-40f3-8900-7a3d5f6392e2",
+          "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "code": "L.Obj 1.1",
+          "bloomTaxonomyId": "1aad45ba-fb65-4af8-957e-60cc895ea851",
+          "bloomTaxonomyName": "Remembering",
+          "bloomTaxonomyDesc": "The lowest level of thinking and most easily applied in eLearning. Given a knowledge then the learner is expected to be able to remember the concept.\t",
+          "bloomTaxonomyCode": "The lowest level of thinking and most easily applied in eLearning. Given a knowledge then the learner is expected to be able to remember the concept.\t",
+          "bloomTaxonomyKeyword": "dementia,forget",
+          "bloomTaxonomyLevel": 44
+        },
+        {
+          "id": "e87ec420-b988-45b4-9413-1d95447fc918",
+          "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "code": "L.Obj 1.2",
+          "bloomTaxonomyId": "53bda074-4a4e-40c8-a414-73f66338e488",
+          "bloomTaxonomyName": "Understanding",
+          "bloomTaxonomyDesc": "At this level learners can understand a concept, such as being able to interpret, model, classify, summarize, conclude, compare, and explain from a concept.",
+          "bloomTaxonomyCode": "At this level learners can understand a concept, such as being able to interpret, model, classify, summarize, conclude, compare, and explain from a concept.",
+          "bloomTaxonomyKeyword": "unnderstand,interpret,model,classify,summarize,conclude,compare,explain,testdb,test23,test db,khdb,dqbq,cbb,testvv,vbcjs,yadbb,bsnncs,nmxcb,bcbnz,vxcbw,nxcbw,cnxc,xnvnbw,zxncn,cnxchq,ishw,zcbzv,gasdg,nxbn,mnxbi,iuidg,vzgf,tftg,kjsnfj,nadj,jfjb,asac,ascac,qweq,sdd,zxczxvvavd,nfgnftndbd,hj,hj,h,h,g,vmbnmbn,vbnmbnm,vbnvbn,vbvnvbnvn,vbn,bnvbnv,bnmbnm,bbmm,weretwwr,wweteryrtu,tutyuyti,cvcvcvcv,cvcvcvxcxc,xcasa,bnmffdh,adqqwe,,nmjluy,mbhfkft,mvkliot,bxjdrw",
+          "bloomTaxonomyLevel": 29
+        }
+      ]
+    },
+    {
+      "statusStudentOutcomeId": "4a777b52-8311-4320-b8e5-985cfbe650aa",
+      "statusStudentOutcomeNameIN": "Keterampilan Kerja Khusus",
+      "statusStudentOutcomeNameEN": "Specific Student Outcomes",
+      "statusStudentOutcomePM": true,
+      "lobjData": [
+        {
+          "id": "8d476fb9-1a5f-4ef9-b0f4-66faff902468",
+          "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+          "code": "L.Obj 2.2",
+          "bloomTaxonomyId": "53bda074-4a4e-40c8-a414-73f66338e488",
+          "bloomTaxonomyName": "Understanding",
+          "bloomTaxonomyDesc": "At this level learners can understand a concept, such as being able to interpret, model, classify, summarize, conclude, compare, and explain from a concept.",
+          "bloomTaxonomyCode": "At this level learners can understand a concept, such as being able to interpret, model, classify, summarize, conclude, compare, and explain from a concept.",
+          "bloomTaxonomyKeyword": "unnderstand,interpret,model,classify,summarize,conclude,compare,explain,testdb,test23,test db,khdb,dqbq,cbb,testvv,vbcjs,yadbb,bsnncs,nmxcb,bcbnz,vxcbw,nxcbw,cnxc,xnvnbw,zxncn,cnxchq,ishw,zcbzv,gasdg,nxbn,mnxbi,iuidg,vzgf,tftg,kjsnfj,nadj,jfjb,asac,ascac,qweq,sdd,zxczxvvavd,nfgnftndbd,hj,hj,h,h,g,vmbnmbn,vbnmbnm,vbnvbn,vbvnvbnvn,vbn,bnvbnv,bnmbnm,bbmm,weretwwr,wweteryrtu,tutyuyti,cvcvcvcv,cvcvcvxcxc,xcasa,bnmffdh,adqqwe,,nmjluy,mbhfkft,mvkliot,bxjdrw",
+          "bloomTaxonomyLevel": 29
+        }
+      ]
+    }
+  ]
+}

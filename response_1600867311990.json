@@ -1,0 +1,848 @@
+{
+  "alert": {
+    "code": 200,
+    "message": "Ok",
+    "inner_message": null
+  },
+  "data": {
+    "teachningAndLearnings": [
+      {
+        "id": "60b1ca3f-9880-4b27-b763-0256b10a7a59",
+        "rpsId": "85a5819f-45cf-4ba8-8f3b-4c5b95c2cf8e",
+        "teachAndLearnStrategyId": "0d480d5a-fbfc-4aec-8adb-21dbe9abce26",
+        "teachAndLearnStrategyCode": "TIC",
+        "teachAndLearnStrategyName": "Technology in the classroom",
+        "studentOutcome": [
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "f242ca85-c1f6-40f3-8900-7a3d5f6392e2",
+                "code": "L.Obj 1.1",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "85a5819f-45cf-4ba8-8f3b-4c5b95c2cf8e",
+                    "id": "7286e1d8-a141-4d19-8e10-b0ccdec79e14",
+                    "name": " EXAM",
+                    "code": " Ex",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "a111ca6c-b023-4c3e-9d11-690f0619f965",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "code": "SO 2",
+            "statusSOId": "4a777b52-8311-4320-b8e5-985cfbe650aa",
+            "statusSONameIN": "Keterampilan Kerja Khusus",
+            "statusSONameEN": "Specific Student Outcomes",
+            "learningObjs": [
+              {
+                "id": "8d476fb9-1a5f-4ef9-b0f4-66faff902468",
+                "code": "L.Obj 2.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "d7b80f6d-7b78-4d56-a6cd-8f9623be20a3",
+                    "id": "2fc92c7c-2434-48c2-abd6-16b5dd06b6e3",
+                    "name": "Question ",
+                    "code": "QU",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "e87ec420-b988-45b4-9413-1d95447fc918",
+                "code": "L.Obj 1.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "6",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "c6d19de2-41de-45dd-a01a-4b2a0532deda",
+                    "id": "8c581fa2-2bce-4f78-b0ff-34e0034ab749",
+                    "name": "Learning Oppotunities",
+                    "code": "LO",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "41d1f9d9-4d89-486a-bb9b-cb60d53f459b",
+        "rpsId": "c6d19de2-41de-45dd-a01a-4b2a0532deda",
+        "teachAndLearnStrategyId": "0d480d5a-fbfc-4aec-8adb-21dbe9abce26",
+        "teachAndLearnStrategyCode": "TIC",
+        "teachAndLearnStrategyName": "Technology in the classroom",
+        "studentOutcome": [
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "f242ca85-c1f6-40f3-8900-7a3d5f6392e2",
+                "code": "L.Obj 1.1",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "85a5819f-45cf-4ba8-8f3b-4c5b95c2cf8e",
+                    "id": "7286e1d8-a141-4d19-8e10-b0ccdec79e14",
+                    "name": " EXAM",
+                    "code": " Ex",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "a111ca6c-b023-4c3e-9d11-690f0619f965",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "code": "SO 2",
+            "statusSOId": "4a777b52-8311-4320-b8e5-985cfbe650aa",
+            "statusSONameIN": "Keterampilan Kerja Khusus",
+            "statusSONameEN": "Specific Student Outcomes",
+            "learningObjs": [
+              {
+                "id": "8d476fb9-1a5f-4ef9-b0f4-66faff902468",
+                "code": "L.Obj 2.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "d7b80f6d-7b78-4d56-a6cd-8f9623be20a3",
+                    "id": "2fc92c7c-2434-48c2-abd6-16b5dd06b6e3",
+                    "name": "Question ",
+                    "code": "QU",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "e87ec420-b988-45b4-9413-1d95447fc918",
+                "code": "L.Obj 1.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "6",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "c6d19de2-41de-45dd-a01a-4b2a0532deda",
+                    "id": "8c581fa2-2bce-4f78-b0ff-34e0034ab749",
+                    "name": "Learning Oppotunities",
+                    "code": "LO",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "8256ae7d-176e-4045-8707-91723c2e0cb0",
+        "rpsId": "d7b80f6d-7b78-4d56-a6cd-8f9623be20a3",
+        "teachAndLearnStrategyId": "0d480d5a-fbfc-4aec-8adb-21dbe9abce26",
+        "teachAndLearnStrategyCode": "TIC",
+        "teachAndLearnStrategyName": "Technology in the classroom",
+        "studentOutcome": [
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "f242ca85-c1f6-40f3-8900-7a3d5f6392e2",
+                "code": "L.Obj 1.1",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "85a5819f-45cf-4ba8-8f3b-4c5b95c2cf8e",
+                    "id": "7286e1d8-a141-4d19-8e10-b0ccdec79e14",
+                    "name": " EXAM",
+                    "code": " Ex",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "a111ca6c-b023-4c3e-9d11-690f0619f965",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "code": "SO 2",
+            "statusSOId": "4a777b52-8311-4320-b8e5-985cfbe650aa",
+            "statusSONameIN": "Keterampilan Kerja Khusus",
+            "statusSONameEN": "Specific Student Outcomes",
+            "learningObjs": [
+              {
+                "id": "8d476fb9-1a5f-4ef9-b0f4-66faff902468",
+                "code": "L.Obj 2.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "d7b80f6d-7b78-4d56-a6cd-8f9623be20a3",
+                    "id": "2fc92c7c-2434-48c2-abd6-16b5dd06b6e3",
+                    "name": "Question ",
+                    "code": "QU",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "e87ec420-b988-45b4-9413-1d95447fc918",
+                "code": "L.Obj 1.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "6",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "c6d19de2-41de-45dd-a01a-4b2a0532deda",
+                    "id": "8c581fa2-2bce-4f78-b0ff-34e0034ab749",
+                    "name": "Learning Oppotunities",
+                    "code": "LO",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "60b1ca3f-9880-4b27-b763-0256b10a7a59",
+        "rpsId": "85a5819f-45cf-4ba8-8f3b-4c5b95c2cf8e",
+        "teachAndLearnStrategyId": "0d480d5a-fbfc-4aec-8adb-21dbe9abce26",
+        "teachAndLearnStrategyCode": "TIC",
+        "teachAndLearnStrategyName": "Technology in the classroom",
+        "studentOutcome": [
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "f242ca85-c1f6-40f3-8900-7a3d5f6392e2",
+                "code": "L.Obj 1.1",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "85a5819f-45cf-4ba8-8f3b-4c5b95c2cf8e",
+                    "id": "7286e1d8-a141-4d19-8e10-b0ccdec79e14",
+                    "name": " EXAM",
+                    "code": " Ex",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "a111ca6c-b023-4c3e-9d11-690f0619f965",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "code": "SO 2",
+            "statusSOId": "4a777b52-8311-4320-b8e5-985cfbe650aa",
+            "statusSONameIN": "Keterampilan Kerja Khusus",
+            "statusSONameEN": "Specific Student Outcomes",
+            "learningObjs": [
+              {
+                "id": "8d476fb9-1a5f-4ef9-b0f4-66faff902468",
+                "code": "L.Obj 2.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "d7b80f6d-7b78-4d56-a6cd-8f9623be20a3",
+                    "id": "2fc92c7c-2434-48c2-abd6-16b5dd06b6e3",
+                    "name": "Question ",
+                    "code": "QU",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "e87ec420-b988-45b4-9413-1d95447fc918",
+                "code": "L.Obj 1.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "6",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "c6d19de2-41de-45dd-a01a-4b2a0532deda",
+                    "id": "8c581fa2-2bce-4f78-b0ff-34e0034ab749",
+                    "name": "Learning Oppotunities",
+                    "code": "LO",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "41d1f9d9-4d89-486a-bb9b-cb60d53f459b",
+        "rpsId": "c6d19de2-41de-45dd-a01a-4b2a0532deda",
+        "teachAndLearnStrategyId": "0d480d5a-fbfc-4aec-8adb-21dbe9abce26",
+        "teachAndLearnStrategyCode": "TIC",
+        "teachAndLearnStrategyName": "Technology in the classroom",
+        "studentOutcome": [
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "f242ca85-c1f6-40f3-8900-7a3d5f6392e2",
+                "code": "L.Obj 1.1",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "85a5819f-45cf-4ba8-8f3b-4c5b95c2cf8e",
+                    "id": "7286e1d8-a141-4d19-8e10-b0ccdec79e14",
+                    "name": " EXAM",
+                    "code": " Ex",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "a111ca6c-b023-4c3e-9d11-690f0619f965",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "code": "SO 2",
+            "statusSOId": "4a777b52-8311-4320-b8e5-985cfbe650aa",
+            "statusSONameIN": "Keterampilan Kerja Khusus",
+            "statusSONameEN": "Specific Student Outcomes",
+            "learningObjs": [
+              {
+                "id": "8d476fb9-1a5f-4ef9-b0f4-66faff902468",
+                "code": "L.Obj 2.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "d7b80f6d-7b78-4d56-a6cd-8f9623be20a3",
+                    "id": "2fc92c7c-2434-48c2-abd6-16b5dd06b6e3",
+                    "name": "Question ",
+                    "code": "QU",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "e87ec420-b988-45b4-9413-1d95447fc918",
+                "code": "L.Obj 1.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "6",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "c6d19de2-41de-45dd-a01a-4b2a0532deda",
+                    "id": "8c581fa2-2bce-4f78-b0ff-34e0034ab749",
+                    "name": "Learning Oppotunities",
+                    "code": "LO",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "8256ae7d-176e-4045-8707-91723c2e0cb0",
+        "rpsId": "d7b80f6d-7b78-4d56-a6cd-8f9623be20a3",
+        "teachAndLearnStrategyId": "0d480d5a-fbfc-4aec-8adb-21dbe9abce26",
+        "teachAndLearnStrategyCode": "TIC",
+        "teachAndLearnStrategyName": "Technology in the classroom",
+        "studentOutcome": [
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "f242ca85-c1f6-40f3-8900-7a3d5f6392e2",
+                "code": "L.Obj 1.1",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "85a5819f-45cf-4ba8-8f3b-4c5b95c2cf8e",
+                    "id": "7286e1d8-a141-4d19-8e10-b0ccdec79e14",
+                    "name": " EXAM",
+                    "code": " Ex",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "a111ca6c-b023-4c3e-9d11-690f0619f965",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "code": "SO 2",
+            "statusSOId": "4a777b52-8311-4320-b8e5-985cfbe650aa",
+            "statusSONameIN": "Keterampilan Kerja Khusus",
+            "statusSONameEN": "Specific Student Outcomes",
+            "learningObjs": [
+              {
+                "id": "8d476fb9-1a5f-4ef9-b0f4-66faff902468",
+                "code": "L.Obj 2.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "d7b80f6d-7b78-4d56-a6cd-8f9623be20a3",
+                    "id": "2fc92c7c-2434-48c2-abd6-16b5dd06b6e3",
+                    "name": "Question ",
+                    "code": "QU",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "e87ec420-b988-45b4-9413-1d95447fc918",
+                "code": "L.Obj 1.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "6",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "c6d19de2-41de-45dd-a01a-4b2a0532deda",
+                    "id": "8c581fa2-2bce-4f78-b0ff-34e0034ab749",
+                    "name": "Learning Oppotunities",
+                    "code": "LO",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "60b1ca3f-9880-4b27-b763-0256b10a7a59",
+        "rpsId": "85a5819f-45cf-4ba8-8f3b-4c5b95c2cf8e",
+        "teachAndLearnStrategyId": "0d480d5a-fbfc-4aec-8adb-21dbe9abce26",
+        "teachAndLearnStrategyCode": "TIC",
+        "teachAndLearnStrategyName": "Technology in the classroom",
+        "studentOutcome": [
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "f242ca85-c1f6-40f3-8900-7a3d5f6392e2",
+                "code": "L.Obj 1.1",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "85a5819f-45cf-4ba8-8f3b-4c5b95c2cf8e",
+                    "id": "7286e1d8-a141-4d19-8e10-b0ccdec79e14",
+                    "name": " EXAM",
+                    "code": " Ex",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "a111ca6c-b023-4c3e-9d11-690f0619f965",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "code": "SO 2",
+            "statusSOId": "4a777b52-8311-4320-b8e5-985cfbe650aa",
+            "statusSONameIN": "Keterampilan Kerja Khusus",
+            "statusSONameEN": "Specific Student Outcomes",
+            "learningObjs": [
+              {
+                "id": "8d476fb9-1a5f-4ef9-b0f4-66faff902468",
+                "code": "L.Obj 2.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "d7b80f6d-7b78-4d56-a6cd-8f9623be20a3",
+                    "id": "2fc92c7c-2434-48c2-abd6-16b5dd06b6e3",
+                    "name": "Question ",
+                    "code": "QU",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "e87ec420-b988-45b4-9413-1d95447fc918",
+                "code": "L.Obj 1.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "6",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "c6d19de2-41de-45dd-a01a-4b2a0532deda",
+                    "id": "8c581fa2-2bce-4f78-b0ff-34e0034ab749",
+                    "name": "Learning Oppotunities",
+                    "code": "LO",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "41d1f9d9-4d89-486a-bb9b-cb60d53f459b",
+        "rpsId": "c6d19de2-41de-45dd-a01a-4b2a0532deda",
+        "teachAndLearnStrategyId": "0d480d5a-fbfc-4aec-8adb-21dbe9abce26",
+        "teachAndLearnStrategyCode": "TIC",
+        "teachAndLearnStrategyName": "Technology in the classroom",
+        "studentOutcome": [
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "f242ca85-c1f6-40f3-8900-7a3d5f6392e2",
+                "code": "L.Obj 1.1",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "85a5819f-45cf-4ba8-8f3b-4c5b95c2cf8e",
+                    "id": "7286e1d8-a141-4d19-8e10-b0ccdec79e14",
+                    "name": " EXAM",
+                    "code": " Ex",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "a111ca6c-b023-4c3e-9d11-690f0619f965",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "code": "SO 2",
+            "statusSOId": "4a777b52-8311-4320-b8e5-985cfbe650aa",
+            "statusSONameIN": "Keterampilan Kerja Khusus",
+            "statusSONameEN": "Specific Student Outcomes",
+            "learningObjs": [
+              {
+                "id": "8d476fb9-1a5f-4ef9-b0f4-66faff902468",
+                "code": "L.Obj 2.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "d7b80f6d-7b78-4d56-a6cd-8f9623be20a3",
+                    "id": "2fc92c7c-2434-48c2-abd6-16b5dd06b6e3",
+                    "name": "Question ",
+                    "code": "QU",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "e87ec420-b988-45b4-9413-1d95447fc918",
+                "code": "L.Obj 1.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "6",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "c6d19de2-41de-45dd-a01a-4b2a0532deda",
+                    "id": "8c581fa2-2bce-4f78-b0ff-34e0034ab749",
+                    "name": "Learning Oppotunities",
+                    "code": "LO",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "8256ae7d-176e-4045-8707-91723c2e0cb0",
+        "rpsId": "d7b80f6d-7b78-4d56-a6cd-8f9623be20a3",
+        "teachAndLearnStrategyId": "0d480d5a-fbfc-4aec-8adb-21dbe9abce26",
+        "teachAndLearnStrategyCode": "TIC",
+        "teachAndLearnStrategyName": "Technology in the classroom",
+        "studentOutcome": [
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "f242ca85-c1f6-40f3-8900-7a3d5f6392e2",
+                "code": "L.Obj 1.1",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "85a5819f-45cf-4ba8-8f3b-4c5b95c2cf8e",
+                    "id": "7286e1d8-a141-4d19-8e10-b0ccdec79e14",
+                    "name": " EXAM",
+                    "code": " Ex",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "a111ca6c-b023-4c3e-9d11-690f0619f965",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "code": "SO 2",
+            "statusSOId": "4a777b52-8311-4320-b8e5-985cfbe650aa",
+            "statusSONameIN": "Keterampilan Kerja Khusus",
+            "statusSONameEN": "Specific Student Outcomes",
+            "learningObjs": [
+              {
+                "id": "8d476fb9-1a5f-4ef9-b0f4-66faff902468",
+                "code": "L.Obj 2.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "50",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "d7b80f6d-7b78-4d56-a6cd-8f9623be20a3",
+                    "id": "2fc92c7c-2434-48c2-abd6-16b5dd06b6e3",
+                    "name": "Question ",
+                    "code": "QU",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "2083cae6-a1b2-4dff-b9e7-aed57bd9123e",
+            "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. indo",
+            "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. eng",
+            "code": "SO 1",
+            "statusSOId": "0788a66c-2491-4fcc-a210-247d305794bb",
+            "statusSONameIN": "Keterampilan Kerja Multidisiplin",
+            "statusSONameEN": "Multidisciplinary Student Outcome",
+            "learningObjs": [
+              {
+                "id": "e87ec420-b988-45b4-9413-1d95447fc918",
+                "code": "L.Obj 1.2",
+                "descIN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "descEN": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                "weight": "6",
+                "assessmentPlan": [
+                  {
+                    "rpsId": "c6d19de2-41de-45dd-a01a-4b2a0532deda",
+                    "id": "8c581fa2-2bce-4f78-b0ff-34e0034ab749",
+                    "name": "Learning Oppotunities",
+                    "code": "LO",
+                    "levelCourse": false,
+                    "crossCount": "2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
