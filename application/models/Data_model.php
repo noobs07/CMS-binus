@@ -3,8 +3,10 @@
 
 class Data_model extends MY_Model{
 	private $_msg;
-	private $_tableCourseStudentOutcome = 'new_courseStudentOutcome';
-	private $_tableCourseLObj 			= 'new_courseLObj';
+	private $_tableCourseStudentOutcome 		= 'courseStudentOutcome';
+	private $_tableCourseOutlineLearningOutcome = 'courseOutlineLearningOutcome';
+	private $_tableCourseLObj 					= 'courseLObj';
+	private $_tableCourseLObj2LO				= 'courseLObj2LO';
 	
 	
 	public function setMessage($msg = ''){
@@ -22,16 +24,16 @@ class Data_model extends MY_Model{
 	
 	
 	public function getCourseStudentOutcome($course_code){
-		return $this->db->select('courseStudentOutcomeId, PM, nameIN, nameEN')
-					->get_where('courseStudentOutcome', ['CRSE_CODE' => $course_code])->result();
+		return $this->db->select('statusStudentOutcomeId, statusStudentOutcomePM, statusStudentOutcomeNameIN, statusStudentOutcomeNameEN')
+					->get_where($this->_tableCourseStudentOutcome, ['CRSE_CODE' => $course_code])->result();
 	}
 	
-	public function getCourseLObj($courseStudentOutcomeId = null, $course_code = null){
-		$this->db->select('courseLObjID, code, descIN, descEN')
-			->from('courseLObj');
+	public function getCourseLObj($statusStudentOutcomeId = null, $course_code = null){
+		$this->db->select('courseLObjId, code, descIN, descEN')
+			->from($this->_tableCourseLObj);
 		
-		if(!empty($courseStudentOutcomeId)){
-			$this->db->where('courseStudentOutcomeID', $courseStudentOutcomeId);
+		if(!empty($statusStudentOutcomeId)){
+			$this->db->where('statusStudentOutcomeId', $statusStudentOutcomeId);
 		}
 		
 		if(!empty($course_code)){
@@ -42,10 +44,10 @@ class Data_model extends MY_Model{
 	}
 	
 	public function getCourseLObj2LO($course_code){
-		$result = $this->db->select('lo.courseLObj2LOID, lobj.courseLObjID, lobj.code, lobj.descIN, lobj.descEN, lo.courseOutlineLearningOutcomeID, lo.weightLO, ol.courseOutlineLearningOutcome, ol.priority')
-					->from('courseLObj lobj')
-					->join('courseLObj2LO lo', 'lobj.courseLObjID = lo.courseLObjID')
-					->join('courseOutlineLearningOutcome ol', 'lo.courseOutlineLearningOutcomeID = ol.courseOutlineLearningOutcomeID')
+		$result = $this->db->select('lo.courseLObj2LOId, lobj.courseLObjID, lobj.code, lobj.descIN, lobj.descEN, lo.courseOutlineLearningOutcomeID, lo.weightLO, ol.courseOutlineLearningOutcome, ol.priority')
+					->from($this->_tableCourseLObj.' lobj')
+					->join($this->_tableCourseLObj2LO.' lo', 'lobj.courseLObjID = lo.courseLObjID')
+					->join($this->_tableCourseOutlineLearningOutcome.' ol', 'lo.courseOutlineLearningOutcomeID = ol.courseOutlineLearningOutcomeID')
 					->where('lobj.CRSE_CODE', $course_code)
 					->order_by('lobj.code', 'ASC')
 					->order_by('ol.priority', 'ASC')
@@ -56,7 +58,7 @@ class Data_model extends MY_Model{
 		$i= 0;
 		foreach($result as $index => $r){
 			if(isset($data[$i][$r->courseLObjID])){
-				$data[$i]['LO'][] 	= ['courseLObj2LOID' => $r->courseLObj2LOID,
+				$data[$i]['LO'][] 	= ['courseLObj2LOId' => $r->courseLObj2LOId,
 									   'courseOutlineLearningOutcomeID' => $r->courseOutlineLearningOutcomeID,
 									   'weightLO' => $r->weightLO,
 									   'courseOutlineLearningOutcome' => $r->courseOutlineLearningOutcome,
@@ -70,7 +72,7 @@ class Data_model extends MY_Model{
 				$data[$i]['code'] 	= $r->code;
 				$data[$i]['descIN'] = $r->descIN;
 				$data[$i]['descEN'] = $r->descEN;
-				$data[$i]['LO'][] 	= ['courseLObj2LOID' => $r->courseLObj2LOID,
+				$data[$i]['LO'][] 	= ['courseLObj2LOId' => $r->courseLObj2LOId,
 									   'courseOutlineLearningOutcomeID' => $r->courseOutlineLearningOutcomeID,
 									   'weightLO' => $r->weightLO,
 									   'courseOutlineLearningOutcome' => $r->courseOutlineLearningOutcome,
@@ -138,13 +140,13 @@ class Data_model extends MY_Model{
 		if(!empty($map)){
 			$db = $this->db;
 			
-			$upd  = "UPDATE e SET e.weightLO = t.weightLO, e.userUp = {$this->db->escape($user_id)}, e.dateUp = GETDATE() FROM courseLObj2LO e JOIN ( VALUES "; //(courseLObj2LOID, courseStudentOutlineID, courseLObjID, weightLO) VALUES ";
+			$upd  = "UPDATE e SET e.weightLO = t.weightLO, e.userUp = {$this->db->escape($user_id)}, e.dateUp = GETDATE() FROM {$this->_tableCourseLObj2LO} e JOIN ( VALUES "; //(courseLObj2LOId, courseStudentOutlineID, courseLObjID, weightLO) VALUES ";
 			foreach($map as $LObj2LOID => $weigth){
 				$upd .= "({$db->escape($LObj2LOID)}, {$db->escape($weigth)}),";	
 			}
 			
 			$upd  = rtrim($upd, ',');
-			$upd .= ") t (courseLObj2LOID, weightLO) ON t.courseLObj2LOID = e.courseLObj2LOID;";
+			$upd .= ") t (courseLObj2LOId, weightLO) ON t.courseLObj2LOId = e.courseLObj2LOId;";
 			
 			if($this->db->simple_query($upd)){
 				$this->setMessage('Data berhasil disimpan.');
