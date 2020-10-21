@@ -14,11 +14,14 @@ class Home extends MY_Controller
 
 	public function index()
 	{
-		//$code = 'FOOD6XXX';
-		$code = $_GET['course_code'];
+		$code = 'ENTR6001';
+		//$code = $_GET['course_code'];
 
 		// get data SO
 		$so = $this->data->getCourseStudentOutcome($code);
+		
+		// untuk mendapatkan course monitoring, parameter bisa diinputkan disini
+		$courseMonitoring = $this->getCourseMonitoring();
 
 		// Jika data belum ada, get dari API
 		if (empty($so)) {
@@ -84,5 +87,10 @@ class Home extends MY_Controller
 			echo json_encode($data);
 			//$this->load->view('konten/cms', $data);
 		}
+	}
+	
+	function getCourseMonitoring($acad_career = 'RS1', $attr_value = '373', $strm = '1920')
+	{
+		return $this->data->getCourseMonitoring($acad_career, $attr_value, $strm);
 	}
 }

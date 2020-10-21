@@ -162,7 +162,7 @@ class Data_model extends MY_Model{
 	}
 	
 	// fungsi untuk mengambil deskripsi course. Contoh parameter 'RS1','373','1920'
-	public function getCourseDescription($acad_career = null, $attr_value = null, $strm = null){
-		return $this->db->query("dbo.Staff_CMS_CourseMonitoring_LoadData ?, ?, ?", array($course_code))->result();
+	public function getCourseMonitoring($acad_career = null, $attr_value = null, $strm = null){
+		return $this->db->query("dbo.Staff_CMS_CourseMonitoring_LoadData ?, ?, ?", array($acad_career, $attr_value, $strm))->result();
 	}
 }
