@@ -160,4 +160,9 @@ class Data_model extends MY_Model{
 		$this->setMessage('Data gagal disimpan. Input map harus array dan memiliki nilai.');
 		return false;
 	}
+	
+	// fungsi untuk mengambil deskripsi course. Contoh parameter 'RS1','373','1920'
+	public function getCourseDescription($acad_career = null, $attr_value = null, $strm = null){
+		return $this->db->query("dbo.Staff_CMS_CourseMonitoring_LoadData ?, ?, ?", array($course_code))->result();
+	}
 }
