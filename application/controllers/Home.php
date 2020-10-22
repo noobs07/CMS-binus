@@ -14,14 +14,15 @@ class Home extends MY_Controller
 
 	public function index()
 	{
-		$code = 'ENTR6001';
-		//$code = $_GET['course_code'];
+		// simplify for get course code, if not exists course code, then set default course code.
+		$code = $this->input->get('course_code');
+		$code = empty($code)? 'ENTR6001' : $code;
 
 		// get data SO
 		$so = $this->data->getCourseStudentOutcome($code);
 		
 		// untuk mendapatkan course monitoring, parameter bisa diinputkan disini
-		$courseMonitoring = $this->getCourseMonitoring();
+		$courseMonitoring = $this->getCourseMonitoring($this->input->post('acad_career'), $this->input->post('attr_value'), $this->input->post('strm'));
 
 		// Jika data belum ada, get dari API
 		if (empty($so)) {
@@ -91,6 +92,10 @@ class Home extends MY_Controller
 	
 	function getCourseMonitoring($acad_career = 'RS1', $attr_value = '373', $strm = '1920')
 	{
+		// validate if parameter has blank value
+		$acad_career = empty($acad_career)? 'RS1' : $acad_career;
+		$attr_value  = empty($attr_value)? '373' : $attr_value;
+		$strm 		 = empty($strm)? '1920' : $strm;
 		return $this->data->getCourseMonitoring($acad_career, $attr_value, $strm);
 	}
 }
