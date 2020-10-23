@@ -98,4 +98,7 @@ class Home extends MY_Controller
 		$strm 		 = empty($strm)? '1920' : $strm;
 		return $this->data->getCourseMonitoring($acad_career, $attr_value, $strm);
 	}
+	function getHome(){
+		echo "home";
+	}
 }
