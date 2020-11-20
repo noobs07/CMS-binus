@@ -15,6 +15,7 @@ class Home extends MY_Controller
 	public function index()
 	{
 		// simplify for get course code, if not exists course code, then set default course code.
+		// FINC7007,ISYS6442,ACCT6063ACCT6010,ISYS6256
 		$code = $this->input->get('course_code');
 		$code = empty($code)? 'ENTR6001' : $code;
 
