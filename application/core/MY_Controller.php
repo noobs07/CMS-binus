@@ -6,7 +6,8 @@ class MY_Controller extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->_token = 'Bearer hNtMWKGUxLEEdZu*ulx.W(*JFi[/J6w!FC.*|dcOeq@yeGWhqEVyLS7z4OQdkVeYvecmstHIcSZJGw[d7}$$F[N\'^1f~Sno';
-		$this->_url = 'http://203.210.85.102:6032/api/v2/ForCMSData';
+		//$this->_url = 'http://203.210.85.102:6032/api/v2/ForCMSData';
+		$this->_url = 'http://radyalabs.asuscomm.com:6032/api/v2/ForCMSData';
 	}
 	
 	public function getRequest($url, $params = []){
