@@ -17,31 +17,31 @@ class Home extends MY_Controller
 		// simplify for get course code, if not exists course code, then set default course code.
 		// FINC7007,ISYS6442,ACCT6063ACCT6010,ISYS6256
 		$code = $this->input->get('course_code');
-		$code = empty($code)? 'ENTR6001' : $code;
+		$code = empty($code)? 'ISYS6442' : $code;
 
 		// get data SO
 		$so = $this->data->getCourseStudentOutcome($code);
 		
 		// untuk mendapatkan course monitoring, parameter bisa diinputkan disini
 		$courseMonitoring = $this->getCourseMonitoring($this->input->post('acad_career'), $this->input->post('attr_value'), $this->input->post('strm'));
-
+		//dump($courseMonitoring);
 		// Jika data belum ada, get dari API
 		if (empty($so)) {
 			// return dari API SO dan LObj
 			$api_data	= $this->postRequest("get_lobj/{$code}");
-
+			
 			// simpan SO dan LObj ke local database
-			$this->data->insertCourseStudentOutcome($this->_userID, $code, $api_data->data);
+			$res = $this->data->insertCourseStudentOutcome($this->_userID, $code, $api_data->data);
 
 			// get data SO
 			$so = $this->data->getCourseStudentOutcome($code);
 		}
-
+		
 		$data = [];
 		foreach ($so as $s) {
 
 			// get data LObj untuk tiap-tiap SO
-			$detail  = $this->data->getCourseLObj($s->courseStudentOutcomeId, $code);
+			$detail  = $this->data->getCourseLObj($s->statusStudentOutcomeId, $code);
 			foreach ($detail as $d) {
 				$s->LObj[] = $d;
 			}
@@ -50,7 +50,7 @@ class Home extends MY_Controller
 		$result = $so;
 
 		//echo '<pre>';
-		print_r($so); //die;
+		//print_r($so); //die;
 
 		// get data mapping LObj dan LO
 		$LObj2LO = $this->data->getCourseLObj2LO($code);
@@ -64,7 +64,7 @@ class Home extends MY_Controller
 			$data['log'] = null;
 		}
 		$data['msg'] 	 = $this->data->getMessage();
-		$data['so'] = $result;
+		$data['so'] 	 = $result;
 		$data['mapping'] = $LObj2LO;
 		$this->load->view('konten/cms', $data);
 	}
