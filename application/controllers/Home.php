@@ -16,57 +16,69 @@ class Home extends MY_Controller
 	{
 		// simplify for get course code, if not exists course code, then set default course code.
 		// FINC7007,ISYS6442,ACCT6063ACCT6010,ISYS6256
-		$code = $this->input->get('course_code');
-		$code = empty($code)? 'ISYS6442' : $code;
-
-		// get data SO
-		$so = $this->data->getCourseStudentOutcome($code);
+		$course_id = $this->input->get('course_id');
+		$course_id = empty($course_id)? '015117' : $course_id;
 		
-		// untuk mendapatkan course monitoring, parameter bisa diinputkan disini
-		$courseMonitoring = $this->getCourseMonitoring($this->input->post('acad_career'), $this->input->post('attr_value'), $this->input->post('strm'));
-		//dump($courseMonitoring);
-		// Jika data belum ada, get dari API
-		if (empty($so)) {
-			// return dari API SO dan LObj
-			$api_data	= $this->postRequest("get_lobj/{$code}");
-			
-			// simpan SO dan LObj ke local database
-			$res = $this->data->insertCourseStudentOutcome($this->_userID, $code, $api_data->data);
-
+		$course = $this->data->getBaseCourseByCourseID($course_id);
+		//dump($course);
+		if($course){
+			$code = $course->CRSE_CODE;
 			// get data SO
 			$so = $this->data->getCourseStudentOutcome($code);
-		}
-		
-		$data = [];
-		foreach ($so as $s) {
-
-			// get data LObj untuk tiap-tiap SO
-			$detail  = $this->data->getCourseLObj($s->statusStudentOutcomeId, $code);
-			foreach ($detail as $d) {
-				$s->LObj[] = $d;
+			//dump($so,'SO-1');
+			
+			// untuk mendapatkan course monitoring, parameter bisa diinputkan disini. parameter 'RS1','373','1920'
+			$courseMonitoring = $this->getCourseMonitoring($course->ACAD_CAREER, $this->input->post('attr_value'), $this->input->post('strm'));
+			//dump($courseMonitoring,'Monitoring');
+			
+			// Jika data belum ada, get dari API
+			if (empty($so)) {
+				// return dari API SO dan LObj
+				$api_data	= $this->postRequest("get_lobj/{$code}");
+				//dump($api_data,'API');	
+				
+				// simpan SO dan LObj ke local database
+				$res = $this->data->insertCourseStudentOutcome($this->_userID, $code, $api_data->data);
+				//dump($res,'Insert');
+				
+				// get data SO
+				$so = $this->data->getCourseStudentOutcome($code);
+				//dump($so,'SO-2');
 			}
-		}
-		//$this->d($so); die;
-		$result = $so;
+			
+			
+			$data = [];
+			foreach ($so as $s) {
 
-		//echo '<pre>';
-		//print_r($so); //die;
+				// get data LObj untuk tiap-tiap SO
+				$detail  = $this->data->getCourseLObj($s->statusStudentOutcomeId, $code);
+				foreach ($detail as $d) {
+					$s->LObj[] = $d;
+				}
+			}
+			
+			$result = $so;
 
-		// get data mapping LObj dan LO
-		$LObj2LO = $this->data->getCourseLObj2LO($code);
 
-		//dump($so, 'data SO dan LObj'); 
-		//dump($LObj2LO, 'data mapping LObj ke LO');
+			// get data mapping LObj dan LO
+			$LObj2LO = $this->data->getCourseLObj2LO($code);
 
-		if ($result) {
-			$data['log'] = $this->data->getLogQuery();
+			if ($result) {
+				$data['log'] = $this->data->getLogQuery();
+			} else {
+				$data['log'] = null;
+			}
+			
+			$data['msg'] 	 = $this->data->getMessage();
+			$data['so'] 	 = $result;
+			$data['mapping'] = $LObj2LO;
+			$this->load->view('konten/cms', $data);
 		} else {
-			$data['log'] = null;
+			$data['msg'] 	 = "No Data Coourse Found";
+			$data['so'] 	 = null;
+			$data['mapping'] = null;
+			$this->load->view('konten/cms', $data);
 		}
-		$data['msg'] 	 = $this->data->getMessage();
-		$data['so'] 	 = $result;
-		$data['mapping'] = $LObj2LO;
-		$this->load->view('konten/cms', $data);
 	}
 
 	function saveData()
