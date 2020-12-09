@@ -7,6 +7,8 @@ class Data_model extends MY_Model{
 	private $_tableCourseOutlineLearningOutcome = 'courseOutlineLearningOutcome';
 	private $_tableCourseLObj 					= 'courseLObj';
 	private $_tableCourseLObj2LO				= 'courseLObj2LO';
+	private $_tableBaseCourse					= 'ORACLE.dbo.PS_N_COURSE_CODE';
+
 	
 	
 	public function setMessage($msg = ''){
@@ -15,6 +17,12 @@ class Data_model extends MY_Model{
 	
 	public function getMessage(){
 		return $this->_msg;
+	}
+	
+	public function getBaseCourseByCourseID($course_id = ''){
+		return $this->db->select("INSTITUTION, ACAD_CAREER, CRSE_ID, CRSE_CODE, CRSE_TTL_LONG_I, COURSE_TITLE_LONG, N_SKST")
+						->from($this->_tableBaseCourse)
+						->where("CRSE_ID", $course_id)->get()->row();
 	}
 	
 		
