@@ -20,16 +20,14 @@ class Home extends MY_Controller
 		$course_id = empty($course_id)? '015117' : $course_id;
 		
 		$course = $this->data->getBaseCourseByCourseID($course_id);
-		//dump($course);
+		
 		if($course){
 			$code = $course->CRSE_CODE;
 			// get data SO
 			$so = $this->data->getCourseStudentOutcome($code);
-			//dump($so,'SO-1');
 			
 			// untuk mendapatkan course monitoring, parameter bisa diinputkan disini. parameter 'RS1','373','1920'
 			$courseMonitoring = $this->getCourseMonitoring($course->ACAD_CAREER, $this->input->post('attr_value'), $this->input->post('strm'));
-			//dump($courseMonitoring,'Monitoring');
 			
 			// Jika data belum ada, get dari API
 			if (empty($so)) {
@@ -39,11 +37,11 @@ class Home extends MY_Controller
 				
 				// simpan SO dan LObj ke local database
 				$res = $this->data->insertCourseStudentOutcome($this->_userID, $code, $api_data->data);
-				//dump($res,'Insert');
+				//dump($res,'Insert'); 
 				
 				// get data SO
 				$so = $this->data->getCourseStudentOutcome($code);
-				//dump($so,'SO-2');
+				//dump($so,'SO-2'); 
 			}
 			
 			
