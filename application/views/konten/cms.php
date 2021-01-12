@@ -108,8 +108,9 @@
 
 
 							<div class="table-responsive" id="mappingTableArea">
+								<table id="mappingTable" class="table table-bordered fontsize-8" width="100%">
 
-								<table id="mappingTables"></table>
+								</table>
 							</div>
 							<!-- end table of mapping -->
 							<!-- end content of mapping LO to LOBj -->
@@ -167,7 +168,8 @@
 			return returnArray;
 		}
 
-		$("form").submit(function(event) {
+		$(".formLOBJ").submit(function(event) {
+			console.log("SUBMIT")
 			event.preventDefault();
 			let dataObject = objectifyForm($(this).serializeArray())
 			let dataStr = JSON.stringify(dataObject)
@@ -187,9 +189,11 @@
 		});
 
 
-		function add(ths, sno, id) {
+		function add(ths, sno) {
+			console.log(ths, sno)
 			let lobj = (ths.getAttribute("lobj"))
 			let lo = (ths.getAttribute("lo"))
+			let id = lobj
 			let inputHidden = $("#" + id)
 			let editedLobj = $("button[isEditActive='true']");
 			if (editedLobj.length > 0) {
@@ -197,7 +201,7 @@
 					return element.getAttribute("lobj") === lobj;
 				});
 				if ($(fix).attr("lobj") === lobj) {
-					let fa = document.getElementsByClassName("fa-times")
+					let fa = $(".fa-times")
 					for (let i = 0; i < fa.length; i++) {
 						let fa_lo = fa[i].getAttribute("lo")
 						let fa_lobj = fa[i].getAttribute("lobj")
@@ -237,13 +241,13 @@
 			let lobj = ths.getAttribute("lobj");
 			let isEditActive = ths.getAttribute("isEditActive");
 			if (isEditActive === "true") {
-				$(ths).attr("type", "submit")
+				$(ths).attr("type", "reset")
 				$(ths).attr("isEditActive", "false");
 				$(ths)
 					.empty()
 					.append('<i class="fa fa-pencil" aria-hidden="true"></i>');
 			} else {
-				$(ths).attr("type", "reset")
+				$(ths).attr("type", "submit")
 				$(ths).attr("isEditActive", "true");
 				$(ths).empty().append("Save");
 			}
@@ -335,30 +339,64 @@
 
 
 		function renderMapping(dataMapping = []) {
-			$("#mappingTables").DataTable({
-				serverSide: true,
-				responsive: true,
-				ajax: {
-					url: 'index.php/home/getmappingSO',
-					dataSrc: function(res) {
-						console.log(res.mapping)
-						return res.mapping
-					}
-				},
-				columns: [{
-					title: "",
-					data: 'code'
-				}, {
-					title: "",
-					data: "descIN"
-				}, {
-					title: "LO 1",
-					render: function(data, type, row) {
-						return row.courseLObjID
-					}
-				}],
+			let LOData = dataMapping[0].LO
+			$("#mappingTable").append(`
+				<thead>
+					<tr>
+						<th class="width-100p"></th>
+						<th class="width-300p"></th>
+						${LOData.map(lo => {
+							return `<th class="width-100p">LO ${lo.courseOutlineLearningOutcomeID} </th>`
+						})}
+						<th class="width-100p">Total LO to support </th>
+						<th class="width-100p"> Action </th>
+					</tr>
+				</thead>
+			`)
 
-			})
+			$("#mappingTable").append(`
+				<tbody>
+					${dataMapping.map(row => {
+						console.log(row.LO.length)
+						return (`
+						<tr>
+						<form class="formLOBJ">
+							<td class="width-100p"> ${row.code} </td>
+							<td class="width-300p"> ${row.descEN}  </td>
+
+							${row.LO.map(data_lo => {
+								console.log(data_lo.courseLObj2LOId)
+								let check1 = ""
+								let check2 = ""
+								if(data_lo.weightLO == 2){
+									check1="checked"; 
+									check2="checked"
+								}else if (data_lo.weightLO == 1) check1="checked"
+								return (`<td class="width-100p">
+									<span class="fa fa-times times1 ${check1}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj="${data_lo.courseLObj2LOId}" onclick="add(this,1)" ></span>
+									<span class="fa fa-times times2 ${check2}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj="${data_lo.courseLObj2LOId}" onclick="add(this,2)" ></span>
+									<input type="hidden" value="0" name="${row.courseLObj2LOId}" id="${row.courseLObj2LOId}">
+									<input type="hidden" value="${row.weightLO}">
+								</td>`)
+
+							})
+								
+							
+							}
+							
+							<td class="width-100p"> ${LOData.length} </td> 
+							<td class="width-100p">
+								<button isEditActive="false" onclick="changeButton(this)" type="submit" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
+									<i class="fa fa-pencil" aria-hidden="true"></i> 
+								</button> 
+							</td> 
+							</form>
+						</tr>
+						`)
+					})}
+					
+				</tbody>
+			`)
 		}
 	</script>
 
