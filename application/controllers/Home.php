@@ -12,14 +12,23 @@ class Home extends MY_Controller
 		$this->load->model('data_model', 'data');
 	}
 
-	public function index()
+	public function index(){
+		$this->load->view('konten/cms');
+	}
+	
+	public function getMappingSO()
 	{
 		// simplify for get course code, if not exists course code, then set default course code.
 		// FINC7007,ISYS6442,ACCT6063ACCT6010,ISYS6256
-		$course_id = $this->input->get('course_id');
+		$course_id = $this->input->get_post('course_id');
+		
 		$course_id = empty($course_id)? '015117' : $course_id;
 		
 		$course = $this->data->getBaseCourseByCourseID($course_id);
+		
+		$data['msg'] 	 = "No Data Coourse Found";
+		$data['so'] 	 = null;
+		$data['mapping'] = null;
 		
 		if($course){
 			$code = $course->CRSE_CODE;
@@ -44,7 +53,6 @@ class Home extends MY_Controller
 				//dump($so,'SO-2'); 
 			}
 			
-			
 			$data = [];
 			foreach ($so as $s) {
 
@@ -57,7 +65,6 @@ class Home extends MY_Controller
 			
 			$result = $so;
 
-
 			// get data mapping LObj dan LO
 			$LObj2LO = $this->data->getCourseLObj2LO($code);
 
@@ -69,14 +76,11 @@ class Home extends MY_Controller
 			
 			$data['msg'] 	 = $this->data->getMessage();
 			$data['so'] 	 = $result;
-			$data['mapping'] = $LObj2LO;
-			$this->load->view('konten/cms', $data);
-		} else {
-			$data['msg'] 	 = "No Data Coourse Found";
-			$data['so'] 	 = null;
-			$data['mapping'] = null;
-			$this->load->view('konten/cms', $data);
+			$data['mapping'] = $LObj2LO;	
 		}
+		
+		$this->output->set_content_type('application/json')
+						->set_output(json_encode($data, JSON_NUMERIC_CHECK));
 	}
 
 	function saveData()
@@ -96,8 +100,9 @@ class Home extends MY_Controller
 			// $map = array(7 => 0, 8 => 2, 9 => 1);		=> key adalah courseLObj2LOID dan valuenya adalah weigthLO	
 			$data['status'] = $this->data->saveStudentLearningOutcome($this->_userID, $this->input->post('courseStudentOutlineID'), $this->input->post('courseLObjID'), $this->input->post('detail', true));
 			$data['msg'] 	= $this->data->getMessage();
-			echo json_encode($data);
-			//$this->load->view('konten/cms', $data);
+			
+			$this->output->set_content_type('application/json')
+						->set_output(json_encode($data, JSON_NUMERIC_CHECK));
 		}
 	}
 	
