@@ -90,7 +90,68 @@
 
 							<!-- table references -->
 
-							<div id="render_so"></div>
+							<?php foreach ($so as $data_so) { ?>
+								<ul class="list-group my-4">
+									<li class="list-group-item">
+										<table class="table table-borderless">
+											<thead>
+												<tr>
+													<td class="w-75">Student Outcome
+														(<?= $data_so->courseStudentOutcomeId ?>)
+														:</td>
+													<td class="w-25">Status :</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="w-75">
+														<p> <?= $data_so->nameEN ?></p>
+													</td>
+													<td class="w-25">
+														<p> Specific Student Outcome </p>
+													</td>
+												</tr>
+												<tr>
+													<td class="w-75">
+														<i class="text-secondary"> <?= $data_so->nameIN ?> </i>
+													</td>
+													<td class="w-25"><i class="text-secondary"> Keterampilan Kerja Khusus
+														</i></td>
+												</tr>
+											</tbody>
+										</table>
+
+									</li>
+									<li class="list-group-item">
+										<?php $i = 0;
+										foreach ($data_so->LObj as $lobj) { ?>
+											<table class="table table-borderless">
+												<thead>
+													<tr>
+														<th class="text-secondary"> Learning Objective
+															(<?= $lobj->courseLObjID ?>) * </th>
+														<td class="w-25 text-center">Assesment Plan</td>
+														<td class="w-25 text-center">Weight</td>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="w-50">
+															<p> <?= $lobj->descEN ?> </p>
+
+															<i class="text-secondary"> <?= $lobj->descIN ?> </i>
+														</td>
+														<td class="w-25 text-center align-middle">Exam Question</td>
+														<td class="w-25 text-center align-middle">40%</td>
+													</tr>
+												</tbody>
+											</table>
+										<?php $i++;
+										} ?>
+										<hr>
+									</li>
+								</ul>
+							<?php } ?>
 							<!-- end table references -->
 
 
@@ -108,8 +169,66 @@
 
 
 							<div class="table-responsive" id="mappingTableArea">
+								<table id="mappingTable" class="table table-bordered fontsize-8" width="100%">
+									<thead>
+										<tr>
+											<th></th>
+											<th class="width-300p"></th>
+											<?php
+											$LO = $mapping['0']['LO'];
+											foreach ($LO as $dataLO) { ?>
+												<th class="width-100p">LO <?= $dataLO['courseOutlineLearningOutcomeID'] ?>
+												</th>
+											<?php } ?>
+											<th class="width-100p">Total LO to support </th>
+											<th class="width-100p"> Action </th>
+										</tr>
+									</thead>
+									<tbody>
 
-								<table id="mappingTables"></table>
+										<!-- table row -->
+
+										<?php foreach ($mapping as $dataMapping) {
+											$i = 0; ?>
+											<form>
+												<tr>
+													<td class="width-100p"><?= $dataMapping['code'] ?></td>
+													<td class="width-300p "> <?= $dataMapping['descIN'] ?> </td>
+													<?php foreach ($dataMapping['LO'] as $data_lo) { ?>
+														<td class="width-100p">
+															<?php if ($data_lo['weightLO'] == 2) {
+																$check1 = 'checked';
+																$check2 = 'checked';
+																$i++;
+															} elseif ($data_lo['weightLO'] == 1) {
+																$check1 = 'checked';
+																$check2 = '';
+																$i++;
+															} elseif ($data_lo['weightLO'] == 0) {
+																$check1 = '';
+																$check2 = '';
+															} ?>
+															<span class="fa fa-times times1 <?php echo $check1 ?>" lobj="<?= $dataMapping['courseLObjID'] ?>" lo="<?= $data_lo['courseOutlineLearningOutcomeID'] ?>" lolobj="<?= $data_lo['courseLObj2LOID'] ?>" onclick="add(this,1, <?= $data_lo['courseLObj2LOID'] ?>)"></span>
+															<span class="fa fa-times times2 <?php echo $check2 ?>" lobj="<?= $dataMapping['courseLObjID'] ?>" lo="<?= $data_lo['courseOutlineLearningOutcomeID'] ?>" lolobj="<?= $data_lo['courseLObj2LOID'] ?>" onclick="add(this,2, <?= $data_lo['courseLObj2LOID'] ?>)"></span>
+															<input type="hidden" value="<?= $data_lo['weightLO'] ?>" name="<?= $data_lo['courseLObj2LOID'] ?>" id="<?= $data_lo['courseLObj2LOID'] ?>">
+															<input type="hidden" value="<?= $data_lo['weightLO'] ?>">
+														</td>
+													<?php } ?>
+													<td class="width-100p"><?= $i ?></td>
+													<td class="width-100p">
+														<!-- <p> <?= $dataMapping["courseLObjID"] ?> </p> -->
+														<input type="hidden" value="<?= $dataMapping['courseLObjID'] ?>" name="courseLObjID" id="courseLObjID">
+														<input type="hidden" value="0" name="courseStudentOutlineID" id="courseStudentOutlineID">
+														<button isEditActive="false" onclick="changeButton(this)" type="reset" lobj="<?= $dataMapping['courseLObjID'] ?>" class="btn btn-yellow btn-sm d-flex p-2 mx-auto">
+															<i class="fa fa-pencil" aria-hidden="true"></i>
+														</button>
+													</td>
+												</tr>
+											</form>
+										<?php } ?>
+										<!-- end table row -->
+									</tbody>
+								</table>
 							</div>
 							<!-- end table of mapping -->
 							<!-- end content of mapping LO to LOBj -->
@@ -147,7 +266,6 @@
 	</script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js">
 	</script>
-	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
 	<script>
 		function objectifyForm(formArray = []) {
@@ -247,118 +365,6 @@
 				$(ths).attr("isEditActive", "true");
 				$(ths).empty().append("Save");
 			}
-		}
-
-		$(document).ready(() => {
-
-			$.ajax({
-				url: 'index.php/home/getmappingSO',
-				type: "GET",
-				success: function(res) {
-					renderSO(res.so)
-					renderMapping(res.mapping)
-				}
-			})
-
-
-
-
-		})
-
-		function renderSO(dataSO = []) {
-			console.log(dataSO)
-			dataSO.forEach(so => {
-				$("#render_so").append(
-					`<ul class="list-group my-4">
-								<li class="list-group-item">
-									<table class="table table-borderless">
-										<thead>
-											<tr>
-												<td class="w-75">Student Outcome
-													${so.statusStudentOutcomeId}
-													:</td>
-												<td class="w-25">Status :</td>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td class="w-75">
-													<p> ${so.statusStudentOutcomeNameEN} </p>
-												</td>
-												<td class="w-25">
-													<p> Specific Student Outcome </p>
-												</td>
-											</tr>
-											<tr>
-												<td class="w-75">
-													<i class="text-secondary"> ${so.statusStudentOutcomeNameIN} </i>
-												</td>
-												<td class="w-25"><i class="text-secondary"> Keterampilan Kerja Khusus
-													</i></td>
-											</tr>
-										</tbody>
-									</table>
-								</li>
-
-								${so.LObj.map((lobj, i) => {
-									return (
-										`<li class="list-group-item" key=${i}>
-											<table class="table table-borderless">
-												<thead>
-													<tr>
-														<th class="text-secondary"> Learning Objective
-															${lobj.code} * </th>
-														<td class="w-25 text-center">Assesment Plan</td>
-														<td class="w-25 text-center">Weight</td>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td class="w-50">
-															<p> ${lobj.descEN} </p>
-
-															<i class="text-secondary"> ${lobj.descIN} </i>
-														</td>
-														<td class="w-25 text-center align-middle">Exam Question</td>
-														<td class="w-25 text-center align-middle">40%</td>
-													</tr>
-												</tbody>
-											</table>
-											<hr>
-										</li>`
-									)
-								})}
-							</ul>`
-				)
-			})
-		}
-
-
-		function renderMapping(dataMapping = []) {
-			$("#mappingTables").DataTable({
-				serverSide: true,
-				responsive: true,
-				ajax: {
-					url: 'index.php/home/getmappingSO',
-					dataSrc: function(res) {
-						console.log(res.mapping)
-						return res.mapping
-					}
-				},
-				columns: [{
-					title: "",
-					data: 'code'
-				}, {
-					title: "",
-					data: "descIN"
-				}, {
-					title: "LO 1",
-					render: function(data, type, row) {
-						return row.courseLObjID
-					}
-				}],
-
-			})
 		}
 	</script>
 
