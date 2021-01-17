@@ -359,8 +359,8 @@
 					${dataMapping.map(row => {
 						console.log(row.LO.length)
 						return (`
-						<tr>
-						<form class="formLOBJ">
+						<tr class="mapping-row">
+						
 							<td class="width-100p"> ${row.code} </td>
 							<td class="width-300p"> ${row.descEN}  </td>
 
@@ -386,17 +386,20 @@
 							
 							<td class="width-100p"> ${LOData.length} </td> 
 							<td class="width-100p">
-								<button isEditActive="false" onclick="changeButton(this)" type="submit" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
+								<button isEditActive="false" onclick="changeButton(this)" type="reset" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
 									<i class="fa fa-pencil" aria-hidden="true"></i> 
 								</button> 
 							</td> 
-							</form>
+							
 						</tr>
 						`)
 					})}
 					
 				</tbody>
 			`)
+
+			$(".mapping-row").wrap( `<form class="formLOBJ"></form>` )
+
 		}
 	</script>
 
