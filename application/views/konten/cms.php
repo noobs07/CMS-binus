@@ -168,9 +168,13 @@
 			return returnArray;
 		}
 
-		$(".formLOBJ").submit(function(event) {
-			console.log("SUBMIT")
+		$("form").trigger("reset", (e)=>{
+			console.log("RESET")
+		})
+
+		$("form").submit(function(event) {
 			event.preventDefault();
+			console.log("SUBMIT")
 			let dataObject = objectifyForm($(this).serializeArray())
 			let dataStr = JSON.stringify(dataObject)
 			console.log(dataStr)
@@ -241,13 +245,13 @@
 			let lobj = ths.getAttribute("lobj");
 			let isEditActive = ths.getAttribute("isEditActive");
 			if (isEditActive === "true") {
-				$(ths).attr("type", "reset")
+				$(ths).attr("type", "submit")
 				$(ths).attr("isEditActive", "false");
 				$(ths)
 					.empty()
 					.append('<i class="fa fa-pencil" aria-hidden="true"></i>');
 			} else {
-				$(ths).attr("type", "submit")
+				$(ths).attr("type", "reset")
 				$(ths).attr("isEditActive", "true");
 				$(ths).empty().append("Save");
 			}
@@ -356,13 +360,13 @@
 
 			$("#mappingTable").append(`
 				<tbody>
-					${dataMapping.map(row => {
+					${dataMapping.map((row, i) => {
 						console.log(row.LO.length)
 						return (`
 						<tr>
-						<form class="formLOBJ">
-							<td class="width-100p"> ${row.code} </td>
-							<td class="width-300p"> ${row.descEN}  </td>
+							<form class="formLOBJ" id="formLobj-${i}">
+							<td class="mapping-td-${i} width-100p"> ${row.code} </td>
+							<td class="mapping-td-${i} width-300p"> ${row.descEN}  </td>
 
 							${row.LO.map(data_lo => {
 								console.log(data_lo.courseLObj2LOId)
@@ -372,11 +376,11 @@
 									check1="checked"; 
 									check2="checked"
 								}else if (data_lo.weightLO == 1) check1="checked"
-								return (`<td class="width-100p">
+								return (`<td class="mapping-td-${i} width-100p">
 									<span class="fa fa-times times1 ${check1}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj="${data_lo.courseLObj2LOId}" onclick="add(this,1)" ></span>
 									<span class="fa fa-times times2 ${check2}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj="${data_lo.courseLObj2LOId}" onclick="add(this,2)" ></span>
-									<input type="hidden" value="0" name="${row.courseLObj2LOId}" id="${row.courseLObj2LOId}">
-									<input type="hidden" value="${row.weightLO}">
+									<input type="hidden" form="formLobj-${i}" value="0" name="${row.courseLObj2LOId}" id="${row.courseLObj2LOId}">
+									<input type="hidden" form="formLobj-${i}" value="${row.weightLO}">
 								</td>`)
 
 							})
@@ -384,19 +388,25 @@
 							
 							}
 							
-							<td class="width-100p"> ${LOData.length} </td> 
-							<td class="width-100p">
-								<button isEditActive="false" onclick="changeButton(this)" type="submit" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
+							<td class="mapping-td-${i} width-100p"> ${LOData.length} </td> 
+							<td class="mapping-td-${i} width-100p">
+								<button isEditActive="false" form="formLobj-${i}" onclick="changeButton(this)" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
 									<i class="fa fa-pencil" aria-hidden="true"></i> 
 								</button> 
 							</td> 
 							</form>
 						</tr>
+
 						`)
 					})}
 					
 				</tbody>
 			`)
+
+			// dataMapping.forEach((row, i)=> {
+			// 	$( `.mapping-td-${i}` ).wrapAll(` <form class="formLOBJ">  </form>  `)
+			// })
+
 		}
 	</script>
 
