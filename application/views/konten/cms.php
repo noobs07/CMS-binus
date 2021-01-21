@@ -168,29 +168,7 @@
 			return returnArray;
 		}
 
-		$("form").trigger("reset", (e)=>{
-			console.log("RESET")
-		})
-
-		$("form").submit(function(event) {
-			event.preventDefault();
-			console.log("SUBMIT")
-			let dataObject = objectifyForm($(this).serializeArray())
-			let dataStr = JSON.stringify(dataObject)
-			console.log(dataStr)
-			$.ajax({
-				type: "POST",
-				url: "index.php/home/saveData",
-				data: dataStr,
-				cache: false,
-				success: function(data) {
-					alert(data);
-				},
-				error: function(err) {
-					alert("FAILED")
-				}
-			});
-		});
+		
 
 
 		function add(ths, sno) {
@@ -265,16 +243,46 @@
 				success: function(res) {
 					renderSO(res.so)
 					renderMapping(res.mapping)
+				},
+				error: function(err) {
+					alert("FAILED")
 				}
+				
 			})
-
-
-
+			
+			$(".submit").on("click",function(event) {
+			console.log("SUBMIT")
+			event.preventDefault();
+			var row = $(this).parents("tr").first();
+			let data = row.find("input").serialize();
+			// let dataObject = objectifyForm($(row).serializeArray())
+			let dataStr = JSON.stringify(data)
+			console.log(dataStr)
+			$.ajax({
+				type: "POST",
+				url: "index.php/home/saveData",
+				data: dataStr,
+				cache: false,
+				success: function(data) {
+					alert(data);
+				},
+				error: function(err) {
+					alert("FAILED")
+				}
+			});
+		});
 
 		})
 
 		function renderSO(dataSO = []) {
 			console.log(dataSO)
+			if(dataSO.length <= 0){
+				$("#render_so").append(`<ul class="list-group my-4"> 
+					<li class="list-group-item">
+						<h2> Data Empty </h2>
+					</li>
+				</ul>`)
+			}else {
 			dataSO.forEach(so => {
 				$("#render_so").append(
 					`<ul class="list-group my-4">
@@ -337,12 +345,21 @@
 									)
 								})}
 							</ul>`
-				)
-			})
+					)
+				})
+			}
 		}
 
 
 		function renderMapping(dataMapping = []) {
+			if(dataSO.length <= 0){
+				$("#mappingTable").append(`<ul class="list-group my-4"> 
+					<li class="list-group-item">
+						<h2> Data Empty </h2>
+					</li>
+				</ul>`)
+			}
+			else{
 			let LOData = dataMapping[0].LO
 			$("#mappingTable").append(`
 				<thead>
@@ -364,7 +381,7 @@
 						console.log(row.LO.length)
 						return (`
 						<tr>
-							<form class="formLOBJ" id="formLobj-${i}">
+							
 							<td class="mapping-td-${i} width-100p"> ${row.code} </td>
 							<td class="mapping-td-${i} width-300p"> ${row.descEN}  </td>
 
@@ -388,9 +405,9 @@
 							
 							}
 							
-							<td class="mapping-td-${i} width-100p"> ${LOData.length} </td> 
-							<td class="mapping-td-${i} width-100p">
-								<button isEditActive="false" form="formLobj-${i}" onclick="changeButton(this)" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
+							<td class="width-100p"> ${LOData.length} </td> 
+							<td class="width-100p">
+								<button isEditActive="false" onclick="changeButton(this)" type="reset" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto submit" >
 									<i class="fa fa-pencil" aria-hidden="true"></i> 
 								</button> 
 							</td> 
@@ -402,10 +419,9 @@
 					
 				</tbody>
 			`)
+		}	
 
-			// dataMapping.forEach((row, i)=> {
-			// 	$( `.mapping-td-${i}` ).wrapAll(` <form class="formLOBJ">  </form>  `)
-			// })
+			// $(".mapping-row").wrap( `<form class="formLOBJ"></form>` )
 
 		}
 	</script>
