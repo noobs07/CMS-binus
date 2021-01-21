@@ -223,13 +223,11 @@
 			let lobj = ths.getAttribute("lobj");
 			let isEditActive = ths.getAttribute("isEditActive");
 			if (isEditActive === "true") {
-				$(ths).attr("type", "submit")
 				$(ths).attr("isEditActive", "false");
 				$(ths)
 					.empty()
 					.append('<i class="fa fa-pencil" aria-hidden="true"></i>');
 			} else {
-				$(ths).attr("type", "reset")
 				$(ths).attr("isEditActive", "true");
 				$(ths).empty().append("Save");
 			}
@@ -251,25 +249,33 @@
 			})
 			
 			$(".submit").on("click",function(event) {
-			console.log("SUBMIT")
-			event.preventDefault();
-			var row = $(this).parents("tr").first();
-			let data = row.find("input").serialize();
-			// let dataObject = objectifyForm($(row).serializeArray())
-			let dataStr = JSON.stringify(data)
-			console.log(dataStr)
-			$.ajax({
-				type: "POST",
-				url: "index.php/home/saveData",
-				data: dataStr,
-				cache: false,
-				success: function(data) {
-					alert(data);
-				},
-				error: function(err) {
-					alert("FAILED")
+				console.log("SUBMIT")
+				event.preventDefault();
+
+				let el = event.target;
+
+				let edit = $(el).attr("isEditActive")
+				if(edit === "true"){
+					let row = $(el).parents("tr").first();
+					var inputs = row.find("input")
+					let data = objectifyForm($(inputs).serializeArray())
+					
+					let dataStr = JSON.stringify(data)
+					console.log(dataStr)
+					$.ajax({
+						type: "POST",
+						url: "index.php/home/saveData",
+						data: dataStr,
+						cache: false,
+						success: function(data) {
+							alert(data);
+						},
+						error: function(err) {
+							alert("FAILED")
+						}
+					});
 				}
-			});
+				
 		});
 
 		})
@@ -407,7 +413,7 @@
 							
 							<td class="width-100p"> ${LOData.length} </td> 
 							<td class="width-100p">
-								<button isEditActive="false" onclick="changeButton(this)" type="reset" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto submit" >
+								<button isEditActive="false" onclick="changeButton(this)" type="reset" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
 									<i class="fa fa-pencil" aria-hidden="true"></i> 
 								</button> 
 							</td> 
