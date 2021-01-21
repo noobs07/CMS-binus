@@ -168,28 +168,7 @@
 			return returnArray;
 		}
 
-		$(".submit").on("click",function(event) {
-			console.log("SUBMIT")
-			event.preventDefault();
-			var row = $(this).parents("tr").first();
-			let data = row.find("input").serialize();
-			let dataObject = objectifyForm($(row).serializeArray())
-			let dataStr = JSON.stringify(data)
-
-			console.log(dataStr)
-			$.ajax({
-				type: "POST",
-				url: "index.php/home/saveData",
-				data: dataStr,
-				cache: false,
-				success: function(data) {
-					alert(data);
-				},
-				error: function(err) {
-					alert("FAILED")
-				}
-			});
-		});
+		
 
 
 		function add(ths, sno) {
@@ -244,13 +223,13 @@
 			let lobj = ths.getAttribute("lobj");
 			let isEditActive = ths.getAttribute("isEditActive");
 			if (isEditActive === "true") {
-				$(ths).attr("type", "reset")
+				$(ths).attr("type", "submit")
 				$(ths).attr("isEditActive", "false");
 				$(ths)
 					.empty()
 					.append('<i class="fa fa-pencil" aria-hidden="true"></i>');
 			} else {
-				$(ths).attr("type", "submit")
+				$(ths).attr("type", "reset")
 				$(ths).attr("isEditActive", "true");
 				$(ths).empty().append("Save");
 			}
@@ -264,22 +243,46 @@
 				success: function(res) {
 					renderSO(res.so)
 					renderMapping(res.mapping)
+				},
+				error: function(err) {
+					alert("FAILED")
 				}
+				
 			})
-
-			// $(".submit").on("click", function(event){
-			// 	event.preventDefault();
-			// 	// var url = ($(this).data("action") === "undefined" ? "/" : $(this).data("action"));
-			// 	var row = $(this).parents("tr").first();
-			// 	var data = row.find("input, select, radio").serialize();
-			// 	$.post(url, data, function(result){ console.log(result); });
-			// });
-
+			
+			$(".submit").on("click",function(event) {
+			console.log("SUBMIT")
+			event.preventDefault();
+			var row = $(this).parents("tr").first();
+			let data = row.find("input").serialize();
+			// let dataObject = objectifyForm($(row).serializeArray())
+			let dataStr = JSON.stringify(data)
+			console.log(dataStr)
+			$.ajax({
+				type: "POST",
+				url: "index.php/home/saveData",
+				data: dataStr,
+				cache: false,
+				success: function(data) {
+					alert(data);
+				},
+				error: function(err) {
+					alert("FAILED")
+				}
+			});
+		});
 
 		})
 
 		function renderSO(dataSO = []) {
 			console.log(dataSO)
+			if(dataSO.length <= 0){
+				$("#render_so").append(`<ul class="list-group my-4"> 
+					<li class="list-group-item">
+						<h2> Data Empty </h2>
+					</li>
+				</ul>`)
+			}else {
 			dataSO.forEach(so => {
 				$("#render_so").append(
 					`<ul class="list-group my-4">
@@ -342,12 +345,21 @@
 									)
 								})}
 							</ul>`
-				)
-			})
+					)
+				})
+			}
 		}
 
 
 		function renderMapping(dataMapping = []) {
+			if(dataSO.length <= 0){
+				$("#mappingTable").append(`<ul class="list-group my-4"> 
+					<li class="list-group-item">
+						<h2> Data Empty </h2>
+					</li>
+				</ul>`)
+			}
+			else{
 			let LOData = dataMapping[0].LO
 			$("#mappingTable").append(`
 				<thead>
@@ -365,13 +377,13 @@
 
 			$("#mappingTable").append(`
 				<tbody>
-					${dataMapping.map(row => {
+					${dataMapping.map((row, i) => {
 						console.log(row.LO.length)
 						return (`
-						<tr class="mapping-row">
-						
-							<td class="width-100p"> ${row.code} </td>
-							<td class="width-300p"> ${row.descEN}  </td>
+						<tr>
+							
+							<td class="mapping-td-${i} width-100p"> ${row.code} </td>
+							<td class="mapping-td-${i} width-300p"> ${row.descEN}  </td>
 
 							${row.LO.map(data_lo => {
 								console.log(data_lo.courseLObj2LOId)
@@ -381,11 +393,11 @@
 									check1="checked"; 
 									check2="checked"
 								}else if (data_lo.weightLO == 1) check1="checked"
-								return (`<td class="width-100p">
+								return (`<td class="mapping-td-${i} width-100p">
 									<span class="fa fa-times times1 ${check1}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj="${data_lo.courseLObj2LOId}" onclick="add(this,1)" ></span>
 									<span class="fa fa-times times2 ${check2}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj="${data_lo.courseLObj2LOId}" onclick="add(this,2)" ></span>
-									<input type="hidden" value="0" name="${row.courseLObj2LOId}" id="${row.courseLObj2LOId}">
-									<input type="hidden" value="${row.weightLO}">
+									<input type="hidden" form="formLobj-${i}" value="0" name="${row.courseLObj2LOId}" id="${row.courseLObj2LOId}">
+									<input type="hidden" form="formLobj-${i}" value="${row.weightLO}">
 								</td>`)
 
 							})
@@ -401,11 +413,13 @@
 							</td> 
 							
 						</tr>
+
 						`)
 					})}
 					
 				</tbody>
 			`)
+		}	
 
 			// $(".mapping-row").wrap( `<form class="formLOBJ"></form>` )
 
