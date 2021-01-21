@@ -168,11 +168,14 @@
 			return returnArray;
 		}
 
-		$(".formLOBJ").submit(function(event) {
+		$(".submit").on("click",function(event) {
 			console.log("SUBMIT")
 			event.preventDefault();
-			let dataObject = objectifyForm($(this).serializeArray())
-			let dataStr = JSON.stringify(dataObject)
+			var row = $(this).parents("tr").first();
+			let data = row.find("input").serialize();
+			let dataObject = objectifyForm($(row).serializeArray())
+			let dataStr = JSON.stringify(data)
+
 			console.log(dataStr)
 			$.ajax({
 				type: "POST",
@@ -264,7 +267,13 @@
 				}
 			})
 
-
+			// $(".submit").on("click", function(event){
+			// 	event.preventDefault();
+			// 	// var url = ($(this).data("action") === "undefined" ? "/" : $(this).data("action"));
+			// 	var row = $(this).parents("tr").first();
+			// 	var data = row.find("input, select, radio").serialize();
+			// 	$.post(url, data, function(result){ console.log(result); });
+			// });
 
 
 		})
@@ -386,7 +395,7 @@
 							
 							<td class="width-100p"> ${LOData.length} </td> 
 							<td class="width-100p">
-								<button isEditActive="false" onclick="changeButton(this)" type="reset" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
+								<button isEditActive="false" onclick="changeButton(this)" type="reset" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto submit" >
 									<i class="fa fa-pencil" aria-hidden="true"></i> 
 								</button> 
 							</td> 
@@ -398,7 +407,7 @@
 				</tbody>
 			`)
 
-			$(".mapping-row").wrap( `<form class="formLOBJ"></form>` )
+			// $(".mapping-row").wrap( `<form class="formLOBJ"></form>` )
 
 		}
 	</script>
