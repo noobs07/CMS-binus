@@ -104,7 +104,6 @@
 							<h4>MAPPING LO to L.ObJ</h4>
 							<b>* stand for XX references </b>
 
-							<!-- table of mapping -->
 
 
 							<div class="table-responsive" id="mappingTableArea">
@@ -112,8 +111,7 @@
 
 								</table>
 							</div>
-							<!-- end table of mapping -->
-							<!-- end content of mapping LO to LOBj -->
+							
 						</div>
 						<div class="tab-pane fade" id="nav-resource" role="tabpanel" aria-labelledby="nav-resource-tab">
 							Resource
