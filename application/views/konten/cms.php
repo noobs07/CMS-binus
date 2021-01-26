@@ -151,6 +151,7 @@
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
 	<script>
+		let temp = []
 		function objectifyForm(formArray = []) {
 			let returnArray = {};
 			let detailObj = {}
@@ -168,37 +169,14 @@
 			return returnArray;
 		}
 
-		$("form").trigger("reset", (e)=>{
-			console.log("RESET")
-		})
-
-		$("form").submit(function(event) {
-			event.preventDefault();
-			console.log("SUBMIT")
-			let dataObject = objectifyForm($(this).serializeArray())
-			let dataStr = JSON.stringify(dataObject)
-			console.log(dataStr)
-			$.ajax({
-				type: "POST",
-				url: "index.php/home/saveData",
-				data: dataStr,
-				cache: false,
-				success: function(data) {
-					alert(data);
-				},
-				error: function(err) {
-					alert("FAILED")
-				}
-			});
-		});
+		
 
 
 		function add(ths, sno) {
-			console.log(ths, sno)
 			let lobj = (ths.getAttribute("lobj"))
 			let lo = (ths.getAttribute("lo"))
-			let id = lobj
-			let inputHidden = $("#" + id)
+			let id = (ths.getAttribute("lobj2"))
+			let inputHidden = $("." + id)
 			let editedLobj = $("button[isEditActive='true']");
 			if (editedLobj.length > 0) {
 				let fix = editedLobj.filter((index, element) => {
@@ -245,15 +223,31 @@
 			let lobj = ths.getAttribute("lobj");
 			let isEditActive = ths.getAttribute("isEditActive");
 			if (isEditActive === "true") {
-				$(ths).attr("type", "submit")
+
+				let row = $(ths).parents("tbody");
+				let inputs = row.find("input")
+				let data = objectifyForm($(inputs).serializeArray())
+				$.ajax({
+						type: "POST",
+						url: "index.php/home/saveData",
+						data: JSON.stringify({detail : {...data}}),
+						cache: false,
+						success: function(data) {
+							alert(data);
+						},
+						error: function(err) {
+							alert("FAILED")
+						}
+					});
+
 				$(ths).attr("isEditActive", "false");
 				$(ths)
 					.empty()
 					.append('<i class="fa fa-pencil" aria-hidden="true"></i>');
 			} else {
-				$(ths).attr("type", "reset")
 				$(ths).attr("isEditActive", "true");
 				$(ths).empty().append("Save");
+				
 			}
 		}
 
@@ -263,18 +257,57 @@
 				url: 'index.php/home/getmappingSO',
 				type: "GET",
 				success: function(res) {
+					console.log(res)
 					renderSO(res.so)
 					renderMapping(res.mapping)
+				},
+				error: function(err) {
+					alert("FAILED")
 				}
+				
 			})
+			
+			// $(".submit").on("click",function(event) {
+			// 	console.log("SUBMIT")
+			// 	event.preventDefault();
 
+			// 	let el = event.target;
 
-
+			// 	let edit = $(el).attr("isEditActive")
+			// 	if(edit === "true"){
+			// 		let row = $(el).parents("tr").first();
+			// 		var inputs = row.find("input")
+			// 		let data = objectifyForm($(inputs).serializeArray())
+					
+			// 		let dataStr = JSON.stringify(data)
+			// 		console.log(dataStr)
+			// 		$.ajax({
+			// 			type: "POST",
+			// 			url: "index.php/home/saveData",
+			// 			data: dataStr,
+			// 			cache: false,
+			// 			success: function(data) {
+			// 				alert(data);
+			// 			},
+			// 			error: function(err) {
+			// 				alert("FAILED")
+			// 			}
+			// 		});
+		// 	// 	}
+				
+		// });
 
 		})
 
 		function renderSO(dataSO = []) {
-			console.log(dataSO)
+			temp = dataSO;
+			if(dataSO.length <= 0){
+				$("#render_so").append(`<ul class="list-group my-4"> 
+					<li class="list-group-item">
+						<h2> Data Empty </h2>
+					</li>
+				</ul>`)
+			}else {
 			dataSO.forEach(so => {
 				$("#render_so").append(
 					`<ul class="list-group my-4">
@@ -294,14 +327,14 @@
 													<p> ${so.statusStudentOutcomeNameEN} </p>
 												</td>
 												<td class="w-25">
-													<p> Specific Student Outcome </p>
+													<p> ${so.statusStudentOutcomeNameEN} </p>
 												</td>
 											</tr>
 											<tr>
 												<td class="w-75">
 													<i class="text-secondary"> ${so.statusStudentOutcomeNameIN} </i>
 												</td>
-												<td class="w-25"><i class="text-secondary"> Keterampilan Kerja Khusus
+												<td class="w-25"><i class="text-secondary"> ${so.statusStudentOutcomeNameIN}
 													</i></td>
 											</tr>
 										</tbody>
@@ -337,12 +370,21 @@
 									)
 								})}
 							</ul>`
-				)
-			})
+					)
+				})
+			}
 		}
 
 
 		function renderMapping(dataMapping = []) {
+			if(temp.length <= 0){
+				$("#mappingTable").append(`<ul class="list-group my-4"> 
+					<li class="list-group-item">
+						<h2> Data Empty </h2>
+					</li>
+				</ul>`)
+			}
+			else{
 			let LOData = dataMapping[0].LO
 			$("#mappingTable").append(`
 				<thead>
@@ -361,15 +403,13 @@
 			$("#mappingTable").append(`
 				<tbody>
 					${dataMapping.map((row, i) => {
-						console.log(row.LO.length)
 						return (`
 						<tr>
-							<form class="formLOBJ" id="formLobj-${i}">
+							
 							<td class="mapping-td-${i} width-100p"> ${row.code} </td>
 							<td class="mapping-td-${i} width-300p"> ${row.descEN}  </td>
 
 							${row.LO.map(data_lo => {
-								console.log(data_lo.courseLObj2LOId)
 								let check1 = ""
 								let check2 = ""
 								if(data_lo.weightLO == 2){
@@ -377,10 +417,10 @@
 									check2="checked"
 								}else if (data_lo.weightLO == 1) check1="checked"
 								return (`<td class="mapping-td-${i} width-100p">
-									<span class="fa fa-times times1 ${check1}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj="${data_lo.courseLObj2LOId}" onclick="add(this,1)" ></span>
-									<span class="fa fa-times times2 ${check2}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj="${data_lo.courseLObj2LOId}" onclick="add(this,2)" ></span>
-									<input type="hidden" form="formLobj-${i}" value="0" name="${row.courseLObj2LOId}" id="${row.courseLObj2LOId}">
-									<input type="hidden" form="formLobj-${i}" value="${row.weightLO}">
+									<span class="fa fa-times times1 ${check1}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj2="${data_lo.courseLObj2LOId}" onclick="add(this,1)" ></span>
+									<span class="fa fa-times times2 ${check2}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj2="${data_lo.courseLObj2LOId}" onclick="add(this,2)" ></span>
+									<input type="hidden" form="formLobj-${i}" value="${data_lo.weightLO}" name="${data_lo.courseLObj2LOId}" class="${data_lo.courseLObj2LOId}">
+									<input type="hidden" form="formLobj-${i}" value="${data_lo.weightLO}">
 								</td>`)
 
 							})
@@ -388,9 +428,9 @@
 							
 							}
 							
-							<td class="mapping-td-${i} width-100p"> ${LOData.length} </td> 
-							<td class="mapping-td-${i} width-100p">
-								<button isEditActive="false" form="formLobj-${i}" onclick="changeButton(this)" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
+							<td class="width-100p"> ${LOData.length} </td> 
+							<td class="width-100p">
+								<button isEditActive="false" onclick="changeButton(this)"  lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
 									<i class="fa fa-pencil" aria-hidden="true"></i> 
 								</button> 
 							</td> 
@@ -402,10 +442,9 @@
 					
 				</tbody>
 			`)
+		}	
 
-			// dataMapping.forEach((row, i)=> {
-			// 	$( `.mapping-td-${i}` ).wrapAll(` <form class="formLOBJ">  </form>  `)
-			// })
+			// $(".mapping-row").wrap( `<form class="formLOBJ"></form>` )
 
 		}
 	</script>
