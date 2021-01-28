@@ -90,68 +90,7 @@
 
 							<!-- table references -->
 
-							<?php foreach ($so as $data_so) { ?>
-								<ul class="list-group my-4">
-									<li class="list-group-item">
-										<table class="table table-borderless">
-											<thead>
-												<tr>
-													<td class="w-75">Student Outcome
-														(<?= $data_so->courseStudentOutcomeId ?>)
-														:</td>
-													<td class="w-25">Status :</td>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td class="w-75">
-														<p> <?= $data_so->nameEN ?></p>
-													</td>
-													<td class="w-25">
-														<p> Specific Student Outcome </p>
-													</td>
-												</tr>
-												<tr>
-													<td class="w-75">
-														<i class="text-secondary"> <?= $data_so->nameIN ?> </i>
-													</td>
-													<td class="w-25"><i class="text-secondary"> Keterampilan Kerja Khusus
-														</i></td>
-												</tr>
-											</tbody>
-										</table>
-
-									</li>
-									<li class="list-group-item">
-										<?php $i = 0;
-										foreach ($data_so->LObj as $lobj) { ?>
-											<table class="table table-borderless">
-												<thead>
-													<tr>
-														<th class="text-secondary"> Learning Objective
-															(<?= $lobj->courseLObjID ?>) * </th>
-														<td class="w-25 text-center">Assesment Plan</td>
-														<td class="w-25 text-center">Weight</td>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td class="w-50">
-															<p> <?= $lobj->descEN ?> </p>
-
-															<i class="text-secondary"> <?= $lobj->descIN ?> </i>
-														</td>
-														<td class="w-25 text-center align-middle">Exam Question</td>
-														<td class="w-25 text-center align-middle">40%</td>
-													</tr>
-												</tbody>
-											</table>
-										<?php $i++;
-										} ?>
-										<hr>
-									</li>
-								</ul>
-							<?php } ?>
+							<div id="render_so"></div>
 							<!-- end table references -->
 
 
@@ -170,64 +109,7 @@
 
 							<div class="table-responsive" id="mappingTableArea">
 								<table id="mappingTable" class="table table-bordered fontsize-8" width="100%">
-									<thead>
-										<tr>
-											<th></th>
-											<th class="width-300p"></th>
-											<?php
-											$LO = $mapping['0']['LO'];
-											foreach ($LO as $dataLO) { ?>
-												<th class="width-100p">LO <?= $dataLO['courseOutlineLearningOutcomeID'] ?>
-												</th>
-											<?php } ?>
-											<th class="width-100p">Total LO to support </th>
-											<th class="width-100p"> Action </th>
-										</tr>
-									</thead>
-									<tbody>
 
-										<!-- table row -->
-
-										<?php foreach ($mapping as $dataMapping) {
-											$i = 0; ?>
-											<form>
-												<tr>
-													<td class="width-100p"><?= $dataMapping['code'] ?></td>
-													<td class="width-300p "> <?= $dataMapping['descIN'] ?> </td>
-													<?php foreach ($dataMapping['LO'] as $data_lo) { ?>
-														<td class="width-100p">
-															<?php if ($data_lo['weightLO'] == 2) {
-																$check1 = 'checked';
-																$check2 = 'checked';
-																$i++;
-															} elseif ($data_lo['weightLO'] == 1) {
-																$check1 = 'checked';
-																$check2 = '';
-																$i++;
-															} elseif ($data_lo['weightLO'] == 0) {
-																$check1 = '';
-																$check2 = '';
-															} ?>
-															<span class="fa fa-times times1 <?php echo $check1 ?>" lobj="<?= $dataMapping['courseLObjID'] ?>" lo="<?= $data_lo['courseOutlineLearningOutcomeID'] ?>" lolobj="<?= $data_lo['courseLObj2LOID'] ?>" onclick="add(this,1, <?= $data_lo['courseLObj2LOID'] ?>)"></span>
-															<span class="fa fa-times times2 <?php echo $check2 ?>" lobj="<?= $dataMapping['courseLObjID'] ?>" lo="<?= $data_lo['courseOutlineLearningOutcomeID'] ?>" lolobj="<?= $data_lo['courseLObj2LOID'] ?>" onclick="add(this,2, <?= $data_lo['courseLObj2LOID'] ?>)"></span>
-															<input type="hidden" value="<?= $data_lo['weightLO'] ?>" name="<?= $data_lo['courseLObj2LOID'] ?>" id="<?= $data_lo['courseLObj2LOID'] ?>">
-															<input type="hidden" value="<?= $data_lo['weightLO'] ?>">
-														</td>
-													<?php } ?>
-													<td class="width-100p"><?= $i ?></td>
-													<td class="width-100p">
-														<!-- <p> <?= $dataMapping["courseLObjID"] ?> </p> -->
-														<input type="hidden" value="<?= $dataMapping['courseLObjID'] ?>" name="courseLObjID" id="courseLObjID">
-														<input type="hidden" value="0" name="courseStudentOutlineID" id="courseStudentOutlineID">
-														<button isEditActive="false" onclick="changeButton(this)" type="reset" lobj="<?= $dataMapping['courseLObjID'] ?>" class="btn btn-yellow btn-sm d-flex p-2 mx-auto">
-															<i class="fa fa-pencil" aria-hidden="true"></i>
-														</button>
-													</td>
-												</tr>
-											</form>
-										<?php } ?>
-										<!-- end table row -->
-									</tbody>
 								</table>
 							</div>
 							<!-- end table of mapping -->
@@ -266,6 +148,7 @@
 	</script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js">
 	</script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
 	<script>
 		function objectifyForm(formArray = []) {
@@ -285,29 +168,14 @@
 			return returnArray;
 		}
 
-		$("form").submit(function(event) {
-			event.preventDefault();
-			let dataObject = objectifyForm($(this).serializeArray())
-			let dataStr = JSON.stringify(dataObject)
-			console.log(dataStr)
-			$.ajax({
-				type: "POST",
-				url: "index.php/home/saveData",
-				data: dataStr,
-				cache: false,
-				success: function(data) {
-					alert(data);
-				},
-				error: function(err) {
-					alert("FAILED")
-				}
-			});
-		});
+		
 
 
-		function add(ths, sno, id) {
+		function add(ths, sno) {
+			console.log(ths, sno)
 			let lobj = (ths.getAttribute("lobj"))
 			let lo = (ths.getAttribute("lo"))
+			let id = lobj
 			let inputHidden = $("#" + id)
 			let editedLobj = $("button[isEditActive='true']");
 			if (editedLobj.length > 0) {
@@ -315,7 +183,7 @@
 					return element.getAttribute("lobj") === lobj;
 				});
 				if ($(fix).attr("lobj") === lobj) {
-					let fa = document.getElementsByClassName("fa-times")
+					let fa = $(".fa-times")
 					for (let i = 0; i < fa.length; i++) {
 						let fa_lo = fa[i].getAttribute("lo")
 						let fa_lobj = fa[i].getAttribute("lobj")
@@ -355,16 +223,212 @@
 			let lobj = ths.getAttribute("lobj");
 			let isEditActive = ths.getAttribute("isEditActive");
 			if (isEditActive === "true") {
-				$(ths).attr("type", "submit")
 				$(ths).attr("isEditActive", "false");
 				$(ths)
 					.empty()
 					.append('<i class="fa fa-pencil" aria-hidden="true"></i>');
 			} else {
-				$(ths).attr("type", "reset")
 				$(ths).attr("isEditActive", "true");
 				$(ths).empty().append("Save");
 			}
+		}
+
+		$(document).ready(() => {
+
+			$.ajax({
+				url: 'index.php/home/getmappingSO',
+				type: "GET",
+				success: function(res) {
+					renderSO(res.so)
+					renderMapping(res.mapping)
+				},
+				error: function(err) {
+					alert("FAILED")
+				}
+				
+			})
+			
+			$(".submit").on("click",function(event) {
+				console.log("SUBMIT")
+				event.preventDefault();
+
+				let el = event.target;
+
+				let edit = $(el).attr("isEditActive")
+				if(edit === "true"){
+					let row = $(el).parents("tr").first();
+					var inputs = row.find("input")
+					let data = objectifyForm($(inputs).serializeArray())
+					
+					let dataStr = JSON.stringify(data)
+					console.log(dataStr)
+					$.ajax({
+						type: "POST",
+						url: "index.php/home/saveData",
+						data: dataStr,
+						cache: false,
+						success: function(data) {
+							alert(data);
+						},
+						error: function(err) {
+							alert("FAILED")
+						}
+					});
+				}
+				
+		});
+
+		})
+
+		function renderSO(dataSO = []) {
+			console.log(dataSO)
+			if(dataSO.length <= 0){
+				$("#render_so").append(`<ul class="list-group my-4"> 
+					<li class="list-group-item">
+						<h2> Data Empty </h2>
+					</li>
+				</ul>`)
+			}else {
+			dataSO.forEach(so => {
+				$("#render_so").append(
+					`<ul class="list-group my-4">
+								<li class="list-group-item">
+									<table class="table table-borderless">
+										<thead>
+											<tr>
+												<td class="w-75">Student Outcome
+													${so.statusStudentOutcomeId}
+													:</td>
+												<td class="w-25">Status :</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="w-75">
+													<p> ${so.statusStudentOutcomeNameEN} </p>
+												</td>
+												<td class="w-25">
+													<p> Specific Student Outcome </p>
+												</td>
+											</tr>
+											<tr>
+												<td class="w-75">
+													<i class="text-secondary"> ${so.statusStudentOutcomeNameIN} </i>
+												</td>
+												<td class="w-25"><i class="text-secondary"> Keterampilan Kerja Khusus
+													</i></td>
+											</tr>
+										</tbody>
+									</table>
+								</li>
+
+								${so.LObj.map((lobj, i) => {
+									return (
+										`<li class="list-group-item" key=${i}>
+											<table class="table table-borderless">
+												<thead>
+													<tr>
+														<th class="text-secondary"> Learning Objective
+															${lobj.code} * </th>
+														<td class="w-25 text-center">Assesment Plan</td>
+														<td class="w-25 text-center">Weight</td>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="w-50">
+															<p> ${lobj.descEN} </p>
+
+															<i class="text-secondary"> ${lobj.descIN} </i>
+														</td>
+														<td class="w-25 text-center align-middle">Exam Question</td>
+														<td class="w-25 text-center align-middle">40%</td>
+													</tr>
+												</tbody>
+											</table>
+											<hr>
+										</li>`
+									)
+								})}
+							</ul>`
+					)
+				})
+			}
+		}
+
+
+		function renderMapping(dataMapping = []) {
+			if(dataSO.length <= 0){
+				$("#mappingTable").append(`<ul class="list-group my-4"> 
+					<li class="list-group-item">
+						<h2> Data Empty </h2>
+					</li>
+				</ul>`)
+			}
+			else{
+			let LOData = dataMapping[0].LO
+			$("#mappingTable").append(`
+				<thead>
+					<tr>
+						<th class="width-100p"></th>
+						<th class="width-300p"></th>
+						${LOData.map(lo => {
+							return `<th class="width-100p">LO ${lo.courseOutlineLearningOutcomeID} </th>`
+						})}
+						<th class="width-100p">Total LO to support </th>
+						<th class="width-100p"> Action </th>
+					</tr>
+				</thead>
+			`)
+
+			$("#mappingTable").append(`
+				<tbody>
+					${dataMapping.map((row, i) => {
+						console.log(row.LO.length)
+						return (`
+						<tr>
+							
+							<td class="mapping-td-${i} width-100p"> ${row.code} </td>
+							<td class="mapping-td-${i} width-300p"> ${row.descEN}  </td>
+
+							${row.LO.map(data_lo => {
+								console.log(data_lo.courseLObj2LOId)
+								let check1 = ""
+								let check2 = ""
+								if(data_lo.weightLO == 2){
+									check1="checked"; 
+									check2="checked"
+								}else if (data_lo.weightLO == 1) check1="checked"
+								return (`<td class="mapping-td-${i} width-100p">
+									<span class="fa fa-times times1 ${check1}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj="${data_lo.courseLObj2LOId}" onclick="add(this,1)" ></span>
+									<span class="fa fa-times times2 ${check2}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj="${data_lo.courseLObj2LOId}" onclick="add(this,2)" ></span>
+									<input type="hidden" form="formLobj-${i}" value="0" name="${row.courseLObj2LOId}" id="${row.courseLObj2LOId}">
+									<input type="hidden" form="formLobj-${i}" value="${row.weightLO}">
+								</td>`)
+
+							})
+								
+							
+							}
+							
+							<td class="width-100p"> ${LOData.length} </td> 
+							<td class="width-100p">
+								<button isEditActive="false" onclick="changeButton(this)" type="reset" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
+									<i class="fa fa-pencil" aria-hidden="true"></i> 
+								</button> 
+							</td> 
+							
+						</tr>
+
+						`)
+					})}
+					
+				</tbody>
+			`)
+		}	
+
+			// $(".mapping-row").wrap( `<form class="formLOBJ"></form>` )
+
 		}
 	</script>
 
