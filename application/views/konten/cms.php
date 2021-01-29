@@ -111,7 +111,6 @@
 
 								</table>
 							</div>
-							
 						</div>
 						<div class="tab-pane fade" id="nav-resource" role="tabpanel" aria-labelledby="nav-resource-tab">
 							Resource
@@ -314,7 +313,7 @@
 										<thead>
 											<tr>
 												<td class="w-75">Student Outcome
-													${so.statusStudentOutcomeId}
+													${so.id}
 													:</td>
 												<td class="w-25">Status :</td>
 											</tr>
@@ -322,31 +321,32 @@
 										<tbody>
 											<tr>
 												<td class="w-75">
-													<p> ${so.statusStudentOutcomeNameEN} </p>
+													<p> ${so.descEN} </p>
 												</td>
 												<td class="w-25">
-													<p> ${so.statusStudentOutcomeNameEN} </p>
+													<p> ${so.descIN} </p>
 												</td>
 											</tr>
 											<tr>
 												<td class="w-75">
-													<i class="text-secondary"> ${so.statusStudentOutcomeNameIN} </i>
+													<i class="text-secondary"> ${so.statusSONameEN} </i>
 												</td>
-												<td class="w-25"><i class="text-secondary"> ${so.statusStudentOutcomeNameIN}
+												<td class="w-25"><i class="text-secondary"> ${so.statusSONameIN}
 													</i></td>
 											</tr>
 										</tbody>
 									</table>
 								</li>
 
-								${so.LObj.map((lobj, i) => {
+								${so.learningObjs.map((lobj, i) => {
 									return (
 										`<li class="list-group-item" key=${i}>
 											<table class="table table-borderless">
 												<thead>
 													<tr>
 														<th class="text-secondary"> Learning Objective
-															${lobj.code} * </th>
+															${lobj.code} <b> ${lobj.isXX ? "*" :" "} </b> </th>
+														<td class="w-25 text-center">teaching & Learning Strategy</td>
 														<td class="w-25 text-center">Assesment Plan</td>
 														<td class="w-25 text-center">Weight</td>
 													</tr>
@@ -358,8 +358,9 @@
 
 															<i class="text-secondary"> ${lobj.descIN} </i>
 														</td>
-														<td class="w-25 text-center align-middle">Exam Question</td>
-														<td class="w-25 text-center align-middle">40%</td>
+														<td class="w-25 text-center align-middle">${lobj.teachAndLearnStrategyName}</td>
+														<td class="w-25 text-center align-middle">${lobj.assessmentPlan}</td>
+														<td class="w-25 text-center align-middle">${loj.weight}</td>
 													</tr>
 												</tbody>
 											</table>
@@ -404,7 +405,7 @@
 						return (`
 						<tr>
 							
-							<td class="mapping-td-${i} width-100p"> ${row.code} </td>
+							<td class="mapping-td-${i} width-100p"> ${row.code} <b> ${row.isXX ? "*" :" "} </b> </td>
 							<td class="mapping-td-${i} width-300p"> ${row.descEN}  </td>
 
 							${row.LO.map(data_lo => {
