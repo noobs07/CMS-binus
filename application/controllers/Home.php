@@ -23,6 +23,8 @@ class Home extends MY_Controller
 		$course_id = $this->input->get_post('course_id');
 		$course_id = empty($course_id)? '015117' : $course_id;
 		
+		//$course_id = empty($course_id)? 'STAT6008' : $course_id;
+		
 		$course = $this->data->getBaseCourseByCourseID($course_id);
 		
 		$data['msg'] 	 = "No Data Coourse Found";
