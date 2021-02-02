@@ -19,22 +19,28 @@ class Home extends MY_Controller
 	public function getMappingSO()
 	{
 		// simplify for get course code, if not exists course code, then set default course code.
-		// FINC7007,ISYS6442,ACCT6063ACCT6010,ISYS6256
+		// FINC7007,ISYS6442,ACCT6063, ACCT6010,ISYS6256
 		$course_id = $this->input->get_post('course_id');
 		
 		// FOOD6573  STAT6008
-		$course_id = empty($course_id)? 'FOOD6573' : $course_id;
+		$course_id = empty($course_id)? 'BUSS6017' : $course_id;
 		
 		$course = $this->data->getBaseCourseByCourseID($course_id);
+		
+		// bypass
+		$course = empty($course)? (object)['CRSE_CODE' => $course_id, 'ACAD_CAREER' =>'AAA'] : $course;
 		
 		$data['msg'] 	 = "No Data Coourse Found";
 		$data['so'] 	 = null;
 		$data['mapping'] = null;
 		
+		//dump($course,'course');
+		
 		if($course){
 			$code = $course->CRSE_CODE;
 			// get data SO
 			$so = $this->data->getCourseStudentOutcome($code);
+			//dump($so,'so');
 			
 			// untuk mendapatkan course monitoring, parameter bisa diinputkan disini. parameter 'RS1','373','1920'
 			$courseMonitoring = $this->getCourseMonitoring($course->ACAD_CAREER, $this->input->post('attr_value'), $this->input->post('strm'));
@@ -42,8 +48,8 @@ class Home extends MY_Controller
 			// Jika data belum ada, get dari API
 			if (empty($so)) {
 				// return dari API SO dan LObj
-				$api_data	= $this->postRequest("get_lobj/{$code}");
-				//dump($api_data,'API');	
+				$api_data	= $this->postRequest("get_assesment_plane/{$code}");
+				//dump($api_data,'API');	die;
 				
 				// simpan SO dan LObj ke local database
 				$res = $this->data->insertCourseStudentOutcome($this->_userID, $code, $api_data->data);
@@ -60,7 +66,7 @@ class Home extends MY_Controller
 				// get data LObj untuk tiap-tiap SO
 				$detail  = $this->data->getCourseLObj($s->statusStudentOutcomeId, $code);
 				foreach ($detail as $d) {
-					$s->LObj[] = $d;
+					$s->learningObjs[] = $d;
 				}
 			}
 			
