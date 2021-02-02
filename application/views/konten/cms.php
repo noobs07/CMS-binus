@@ -37,15 +37,15 @@
 					<p class="text-muted">Course</p>
 				</div>
 				<div class="col-sm-9">
-					<p> : ACCT6018 2D ANIMATION</p>
+					<p id="course"> : </p>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-3">
-					<p class="text-muted">Course Credit Theory</p>
+					<p  class="text-muted">Course Credit Theory</p>
 				</div>
 				<div class="col-sm-9">
-					<p> : 2</p>
+					<p id="course_credit_theory"> : 2</p>
 				</div>
 			</div>
 			<div class="row">
@@ -53,7 +53,7 @@
 					<p class="text-muted">Course Credit Practicum</p>
 				</div>
 				<div class="col-sm-9">
-					<p> : -</p>
+					<p id="course_credit_practicum"> : -</p>
 				</div>
 			</div>
 		</div>
@@ -256,7 +256,10 @@
 				success: function(res) {
 					console.log(res)
 					renderSO(res.so)
-					renderMapping(res.mapping)
+					// renderMapping(res.mapping)
+					$("#course").text(res.so[0].statusSONameIN)
+					$("#course_credit_theory").text(res.so[0].learningObjs[0].descEN)
+					$("#course_credit_practicum").text(res.so[0].learningObjs[0].descIN)
 				},
 				error: function(err) {
 					alert("FAILED")
@@ -264,36 +267,6 @@
 				
 			})
 			
-			// $(".submit").on("click",function(event) {
-			// 	console.log("SUBMIT")
-			// 	event.preventDefault();
-
-			// 	let el = event.target;
-
-			// 	let edit = $(el).attr("isEditActive")
-			// 	if(edit === "true"){
-			// 		let row = $(el).parents("tr").first();
-			// 		var inputs = row.find("input")
-			// 		let data = objectifyForm($(inputs).serializeArray())
-					
-			// 		let dataStr = JSON.stringify(data)
-			// 		console.log(dataStr)
-			// 		$.ajax({
-			// 			type: "POST",
-			// 			url: "index.php/home/saveData",
-			// 			data: dataStr,
-			// 			cache: false,
-			// 			success: function(data) {
-			// 				alert(data);
-			// 			},
-			// 			error: function(err) {
-			// 				alert("FAILED")
-			// 			}
-			// 		});
-		// 	// 	}
-				
-		// });
-
 		})
 
 		function renderSO(dataSO = []) {
@@ -313,7 +286,7 @@
 										<thead>
 											<tr>
 												<td class="w-75">Student Outcome
-													${so.id}
+													${so.statusSOId}
 													:</td>
 												<td class="w-25">Status :</td>
 											</tr>
@@ -344,23 +317,23 @@
 											<table class="table table-borderless">
 												<thead>
 													<tr>
-														<th class="text-secondary"> Learning Objective
+														<th class="text-secondary w-25"> Learning Objective
 															${lobj.code} <b> ${lobj.isXX ? "*" :" "} </b> </th>
-														<td class="w-25 text-center">teaching & Learning Strategy</td>
+														<td class="w-25 text-center">Teaching & Learning Strategy</td>
 														<td class="w-25 text-center">Assesment Plan</td>
 														<td class="w-25 text-center">Weight</td>
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
-														<td class="w-50">
+														<td class="w-25">
 															<p> ${lobj.descEN} </p>
 
 															<i class="text-secondary"> ${lobj.descIN} </i>
 														</td>
 														<td class="w-25 text-center align-middle">${lobj.teachAndLearnStrategyName}</td>
 														<td class="w-25 text-center align-middle">${lobj.assessmentPlan}</td>
-														<td class="w-25 text-center align-middle">${loj.weight}</td>
+														<td class="w-25 text-center align-middle">${lobj.weight}</td>
 													</tr>
 												</tbody>
 											</table>
