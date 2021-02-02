@@ -64,7 +64,7 @@ class Home extends MY_Controller
 			foreach ($so as $s) {
 
 				// get data LObj untuk tiap-tiap SO
-				$detail  = $this->data->getCourseLObj($s->statusStudentOutcomeId, $code);
+				$detail  = $this->data->getCourseLObj($s->statusSOId, $code);
 				foreach ($detail as $d) {
 					$s->learningObjs[] = $d;
 				}
@@ -96,21 +96,21 @@ class Home extends MY_Controller
 
 		$_POST = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
 		
-		$this->form_validation->set_rules('courseStudentOutlineID', 'SO ID', 'required');
+		/* $this->form_validation->set_rules('courseStudentOutlineID', 'SO ID', 'required');
 		$this->form_validation->set_rules('courseLObjID', 'LObj ID', 'required');
 		
 		if ($this->form_validation->run() == FALSE) {
 			echo json_encode(['status' => false,
                              'message' => $this->form_validation->error_array()]);
-		} else {
+		} else { */
 			// contoh post data untuk map parameter ketiga saveStudentLearningOutcome(1,2,3), parameter 1,2 bisa diabaikan (diset null dulu)
 			// $map = array(7 => 0, 8 => 2, 9 => 1);		=> key adalah courseLObj2LOID dan valuenya adalah weigthLO	
-			$data['status'] = $this->data->saveStudentLearningOutcome($this->_userID, $this->input->post('courseStudentOutlineID'), $this->input->post('courseLObjID'), $this->input->post('detail', true));
+			$data['status'] = $this->data->saveStudentLearningOutcome($this->_userID, $this->input->post('detail', true));
 			$data['msg'] 	= $this->data->getMessage();
 			
 			$this->output->set_content_type('application/json')
 						->set_output(json_encode($data, JSON_NUMERIC_CHECK));
-		}
+		/* } */
 	}
 	
 	function getCourseMonitoring($acad_career = 'RS1', $attr_value = '373', $strm = '1920')
