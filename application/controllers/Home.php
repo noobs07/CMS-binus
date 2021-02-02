@@ -21,9 +21,9 @@ class Home extends MY_Controller
 		// simplify for get course code, if not exists course code, then set default course code.
 		// FINC7007,ISYS6442,ACCT6063ACCT6010,ISYS6256
 		$course_id = $this->input->get_post('course_id');
-		$course_id = empty($course_id)? '015117' : $course_id;
 		
-		//$course_id = empty($course_id)? 'STAT6008' : $course_id;
+		// FOOD6573  STAT6008
+		$course_id = empty($course_id)? 'FOOD6573' : $course_id;
 		
 		$course = $this->data->getBaseCourseByCourseID($course_id);
 		
@@ -32,7 +32,7 @@ class Home extends MY_Controller
 		$data['mapping'] = null;
 		
 		if($course){
-			$code = "STAT6008";
+			$code = $course->CRSE_CODE;
 			// get data SO
 			$so = $this->data->getCourseStudentOutcome($code);
 			
@@ -89,24 +89,22 @@ class Home extends MY_Controller
 		$this->load->library('form_validation');
 
 		$_POST = json_decode($this->security->xss_clean($this->input->raw_input_stream), true);
-		// dump($_POST);
-		//$this->form_validation->set_rules('courseStudentOutlineID', 'SO ID', 'required');
-		//$this->form_validation->set_rules('courseLObjID', 'LObj ID', 'required');
-		$this->form_validation->set_rules('detail', 'detail', 'required');
 		
-		// if ($this->form_validation->run() == FALSE) {
-		// 	echo json_encode(['status' => false,
-		// 					'dump' => dump($_POST),
-        //                      'message' => $this->form_validation->error_array()]);
-		// } else {
+		$this->form_validation->set_rules('courseStudentOutlineID', 'SO ID', 'required');
+		$this->form_validation->set_rules('courseLObjID', 'LObj ID', 'required');
+		
+		if ($this->form_validation->run() == FALSE) {
+			echo json_encode(['status' => false,
+                             'message' => $this->form_validation->error_array()]);
+		} else {
 			// contoh post data untuk map parameter ketiga saveStudentLearningOutcome(1,2,3), parameter 1,2 bisa diabaikan (diset null dulu)
 			// $map = array(7 => 0, 8 => 2, 9 => 1);		=> key adalah courseLObj2LOID dan valuenya adalah weigthLO	
-			$data['status'] = $this->data->saveStudentLearningOutcome($this->_userID, $this->input->post('detail', true));
+			$data['status'] = $this->data->saveStudentLearningOutcome($this->_userID, $this->input->post('courseStudentOutlineID'), $this->input->post('courseLObjID'), $this->input->post('detail', true));
 			$data['msg'] 	= $this->data->getMessage();
 			
-			// $this->output->set_content_type('application/json')
-						echo json_encode($data);
-		// }
+			$this->output->set_content_type('application/json')
+						->set_output(json_encode($data, JSON_NUMERIC_CHECK));
+		}
 	}
 	
 	function getCourseMonitoring($acad_career = 'RS1', $attr_value = '373', $strm = '1920')
