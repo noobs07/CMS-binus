@@ -104,7 +104,6 @@
 							<h4>MAPPING LO to L.ObJ</h4>
 							<b>* stand for XX references </b>
 
-							<!-- table of mapping -->
 
 
 							<div class="table-responsive" id="mappingTableArea">
@@ -112,8 +111,6 @@
 
 								</table>
 							</div>
-							<!-- end table of mapping -->
-							<!-- end content of mapping LO to LOBj -->
 						</div>
 						<div class="tab-pane fade" id="nav-resource" role="tabpanel" aria-labelledby="nav-resource-tab">
 							Resource
@@ -151,6 +148,7 @@
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
 	<script>
+		let temp = []
 		function objectifyForm(formArray = []) {
 			let returnArray = {};
 			let detailObj = {}
@@ -172,11 +170,10 @@
 
 
 		function add(ths, sno) {
-			console.log(ths, sno)
 			let lobj = (ths.getAttribute("lobj"))
 			let lo = (ths.getAttribute("lo"))
-			let id = lobj
-			let inputHidden = $("#" + id)
+			let id = (ths.getAttribute("lobj2"))
+			let inputHidden = $("." + id)
 			let editedLobj = $("button[isEditActive='true']");
 			if (editedLobj.length > 0) {
 				let fix = editedLobj.filter((index, element) => {
@@ -223,6 +220,23 @@
 			let lobj = ths.getAttribute("lobj");
 			let isEditActive = ths.getAttribute("isEditActive");
 			if (isEditActive === "true") {
+
+				let row = $(ths).parents("tbody");
+				let inputs = row.find("input")
+				let data = objectifyForm($(inputs).serializeArray())
+				$.ajax({
+						type: "POST",
+						url: "index.php/home/saveData",
+						data: JSON.stringify({detail : {...data}}),
+						cache: false,
+						success: function(data) {
+							alert(data);
+						},
+						error: function(err) {
+							alert("FAILED")
+						}
+					});
+
 				$(ths).attr("isEditActive", "false");
 				$(ths)
 					.empty()
@@ -230,6 +244,7 @@
 			} else {
 				$(ths).attr("isEditActive", "true");
 				$(ths).empty().append("Save");
+				
 			}
 		}
 
@@ -239,6 +254,7 @@
 				url: 'index.php/home/getmappingSO',
 				type: "GET",
 				success: function(res) {
+					console.log(res)
 					renderSO(res.so)
 					renderMapping(res.mapping)
 				},
@@ -248,40 +264,40 @@
 				
 			})
 			
-			$(".submit").on("click",function(event) {
-				console.log("SUBMIT")
-				event.preventDefault();
+			// $(".submit").on("click",function(event) {
+			// 	console.log("SUBMIT")
+			// 	event.preventDefault();
 
-				let el = event.target;
+			// 	let el = event.target;
 
-				let edit = $(el).attr("isEditActive")
-				if(edit === "true"){
-					let row = $(el).parents("tr").first();
-					var inputs = row.find("input")
-					let data = objectifyForm($(inputs).serializeArray())
+			// 	let edit = $(el).attr("isEditActive")
+			// 	if(edit === "true"){
+			// 		let row = $(el).parents("tr").first();
+			// 		var inputs = row.find("input")
+			// 		let data = objectifyForm($(inputs).serializeArray())
 					
-					let dataStr = JSON.stringify(data)
-					console.log(dataStr)
-					$.ajax({
-						type: "POST",
-						url: "index.php/home/saveData",
-						data: dataStr,
-						cache: false,
-						success: function(data) {
-							alert(data);
-						},
-						error: function(err) {
-							alert("FAILED")
-						}
-					});
-				}
+			// 		let dataStr = JSON.stringify(data)
+			// 		console.log(dataStr)
+			// 		$.ajax({
+			// 			type: "POST",
+			// 			url: "index.php/home/saveData",
+			// 			data: dataStr,
+			// 			cache: false,
+			// 			success: function(data) {
+			// 				alert(data);
+			// 			},
+			// 			error: function(err) {
+			// 				alert("FAILED")
+			// 			}
+			// 		});
+		// 	// 	}
 				
-		});
+		// });
 
 		})
 
 		function renderSO(dataSO = []) {
-			console.log(dataSO)
+			temp = dataSO;
 			if(dataSO.length <= 0){
 				$("#render_so").append(`<ul class="list-group my-4"> 
 					<li class="list-group-item">
@@ -297,7 +313,7 @@
 										<thead>
 											<tr>
 												<td class="w-75">Student Outcome
-													${so.statusStudentOutcomeId}
+													${so.id}
 													:</td>
 												<td class="w-25">Status :</td>
 											</tr>
@@ -305,31 +321,32 @@
 										<tbody>
 											<tr>
 												<td class="w-75">
-													<p> ${so.statusStudentOutcomeNameEN} </p>
+													<p> ${so.descEN} </p>
 												</td>
 												<td class="w-25">
-													<p> Specific Student Outcome </p>
+													<p> ${so.descIN} </p>
 												</td>
 											</tr>
 											<tr>
 												<td class="w-75">
-													<i class="text-secondary"> ${so.statusStudentOutcomeNameIN} </i>
+													<i class="text-secondary"> ${so.statusSONameEN} </i>
 												</td>
-												<td class="w-25"><i class="text-secondary"> Keterampilan Kerja Khusus
+												<td class="w-25"><i class="text-secondary"> ${so.statusSONameIN}
 													</i></td>
 											</tr>
 										</tbody>
 									</table>
 								</li>
 
-								${so.LObj.map((lobj, i) => {
+								${so.learningObjs.map((lobj, i) => {
 									return (
 										`<li class="list-group-item" key=${i}>
 											<table class="table table-borderless">
 												<thead>
 													<tr>
 														<th class="text-secondary"> Learning Objective
-															${lobj.code} * </th>
+															${lobj.code} <b> ${lobj.isXX ? "*" :" "} </b> </th>
+														<td class="w-25 text-center">teaching & Learning Strategy</td>
 														<td class="w-25 text-center">Assesment Plan</td>
 														<td class="w-25 text-center">Weight</td>
 													</tr>
@@ -341,8 +358,9 @@
 
 															<i class="text-secondary"> ${lobj.descIN} </i>
 														</td>
-														<td class="w-25 text-center align-middle">Exam Question</td>
-														<td class="w-25 text-center align-middle">40%</td>
+														<td class="w-25 text-center align-middle">${lobj.teachAndLearnStrategyName}</td>
+														<td class="w-25 text-center align-middle">${lobj.assessmentPlan}</td>
+														<td class="w-25 text-center align-middle">${loj.weight}</td>
 													</tr>
 												</tbody>
 											</table>
@@ -358,7 +376,7 @@
 
 
 		function renderMapping(dataMapping = []) {
-			if(dataSO.length <= 0){
+			if(temp.length <= 0){
 				$("#mappingTable").append(`<ul class="list-group my-4"> 
 					<li class="list-group-item">
 						<h2> Data Empty </h2>
@@ -384,15 +402,13 @@
 			$("#mappingTable").append(`
 				<tbody>
 					${dataMapping.map((row, i) => {
-						console.log(row.LO.length)
 						return (`
 						<tr>
 							
-							<td class="mapping-td-${i} width-100p"> ${row.code} </td>
+							<td class="mapping-td-${i} width-100p"> ${row.code} <b> ${row.isXX ? "*" :" "} </b> </td>
 							<td class="mapping-td-${i} width-300p"> ${row.descEN}  </td>
 
 							${row.LO.map(data_lo => {
-								console.log(data_lo.courseLObj2LOId)
 								let check1 = ""
 								let check2 = ""
 								if(data_lo.weightLO == 2){
@@ -400,10 +416,10 @@
 									check2="checked"
 								}else if (data_lo.weightLO == 1) check1="checked"
 								return (`<td class="mapping-td-${i} width-100p">
-									<span class="fa fa-times times1 ${check1}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj="${data_lo.courseLObj2LOId}" onclick="add(this,1)" ></span>
-									<span class="fa fa-times times2 ${check2}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj="${data_lo.courseLObj2LOId}" onclick="add(this,2)" ></span>
-									<input type="hidden" form="formLobj-${i}" value="0" name="${row.courseLObj2LOId}" id="${row.courseLObj2LOId}">
-									<input type="hidden" form="formLobj-${i}" value="${row.weightLO}">
+									<span class="fa fa-times times1 ${check1}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj2="${data_lo.courseLObj2LOId}" onclick="add(this,1)" ></span>
+									<span class="fa fa-times times2 ${check2}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj2="${data_lo.courseLObj2LOId}" onclick="add(this,2)" ></span>
+									<input type="hidden" form="formLobj-${i}" value="${data_lo.weightLO}" name="${data_lo.courseLObj2LOId}" class="${data_lo.courseLObj2LOId}">
+									<input type="hidden" form="formLobj-${i}" value="${data_lo.weightLO}">
 								</td>`)
 
 							})
@@ -413,7 +429,7 @@
 							
 							<td class="width-100p"> ${LOData.length} </td> 
 							<td class="width-100p">
-								<button isEditActive="false" onclick="changeButton(this)" type="reset" lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
+								<button isEditActive="false" onclick="changeButton(this)"  lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
 									<i class="fa fa-pencil" aria-hidden="true"></i> 
 								</button> 
 							</td> 
