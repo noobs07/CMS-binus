@@ -33,8 +33,8 @@ class Data_model extends MY_Model{
 		return $this->db->query("dbo.CMS_GET_CourseStudentOutcomeByCourseCode ?", array($course_code))->result();
 	}
 	
-	public function getCourseLObj($statusStudentOutcomeId = null, $course_code = null){
-		return $this->db->query("dbo.CMS_GET_CourseLObj ?, ?", array($statusStudentOutcomeId, $course_code))->result();
+	public function getCourseLObj($statusSOId = null, $course_code = null){
+		return $this->db->query("dbo.CMS_GET_CourseLObj ?, ?", array($statusSOId, $course_code))->result();
 	}
 	
 	public function getCourseLObj2LO($course_code){
@@ -58,6 +58,10 @@ class Data_model extends MY_Model{
 				$data[$i]['code'] 	= $r->code;
 				$data[$i]['descIN'] = $r->descIN;
 				$data[$i]['descEN'] = $r->descEN;
+				$data[$i]['teachAndLearnStrategyName'] = $r->teachAndLearnStrategyName;
+				$data[$i]['assessmentPlan'] = $r->assessmentPlan;
+				$data[$i]['weight'] = $r->weight;
+				$data[$i]['isXX'] = $r->isXX;
 				$data[$i]['LO'][] 	= ['courseLObj2LOId' => $r->courseLObj2LOId,
 									   'courseOutlineLearningOutcomeID' => $r->courseOutlineLearningOutcomeID,
 									   'weightLO' => $r->weightLO,
@@ -71,19 +75,19 @@ class Data_model extends MY_Model{
 	
 	
 	public function insertCourseStudentOutcome($user_id = 1, $course_code, $data){
-		if(is_array($data) && !empty($data)){
+		if(is_object($data) && !empty($data)){
 			
-			$ins = "INSERT INTO {$this->_tableCourseStudentOutcome}(stsrc, userIn, statusStudentOutcomeId, statusStudentOutcomePM, statusStudentOutcomeNameIN, statusStudentOutcomeNameEN, CRSE_CODE) VALUES ";
-			$insDetail = "INSERT INTO {$this->_tableCourseLObj}(stsrc, userIn, courseLObjId, code, descIN, descEN, bloomTaxonomyId, bloomTaxonomyName, bloomTaxonomyDesc, bloomTaxonomyCode, bloomTaxonomyKeyword, bloomTaxonomyLevel, statusStudentOutcomeId, CRSE_CODE) VALUES ";
+			$ins = "INSERT INTO {$this->_tableCourseStudentOutcome}(id, stsrc, userIn, statusSOId, statusSONameIN, statusSONameEN, CRSE_CODE, descIN, descEN, code) VALUES ";
+			$insDetail = "INSERT INTO {$this->_tableCourseLObj}(stsrc, userIn, id, code, descIN, descEN, teachAndLearnStrategyName, assessmentPlan, weight, isXX, courseSOId, statusSOId, CRSE_CODE) VALUES ";
 			$check_ins = false;
 			$check_insDetail = false;
 			$insLObj2LO = [];
-			foreach($data as $d){
-				$ins .= "('I', {$this->db->escape($user_id)}, {$this->db->escape($d->statusStudentOutcomeId)}, {$this->db->escape($d->statusStudentOutcomePM)}, {$this->db->escape($d->statusStudentOutcomeNameIN)}, {$this->db->escape($d->statusStudentOutcomeNameEN)}, {$this->db->escape($course_code)}),";
+			foreach($data->studentOutcome as $d){
+				$ins .= "({$this->db->escape($d->id)}, 'I', {$this->db->escape($user_id)}, {$this->db->escape($d->statusSOId)}, {$this->db->escape($d->statusSONameIN)}, {$this->db->escape($d->statusSONameEN)}, {$this->db->escape($course_code)}, {$this->db->escape($d->descIN)}, {$this->db->escape($d->descEN)}, {$this->db->escape($d->code)}),";
 				$check_ins = true;
 				
-				foreach($d->lobjData as $r){
-					$insDetail .= "('I', {$this->db->escape($user_id)}, {$this->db->escape($r->id)}, {$this->db->escape($r->code)}, {$this->db->escape($r->descIN)}, {$this->db->escape($r->descEN)}, {$this->db->escape($r->bloomTaxonomyId)}, {$this->db->escape($r->bloomTaxonomyName)}, {$this->db->escape($r->bloomTaxonomyDesc)}, {$this->db->escape($r->bloomTaxonomyCode)}, {$this->db->escape($r->bloomTaxonomyKeyword)}, {$this->db->escape($r->bloomTaxonomyLevel)}, {$this->db->escape($d->statusStudentOutcomeId)}, {$this->db->escape($course_code)}),";
+				foreach($d->learningObjs as $r){
+					$insDetail .= "('I', {$this->db->escape($user_id)}, {$this->db->escape($r->id)}, {$this->db->escape($r->code)}, {$this->db->escape($r->descIN)}, {$this->db->escape($r->descEN)}, {$this->db->escape($r->teachAndLearnStrategyName)}, {$this->db->escape($r->assessmentPlan)}, {$this->db->escape($r->weight)}, {$this->db->escape($r->isXX)}, {$this->db->escape($d->id)}, {$this->db->escape($d->statusSOId)}, {$this->db->escape($course_code)}),";
 					$check_insDetail = true;
 					
 					$insLObj2LO[] = "dbo.CMS_INS_CourseLObj2LO {$this->db->escape($course_code)}, {$this->db->escape($r->id)}, {$this->db->escape($user_id)} ";
