@@ -34,7 +34,8 @@ class Home extends MY_Controller
 													  'CRSE_CODE' => $course_id, 
 													  'CRSE_TTL_LONG_I' => 'Kursus tidak ditemukan', 
 													  'COURSE_TITLE_LONG' => 'Course not found', 
-													  'N_SKST' => 2];
+													  'N_SKST' => 2,
+													  'N_SKSP' => 2];
 		
 		$data['status']	 = false;
 		$data['msg'] 	 = "No Data Coourse Found";
