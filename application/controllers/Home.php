@@ -28,9 +28,17 @@ class Home extends MY_Controller
 		$course = $this->data->getBaseCourseByCourseID($course_id);
 		
 		// bypass
-		$course = empty($course)? (object)['CRSE_CODE' => $course_id, 'ACAD_CAREER' =>'AAA'] : $course;
+		$course = !empty($course)? $course : (object)['INSTITUTION' => 'BNS01', 
+													  'ACAD_CAREER' => 'CNF', 
+													  'CRSE_ID' => '404', 
+													  'CRSE_CODE' => 'C_404', 
+													  'CRSE_TTL_LONG_I' => 'Kursus tidak ditemukan', 
+													  'COURSE_TITLE_LONG' => 'Course not found', 
+													  'N_SKST' => 2];
 		
+		$data['status']	 = false;
 		$data['msg'] 	 = "No Data Coourse Found";
+		$data['course']  = null;
 		$data['so'] 	 = null;
 		$data['mapping'] = null;
 		
@@ -96,7 +104,9 @@ class Home extends MY_Controller
 				$data['log'] = null;
 			}
 			
+			$data['status']	 = true;
 			$data['msg'] 	 = $this->data->getMessage();
+			$data['course']	 = $course;
 			$data['so'] 	 = $result;
 			$data['mapping'] = $LObj2LO;	
 		}
