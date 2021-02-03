@@ -30,8 +30,8 @@ class Home extends MY_Controller
 		// bypass
 		$course = !empty($course)? $course : (object)['INSTITUTION' => 'BNS01', 
 													  'ACAD_CAREER' => 'CNF', 
-													  'CRSE_ID' => '404', 
-													  'CRSE_CODE' => 'C_404', 
+													  'CRSE_ID' => $course_id, 
+													  'CRSE_CODE' => $course_id, 
 													  'CRSE_TTL_LONG_I' => 'Kursus tidak ditemukan', 
 													  'COURSE_TITLE_LONG' => 'Course not found', 
 													  'N_SKST' => 2];
@@ -84,15 +84,15 @@ class Home extends MY_Controller
 			$LObj2LO = $this->data->getCourseLObj2LO($code);
 			
 			if(!$LObj2LO){
-				$data[$i]['courseLObjID'] = uniqid();
-				$data[$i]['code'] 	= 'code';
-				$data[$i]['descIN'] = 'desc IN';
-				$data[$i]['descEN'] = 'desc EN';
-				$data[$i]['teachAndLearnStrategyName'] = 'teachAndLearnStrategyName';
-				$data[$i]['assessmentPlan'] = 'assessmentPlan';
-				$data[$i]['weight'] = 50;
-				$data[$i]['isXX'] 	= false;
-				$data[$i]['LO'] 	= [['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 1', 'weightLO' => '1', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 1', 'priority' => 1],
+				$data[0]['courseLObjID'] = uniqid();
+				$data[0]['code'] 	= 'code';
+				$data[0]['descIN'] = 'desc IN';
+				$data[0]['descEN'] = 'desc EN';
+				$data[0]['teachAndLearnStrategyName'] = 'teachAndLearnStrategyName';
+				$data[0]['assessmentPlan'] = 'assessmentPlan';
+				$data[0]['weight'] = 50;
+				$data[0]['isXX'] 	= false;
+				$data[0]['LO'] 	= [['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 1', 'weightLO' => '1', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 1', 'priority' => 1],
 										['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 2', 'weightLO' => '2', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 2', 'priority' => 1],
 										['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 3', 'weightLO' => '3', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 3', 'priority' => 1],
 									  ];
