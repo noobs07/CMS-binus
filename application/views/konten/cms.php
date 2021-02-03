@@ -83,8 +83,7 @@
 
 							<!-- content of student outcomes -->
 							<h4>STUDENT OUTCOMES</h4>
-							<h6 class="ml-2">Teaching & Learning Strategy</h6>
-							<p class="ml-4"> Lecturing, Discussing, Hand of Practice</p>
+							
 
 							<b>* stands for XX references</b>
 
@@ -256,7 +255,7 @@
 				success: function(res) {
 					console.log(res)
 					renderSO(res.so)
-					renderMappingLOBJ(res.so[0].learningObjs)
+					renderMapping(res.mapping)
 					$("#course").text(res.so[0].statusSONameIN)
 					$("#course_credit_theory").text(res.so[0].learningObjs[0].descEN)
 					$("#course_credit_practicum").text(res.so[0].learningObjs[0].descIN)
@@ -333,7 +332,7 @@
 														</td>
 														<td class="w-25 text-center align-middle">${lobj.teachAndLearnStrategyName}</td>
 														<td class="w-25 text-center align-middle">${lobj.assessmentPlan}</td>
-														<td class="w-25 text-center align-middle">${lobj.weight}</td>
+														<td class="w-25 text-center align-middle">${lobj.weight}% </td>
 													</tr>
 												</tbody>
 											</table>
@@ -419,58 +418,6 @@
 
 		}
 
-		function renderMappingLOBJ(dataMapping = []) {
-			console.log(dataMapping)
-			if(temp.length <= 0){
-				$("#mappingTable").append(`<ul class="list-group my-4"> 
-					<li class="list-group-item">
-						<h2> Data Empty </h2>
-					</li>
-				</ul>`)
-			}
-			else{
-			let LOData = dataMapping[0].LO
-			$("#mappingTable").append(`
-				<thead>
-					<tr>
-						<th class="width-100p"></th>
-						<th class="width-300p"></th>
-						
-						<th class="width-100p">Total LO to support </th>
-						<th class="width-100p"> Action </th>
-					</tr>
-				</thead>
-			`)
-
-			$("#mappingTable").append(`
-				<tbody>
-					${dataMapping.map((row, i) => {
-						return (`
-						<tr>
-							
-							<td class="mapping-td-${i} width-100p"> ${row.descEN} <b> ${row.isXX ? "*" :" "} </b> </td>
-							<td class="mapping-td-${i} width-300p"> ${row.descIN}  </td>
-
-							
-							
-							<td class="width-100p">  </td> 
-							<td class="width-100p">
-								<button isEditActive="false" onclick="changeButton(this)"  lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
-									<i class="fa fa-pencil" aria-hidden="true"></i> 
-								</button> 
-							</td> 
-							
-						</tr>
-
-						`)
-					})}
-					
-				</tbody>
-			`)
-		}	
-
-
-		}
 
 	</script>
 
