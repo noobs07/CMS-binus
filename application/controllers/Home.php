@@ -74,6 +74,21 @@ class Home extends MY_Controller
 
 			// get data mapping LObj dan LO
 			$LObj2LO = $this->data->getCourseLObj2LO($code);
+			
+			if(!$LObj2LO){
+				$data[$i]['courseLObjID'] = uniqid();
+				$data[$i]['code'] 	= 'code';
+				$data[$i]['descIN'] = 'desc IN';
+				$data[$i]['descEN'] = 'desc EN';
+				$data[$i]['teachAndLearnStrategyName'] = 'teachAndLearnStrategyName';
+				$data[$i]['assessmentPlan'] = 'assessmentPlan';
+				$data[$i]['weight'] = 50;
+				$data[$i]['isXX'] 	= false;
+				$data[$i]['LO'] 	= [['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 1', 'weightLO' => '1', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 1', 'priority' => 1],
+										['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 2', 'weightLO' => '2', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 2', 'priority' => 1],
+										['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 3', 'weightLO' => '3', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 3', 'priority' => 1],
+									  ];
+			}
 
 			if ($result) {
 				$data['log'] = $this->data->getLogQuery();
