@@ -320,7 +320,7 @@
 													<tr>
 														<th class="text-secondary"> Learning Objective
 															${lobj.code} <b> ${lobj.isXX ? "*" :" "} </b> </th>
-														<td class="w-25 text-center ">Assesment Plan</td>
+														<td class="w-25 text-center ">Method of Assesment</td>
 														<td class="w-25 text-center ">Weight</td>
 													</tr>
 												</thead>
