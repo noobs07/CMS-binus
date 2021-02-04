@@ -68,7 +68,7 @@ td {
 nav > div a.nav-item.nav-link.active:after {
 	content: "";
 	position: relative;
-	bottom: -40px;
+	bottom: -43px;
 	left: -40%;
 	border: 10px solid transparent;
 	border-top-color: #fa9430;
