@@ -37,7 +37,7 @@
 					<p class="text-muted">Course</p>
 				</div>
 				<div class="col-sm-9">
-					<p id="course"> : </p>
+					<p id="course"> : -</p>
 				</div>
 			</div>
 			<div class="row">
@@ -45,7 +45,7 @@
 					<p  class="text-muted">Course Credit Theory</p>
 				</div>
 				<div class="col-sm-9">
-					<p id="course_credit_theory"> : 2</p>
+					<p id="course_credit_theory"> : -</p>
 				</div>
 			</div>
 			<div class="row">
@@ -256,9 +256,9 @@
 					console.log(res)
 					renderSO(res.so)
 					renderMapping(res.mapping)
-					$("#course").text(res.so[0].statusSONameIN)
-					$("#course_credit_theory").text(res.so[0].learningObjs[0].descEN)
-					$("#course_credit_practicum").text(res.so[0].learningObjs[0].descIN)
+					$("#course").text(": "+res.course.CRSE_CODE+" "+res.course.COURSE_TITLE_LONG)
+					$("#course_credit_theory").text(": "+(res.course.N_SKST === null ? "-" : res.course.N_SKST)  )
+					$("#course_credit_practicum").text(": "+(res.course.N_SKSP === null ? "-" : res.course.N_SKSP))
 				},
 				error: function(err) {
 					alert("FAILED")
