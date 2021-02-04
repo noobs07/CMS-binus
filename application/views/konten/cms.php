@@ -136,14 +136,14 @@
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.js" integrity="sha512-1lagjLfnC1I0iqH9plHYIUq3vDMfjhZsLy9elfK89RBcpcRcx4l+kRJBSnHh2Mh6kLxRHoObD1M5UTUbgFy6nA==" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
 	</script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
 	</script>
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js">
-	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js" integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==" crossorigin="anonymous"></script>
+	<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js">
+	</script> -->
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
 	<script>
@@ -287,7 +287,7 @@
 										<thead>
 											<tr>
 												<td class="w-75">Student Outcome
-													${so.statusSOId}
+													
 													:</td>
 												<td class="w-25">Status :</td>
 											</tr>
@@ -318,19 +318,22 @@
 											<table class="table table-borderless">
 												<thead>
 													<tr>
-														<th class="text-secondary"> Learning Objective
+														<th class="text-secondary w-50"> Learning Objective
 															${lobj.code} <b> ${lobj.isXX ? "*" :" "} </b> </th>
+														<td class="w-25 text-center ">Teaching & Learning Strategy</td>
 														<td class="w-25 text-center ">Method of Assesment</td>
 														<td class="w-25 text-center ">Weight</td>
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
-														<td >
+														<td class="w-50">
 															<p> ${lobj.descEN} </p>
 
 															<i class="text-secondary"> ${lobj.descIN} </i>
 														</td>
+														<td class="w-25 text-center align-middle">${lobj.teachAndLearnStrategyName === "" ? "-" : lobj.teachAndLearnStrategyName}</td>
+
 														<td class="w-25 text-center align-middle">${lobj.assessmentPlan === "" ? "-" : lobj.assessmentPlan}</td>
 														<td class="w-25 text-center align-middle">${lobj.weight}% </td>
 													</tr>
