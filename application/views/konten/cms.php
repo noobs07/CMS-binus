@@ -37,7 +37,7 @@
 					<p class="text-muted">Course</p>
 				</div>
 				<div class="col-sm-9">
-					<p id="course"> : </p>
+					<p id="course"> : -</p>
 				</div>
 			</div>
 			<div class="row">
@@ -45,7 +45,7 @@
 					<p  class="text-muted">Course Credit Theory</p>
 				</div>
 				<div class="col-sm-9">
-					<p id="course_credit_theory"> : 2</p>
+					<p id="course_credit_theory"> : -</p>
 				</div>
 			</div>
 			<div class="row">
@@ -229,10 +229,12 @@
 						data: JSON.stringify({detail : {...data}}),
 						cache: false,
 						success: function(data) {
-							alert(data);
+							if(data.status){
+								alert(data.msg)
+							}
 						},
 						error: function(err) {
-							alert("FAILED")
+							alert("Failed to save Data. Try Again.")
 						}
 					});
 
@@ -256,9 +258,9 @@
 					console.log(res)
 					renderSO(res.so)
 					renderMapping(res.mapping)
-					$("#course").text(res.so[0].statusSONameIN)
-					$("#course_credit_theory").text(res.so[0].learningObjs[0].descEN)
-					$("#course_credit_practicum").text(res.so[0].learningObjs[0].descIN)
+					$("#course").text(": "+res.course.CRSE_CODE+" "+res.course.COURSE_TITLE_LONG)
+					$("#course_credit_theory").text(": "+(res.course.N_SKST === null ? "-" : res.course.N_SKST)  )
+					$("#course_credit_practicum").text(": "+(res.course.N_SKSP === null ? "-" : res.course.N_SKSP))
 				},
 				error: function(err) {
 					alert("FAILED")
@@ -296,12 +298,12 @@
 													<p> ${so.descEN} </p>
 												</td>
 												<td class="w-25">
-													<p> ${so.descIN} </p>
+													<p> ${so.statusSONameEN}  </p>
 												</td>
 											</tr>
 											<tr>
 												<td class="w-75">
-													<i class="text-secondary"> ${so.statusSONameEN} </i>
+													<i class="text-secondary"> ${so.descIN}  </i>
 												</td>
 												<td class="w-25"><i class="text-secondary"> ${so.statusSONameIN}
 													</i></td>
@@ -316,22 +318,20 @@
 											<table class="table table-borderless">
 												<thead>
 													<tr>
-														<th class="text-secondary w-25"> Learning Objective
+														<th class="text-secondary"> Learning Objective
 															${lobj.code} <b> ${lobj.isXX ? "*" :" "} </b> </th>
-														<td class="w-25 text-center">Teaching & Learning Strategy</td>
-														<td class="w-25 text-center">Assesment Plan</td>
-														<td class="w-25 text-center">Weight</td>
+														<td class="w-25 text-center ">Assesment Plan</td>
+														<td class="w-25 text-center ">Weight</td>
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
-														<td class="w-25">
+														<td >
 															<p> ${lobj.descEN} </p>
 
 															<i class="text-secondary"> ${lobj.descIN} </i>
 														</td>
-														<td class="w-25 text-center align-middle">${lobj.teachAndLearnStrategyName}</td>
-														<td class="w-25 text-center align-middle">${lobj.assessmentPlan}</td>
+														<td class="w-25 text-center align-middle">${lobj.assessmentPlan === "" ? "-" : lobj.assessmentPlan}</td>
 														<td class="w-25 text-center align-middle">${lobj.weight}% </td>
 													</tr>
 												</tbody>
@@ -339,7 +339,7 @@
 											<hr>
 										</li>`
 									)
-								})}
+								}).join('')}
 							</ul>`
 					)
 				})
@@ -363,10 +363,10 @@
 						<th class="width-100p"></th>
 						<th class="width-300p"></th>
 						${LOData.map(lo => {
-							return `<th class="width-100p">LO ${lo.courseOutlineLearningOutcomeID} </th>`
+							return `<th class="width-100p text-center">LO ${lo.courseOutlineLearningOutcomeID} </th>`
 						})}
-						<th class="width-100p">Total LO to support </th>
-						<th class="width-100p"> Action </th>
+						<th class="width-100p text-center">Total LO to support </th>
+						<th class="width-100p text-center"> Action </th>
 					</tr>
 				</thead>
 			`)
@@ -387,7 +387,7 @@
 									check1="checked"; 
 									check2="checked"
 								}else if (data_lo.weightLO == 1) check1="checked"
-								return (`<td class="mapping-td-${i} width-100p">
+								return (`<td class="mapping-td-${i} width-100p text-center">
 									<span class="fa fa-times times1 ${check1}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj2="${data_lo.courseLObj2LOId}" onclick="add(this,1)" ></span>
 									<span class="fa fa-times times2 ${check2}" lobj="${row.courseLObjID}" lo="${data_lo.courseOutlineLearningOutcomeID}" lobj2="${data_lo.courseLObj2LOId}" onclick="add(this,2)" ></span>
 									<input type="hidden" form="formLobj-${i}" value="${data_lo.weightLO}" name="${data_lo.courseLObj2LOId}" class="${data_lo.courseLObj2LOId}">
@@ -399,8 +399,8 @@
 							
 							}
 							
-							<td class="width-100p"> ${LOData.length} </td> 
-							<td class="width-100p">
+							<td class="width-100p text-center"> ${LOData.length} </td> 
+							<td class="width-100p text-center">
 								<button isEditActive="false" onclick="changeButton(this)"  lobj="${row.courseLObjID}" class="btn btn-yellow btn-sm d-flex p-2 mx-auto" >
 									<i class="fa fa-pencil" aria-hidden="true"></i> 
 								</button> 
