@@ -230,11 +230,11 @@
 						cache: false,
 						success: function(data) {
 							if(data.status){
-								alert(data.msg)
+								alert("Data berhasil disimpan.")
 							}
 						},
 						error: function(err) {
-							alert("Failed to save Data. Try Again.")
+							alert("Data gagal disimpan.")
 						}
 					});
 
