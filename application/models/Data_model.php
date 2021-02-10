@@ -37,11 +37,21 @@ class Data_model extends MY_Model{
 		return $this->db->query("dbo.CMS_GET_CourseLObj ?, ?", array($statusSOId, $course_code))->result();
 	}
 	
-	public function getCourseLObj2LO($course_code){
+	public function insertCourseLObj2LO($user_id = 1, $course_id, $course_code){
+		$data = $this->getCourseLObj(null, $course_code);
+		if($data){
+			foreach($data as $r){
+				$this->db->query("dbo.CMS_INS_CourseLObj2LO {$this->db->escape($course_id)}, {$this->db->escape($course_code)}, {$this->db->escape($r->courseLObjId)}, {$this->db->escape($user_id)} ");
+			}
+		}	
+	}
+	
+	public function getCourseLObj2LO($user_id = 1, $course_id, $course_code){
 		$result = $this->db->query("dbo.CMS_GET_CourseLObj2LO ?", array($course_code))->result();
 		
 		$data = [];
 		$i= 0;
+	
 		foreach($result as $index => $r){
 			if(isset($data[$i][$r->courseLObjID])){
 				$data[$i]['LO'][] 	= ['courseLObj2LOId' => $r->courseLObj2LOId,
@@ -74,7 +84,7 @@ class Data_model extends MY_Model{
 	}
 	
 	
-	public function insertCourseStudentOutcome($user_id = 1, $course_code, $data){
+	public function insertCourseStudentOutcome($user_id = 1, $course_id, $course_code, $data){
 		if(is_object($data) && !empty($data)){
 			
 			$ins = "INSERT INTO {$this->_tableCourseStudentOutcome}(id, stsrc, userIn, statusSOId, statusSONameIN, statusSONameEN, CRSE_CODE, descIN, descEN, code) VALUES ";
@@ -90,7 +100,7 @@ class Data_model extends MY_Model{
 					$insDetail .= "('I', {$this->db->escape($user_id)}, {$this->db->escape($r->id)}, {$this->db->escape($r->code)}, {$this->db->escape($r->descIN)}, {$this->db->escape($r->descEN)}, {$this->db->escape($r->teachAndLearnStrategyName)}, {$this->db->escape($r->assessmentPlan)}, {$this->db->escape($r->weight)}, {$this->db->escape($r->isXX)}, {$this->db->escape($d->id)}, {$this->db->escape($d->statusSOId)}, {$this->db->escape($course_code)}),";
 					$check_insDetail = true;
 					
-					$insLObj2LO[] = "dbo.CMS_INS_CourseLObj2LO {$this->db->escape($course_code)}, {$this->db->escape($r->id)}, {$this->db->escape($user_id)} ";
+					$insLObj2LO[] = "dbo.CMS_INS_CourseLObj2LO {$this->db->escape($course_id)}, {$this->db->escape($course_code)}, {$this->db->escape($r->id)}, {$this->db->escape($user_id)} ";
 				}
 			}
 			
