@@ -46,9 +46,8 @@ class Home extends MY_Controller
 		//dump($course,'course');
 		
 		if($course){
-			$code = $course->CRSE_CODE;
 			// get data SO
-			$so = $this->data->getCourseStudentOutcome($code);
+			$so = $this->data->getCourseStudentOutcome($course->CRSE_CODE);
 			//dump($so,'so');
 			
 			// untuk mendapatkan course monitoring, parameter bisa diinputkan disini. parameter 'RS1','373','1920'
@@ -57,15 +56,15 @@ class Home extends MY_Controller
 			// Jika data belum ada, get dari API
 			if (empty($so)) {
 				// return dari API SO dan LObj
-				$api_data	= $this->postRequest("get_assesment_plane/{$code}");
+				$api_data	= $this->postRequest("get_assesment_plane/{$course->CRSE_CODE}");
 				//dump($api_data,'API');	die;
 				
 				// simpan SO dan LObj ke local database
-				$res = $this->data->insertCourseStudentOutcome($this->_userID, $code, $api_data->data);
-				//dump($res,'Insert'); 
+				$res = $this->data->insertCourseStudentOutcome($this->_userID, $course->CRSE_ID, $course->CRSE_CODE, $api_data->data);
+				$data['res'] = $this->data->getMessage(); 
 				
 				// get data SO
-				$so = $this->data->getCourseStudentOutcome($code);
+				$so = $this->data->getCourseStudentOutcome($course->CRSE_CODE);
 				//dump($so,'SO-2'); 
 			}
 			
@@ -73,7 +72,7 @@ class Home extends MY_Controller
 			foreach ($so as $s) {
 
 				// get data LObj untuk tiap-tiap SO
-				$detail  = $this->data->getCourseLObj($s->statusSOId, $code);
+				$detail  = $this->data->getCourseLObj($s->statusSOId, $course->CRSE_CODE);
 				foreach ($detail as $d) {
 					$s->learningObjs[] = $d;
 				}
@@ -82,10 +81,13 @@ class Home extends MY_Controller
 			$result = $so;
 
 			// get data mapping LObj dan LO
-			$LObj2LO = $this->data->getCourseLObj2LO($code);
+			$LObj2LO = $this->data->getCourseLObj2LO($this->_userID, $course->CRSE_ID, $course->CRSE_CODE);
 			
-			if(!$LObj2LO){
-				$LObj2LO[0]['courseLObjID'] = uniqid();
+			if(!$LObj2LO){		
+				$this->data->insertCourseLObj2LO($this->_userID, $course->CRSE_ID, $course->CRSE_CODE);
+				
+				$LObj2LO = $this->data->getCourseLObj2LO($this->_userID, $course->CRSE_ID, $course->CRSE_CODE);
+				/* $LObj2LO[0]['courseLObjID'] = uniqid();
 				$LObj2LO[0]['code'] 	= 'code';
 				$LObj2LO[0]['descIN'] = 'desc IN';
 				$LObj2LO[0]['descEN'] = 'desc EN';
@@ -96,7 +98,7 @@ class Home extends MY_Controller
 				$LObj2LO[0]['LO'] 	= [['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 1', 'weightLO' => '1', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 1', 'priority' => 1],
 										['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 2', 'weightLO' => '2', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 2', 'priority' => 1],
 										['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 3', 'weightLO' => '3', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 3', 'priority' => 1],
-									  ];
+									  ]; */
 			}
 
 			if ($result) {
