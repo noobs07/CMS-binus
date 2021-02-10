@@ -22,8 +22,8 @@ class Home extends MY_Controller
 		// FINC7007,ISYS6442,ACCT6063, ACCT6010,ISYS6256
 		$course_id = $this->input->get_post('course_id');
 		
-		// FOOD6573  STAT6008
-		$course_id = empty($course_id)? 'BUSS6017' : $course_id;
+		// FOOD6573  STAT6008 BUSS6017
+		$course_id = empty($course_id)? '019500' : $course_id;
 		
 		$course = $this->data->getBaseCourseByCourseID($course_id);
 		
