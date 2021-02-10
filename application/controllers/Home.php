@@ -60,8 +60,7 @@ class Home extends MY_Controller
 				//dump($api_data,'API');	die;
 				
 				// simpan SO dan LObj ke local database
-				$res = $this->data->insertCourseStudentOutcome($this->_userID, $course->CRSE_ID, $course->CRSE_CODE, $api_data->data);
-				$data['res'] = $this->data->getMessage(); 
+				$res = $this->data->insertCourseStudentOutcome($this->_userID, $course->CRSE_ID, $course->CRSE_CODE, $api_data->data); 
 				
 				// get data SO
 				$so = $this->data->getCourseStudentOutcome($course->CRSE_CODE);
