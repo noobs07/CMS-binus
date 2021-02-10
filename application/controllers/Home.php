@@ -85,15 +85,15 @@ class Home extends MY_Controller
 			$LObj2LO = $this->data->getCourseLObj2LO($code);
 			
 			if(!$LObj2LO){
-				$data[0]['courseLObjID'] = uniqid();
-				$data[0]['code'] 	= 'code';
-				$data[0]['descIN'] = 'desc IN';
-				$data[0]['descEN'] = 'desc EN';
-				$data[0]['teachAndLearnStrategyName'] = 'teachAndLearnStrategyName';
-				$data[0]['assessmentPlan'] = 'assessmentPlan';
-				$data[0]['weight'] = 50;
-				$data[0]['isXX'] 	= false;
-				$data[0]['LO'] 	= [['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 1', 'weightLO' => '1', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 1', 'priority' => 1],
+				$LObj2LO[0]['courseLObjID'] = uniqid();
+				$LObj2LO[0]['code'] 	= 'code';
+				$LObj2LO[0]['descIN'] = 'desc IN';
+				$LObj2LO[0]['descEN'] = 'desc EN';
+				$LObj2LO[0]['teachAndLearnStrategyName'] = 'teachAndLearnStrategyName';
+				$LObj2LO[0]['assessmentPlan'] = 'assessmentPlan';
+				$LObj2LO[0]['weight'] = 50;
+				$LObj2LO[0]['isXX'] 	= false;
+				$LObj2LO[0]['LO'] 	= [['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 1', 'weightLO' => '1', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 1', 'priority' => 1],
 										['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 2', 'weightLO' => '2', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 2', 'priority' => 1],
 										['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 3', 'weightLO' => '3', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 3', 'priority' => 1],
 									  ];
