@@ -295,17 +295,17 @@
 										<tbody>
 											<tr>
 												<td class="w-75">
-													<p> ${so.descEN} </p>
+													<p> ${ so.descEN === null ? "-" : so.descEN} </p>
 												</td>
 												<td class="w-25">
-													<p> ${so.statusSONameEN}  </p>
+													<p> ${ so.statusSONameEN === null ? "-" : so.statusSONameEN}  </p>
 												</td>
 											</tr>
 											<tr>
 												<td class="w-75">
-													<i class="text-secondary"> ${so.descIN}  </i>
+													<i class="text-secondary"> ${ so.descIN === null ? "-" : so.descIN}  </i>
 												</td>
-												<td class="w-25"><i class="text-secondary"> ${so.statusSONameIN}
+												<td class="w-25"><i class="text-secondary"> ${ so.statusSONameIN === null ? "-" : so.statusSONameIN}
 													</i></td>
 											</tr>
 										</tbody>
@@ -319,7 +319,7 @@
 												<thead>
 													<tr>
 														<th class="text-secondary w-50"> Learning Objective
-															${lobj.code} <b> ${lobj.isXX ? "*" :" "} </b> </th>
+															${lobj.code === null ? "-" : lobj.code} <b> ${lobj.isXX ? "*" :" "} </b> </th>
 														<td class="w-25 text-center ">Teaching & Learning Strategy</td>
 														<td class="w-25 text-center ">Method of Assesment</td>
 														<td class="w-25 text-center ">Weight</td>
@@ -328,14 +328,14 @@
 												<tbody>
 													<tr>
 														<td class="w-50">
-															<p> ${lobj.descEN} </p>
+															<p> ${ lobj.descEN === null ? "-" : lobj.descEN} </p>
 
-															<i class="text-secondary"> ${lobj.descIN} </i>
+															<i class="text-secondary"> ${lobj.descIN === null ? "-" : lobj.descIN} </i>
 														</td>
 														<td class="w-25 text-center align-middle">${lobj.teachAndLearnStrategyName === "" ? "-" : lobj.teachAndLearnStrategyName}</td>
 
 														<td class="w-25 text-center align-middle">${lobj.assessmentPlan === "" ? "-" : lobj.assessmentPlan}</td>
-														<td class="w-25 text-center align-middle">${lobj.weight}% </td>
+														<td class="w-25 text-center align-middle">${ lobj.weight === null ? "-" : lobj.weight}% </td>
 													</tr>
 												</tbody>
 											</table>
@@ -366,7 +366,7 @@
 						<th class="width-100p"></th>
 						<th class="width-300p"></th>
 						${LOData.map(lo => {
-							return `<th class="width-100p text-center">LO ${lo.courseOutlineLearningOutcomeID} </th>`
+							return `<th class="width-100p text-center">LO ${ lo.courseOutlineLearningOutcomeID === null ? "-" : lo.courseOutlineLearningOutcomeID} </th>`
 						})}
 						<th class="width-100p text-center">Total LO to support </th>
 						<th class="width-100p text-center"> Action </th>
@@ -380,8 +380,8 @@
 						return (`
 						<tr>
 							
-							<td class="mapping-td-${i} width-100p"> ${row.code} <b> ${row.isXX ? "*" :" "} </b> </td>
-							<td class="mapping-td-${i} width-300p"> ${row.descEN}  </td>
+							<td class="mapping-td-${i} width-100p"> ${ row.code === null ? "-" : row.code} <b> ${row.isXX ? "*" :" "} </b> </td>
+							<td class="mapping-td-${i} width-300p"> ${ row.descEN === null ? "-" : row.descEN}   </td>
 
 							${row.LO.map(data_lo => {
 								let check1 = ""
