@@ -366,7 +366,7 @@
 						<th class="width-100p"></th>
 						<th class="width-300p"></th>
 						${LOData.map(lo => {
-							return `<th class="width-100p text-center">LO ${ lo.courseOutlineLearningOutcomeID === null ? "-" : lo.courseOutlineLearningOutcomeID} </th>`
+							return `<th class="width-100p text-center">LO ${ lo.courseOutlineLearningOutcome === null ? "-" : lo.courseOutlineLearningOutcome} </th>`
 						})}
 						<th class="width-100p text-center">Total LO to support </th>
 						<th class="width-100p text-center"> Action </th>
