@@ -22,8 +22,8 @@ class Home extends MY_Controller
 		// FINC7007,ISYS6442,ACCT6063, ACCT6010,ISYS6256
 		$course_id = $this->input->get_post('course_id');
 		
-		// FOOD6573  STAT6008
-		$course_id = empty($course_id)? 'BUSS6017' : $course_id;
+		// FOOD6573  STAT6008 BUSS6017
+		$course_id = empty($course_id)? '019500' : $course_id;
 		
 		$course = $this->data->getBaseCourseByCourseID($course_id);
 		
@@ -85,15 +85,15 @@ class Home extends MY_Controller
 			$LObj2LO = $this->data->getCourseLObj2LO($code);
 			
 			if(!$LObj2LO){
-				$data[0]['courseLObjID'] = uniqid();
-				$data[0]['code'] 	= 'code';
-				$data[0]['descIN'] = 'desc IN';
-				$data[0]['descEN'] = 'desc EN';
-				$data[0]['teachAndLearnStrategyName'] = 'teachAndLearnStrategyName';
-				$data[0]['assessmentPlan'] = 'assessmentPlan';
-				$data[0]['weight'] = 50;
-				$data[0]['isXX'] 	= false;
-				$data[0]['LO'] 	= [['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 1', 'weightLO' => '1', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 1', 'priority' => 1],
+				$LObj2LO[0]['courseLObjID'] = uniqid();
+				$LObj2LO[0]['code'] 	= 'code';
+				$LObj2LO[0]['descIN'] = 'desc IN';
+				$LObj2LO[0]['descEN'] = 'desc EN';
+				$LObj2LO[0]['teachAndLearnStrategyName'] = 'teachAndLearnStrategyName';
+				$LObj2LO[0]['assessmentPlan'] = 'assessmentPlan';
+				$LObj2LO[0]['weight'] = 50;
+				$LObj2LO[0]['isXX'] 	= false;
+				$LObj2LO[0]['LO'] 	= [['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 1', 'weightLO' => '1', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 1', 'priority' => 1],
 										['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 2', 'weightLO' => '2', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 2', 'priority' => 1],
 										['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 3', 'weightLO' => '3', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 3', 'priority' => 1],
 									  ];
