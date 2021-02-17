@@ -125,9 +125,10 @@ class Data_model extends MY_Model{
 	public function saveStudentLearningOutcome($user_id = 1, $map){
 		if(!empty($map)){
 			
+			
 			$upd  = "UPDATE e SET e.weightLO = t.weightLO, e.userUp = {$this->db->escape($user_id)}, e.dateUp = GETDATE() FROM {$this->_tableCourseLObj2LO} e JOIN ( VALUES "; //(courseLObj2LOId, courseStudentOutlineID, courseLObjID, weightLO) VALUES ";
 			foreach($map as $LObj2LOID => $weigth){
-				$upd .= "({$this->db->escape($LObj2LOID)}, {$this->db->escape($weigth)}),";	
+				$upd .= "({$this->db->escape($LObj2LOID)}, ".intval($weigth)."),";	
 			}
 			
 			$upd  = rtrim($upd, ',');
