@@ -231,6 +231,8 @@
 						success: function(data) {
 							if(data.status){
 								alert("Data berhasil disimpan.")
+							}else{
+								alert(data.msg)
 							}
 						},
 						error: function(err) {
