@@ -236,7 +236,7 @@
 							}
 						},
 						error: function(err) {
-							alert("Data gagal disimpan.")
+							alert("Network Error, Data gagal disimpan.")
 						}
 					});
 
