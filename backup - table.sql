@@ -32,10 +32,6 @@ CREATE INDEX IDX_new_courseStudentOutcome_CRSE_CODE
   ON [PRIMARY]
 GO
 
-ALTER TABLE CMS_DB.dbo.courseLObj
-  ADD CONSTRAINT FK_new_courseLObj_statusStudentOutcomeId FOREIGN KEY (statusStudentOutcomeId) REFERENCES dbo.new_courseStudentOutcome (statusStudentOutcomeId)
-GO
-
 
 CREATE TABLE CMS_DB.dbo.courseLObj2LO (
   Stsrc char(1) NOT NULL,
@@ -76,5 +72,3 @@ CREATE INDEX IDX_new_courseStudentOutcome_CRSE_CODE
   ON CMS_DB.dbo.courseStudentOutcome (CRSE_CODE)
   ON [PRIMARY]
 GO
-
-
