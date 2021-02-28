@@ -22,7 +22,7 @@ class Home extends MY_Controller
 		// FINC7007,ISYS6442,ACCT6063, ACCT6010,ISYS6256
 		$course_id = $this->input->get_post('course_id');
 		
-		// FOOD6573  STAT6008 BUSS6017
+		// FOOD6573  STAT6008 BUSS6017 019500 COMP6004
 		$course_id = empty($course_id)? '019500' : $course_id;
 		
 		$course = $this->data->getBaseCourseByCourseID($course_id);
@@ -43,21 +43,18 @@ class Home extends MY_Controller
 		$data['so'] 	 = null;
 		$data['mapping'] = null;
 		
-		//dump($course,'course');
-		
 		if($course){
 			// get data SO
 			$so = $this->data->getCourseStudentOutcome($course->CRSE_CODE);
-			//dump($so,'so');
 			
 			// untuk mendapatkan course monitoring, parameter bisa diinputkan disini. parameter 'RS1','373','1920'
 			$courseMonitoring = $this->getCourseMonitoring($course->ACAD_CAREER, $this->input->post('attr_value'), $this->input->post('strm'));
-			
 			// Jika data belum ada, get dari API
 			if (empty($so)) {
 				// return dari API SO dan LObj
 				$api_data	= $this->postRequest("get_assesment_plane/{$course->CRSE_CODE}");
-				//dump($api_data,'API');	die;
+				//dump($course,'course');
+				//dump($api_data,'api_data'); die;
 				
 				// simpan SO dan LObj ke local database
 				$res = $this->data->insertCourseStudentOutcome($this->_userID, $course->CRSE_ID, $course->CRSE_CODE, $api_data->data); 
@@ -78,26 +75,14 @@ class Home extends MY_Controller
 			}
 			
 			$result = $so;
+			
 
 			// get data mapping LObj dan LO
 			$LObj2LO = $this->data->getCourseLObj2LO($this->_userID, $course->CRSE_ID, $course->CRSE_CODE);
 			
 			if(!$LObj2LO){		
 				$this->data->insertCourseLObj2LO($this->_userID, $course->CRSE_ID, $course->CRSE_CODE);
-				
 				$LObj2LO = $this->data->getCourseLObj2LO($this->_userID, $course->CRSE_ID, $course->CRSE_CODE);
-				/* $LObj2LO[0]['courseLObjID'] = uniqid();
-				$LObj2LO[0]['code'] 	= 'code';
-				$LObj2LO[0]['descIN'] = 'desc IN';
-				$LObj2LO[0]['descEN'] = 'desc EN';
-				$LObj2LO[0]['teachAndLearnStrategyName'] = 'teachAndLearnStrategyName';
-				$LObj2LO[0]['assessmentPlan'] = 'assessmentPlan';
-				$LObj2LO[0]['weight'] = 50;
-				$LObj2LO[0]['isXX'] 	= false;
-				$LObj2LO[0]['LO'] 	= [['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 1', 'weightLO' => '1', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 1', 'priority' => 1],
-										['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 2', 'weightLO' => '2', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 2', 'priority' => 1],
-										['courseLObj2LOId' => uniqid(), 'courseOutlineLearningOutcomeID' => 'courseOutlineLearningOutcomeID 3', 'weightLO' => '3', 'courseOutlineLearningOutcome' => 'courseOutlineLearningOutcome 3', 'priority' => 1],
-									  ]; */
 			}
 
 			if ($result) {

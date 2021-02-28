@@ -48,7 +48,6 @@ class Data_model extends MY_Model{
 	
 	public function getCourseLObj2LO($user_id = 1, $course_id, $course_code){
 		$result = $this->db->query("dbo.CMS_GET_CourseLObj2LO ?", array($course_code))->result();
-		
 		$data = [];
 		$i= 0;
 	
@@ -87,17 +86,17 @@ class Data_model extends MY_Model{
 	public function insertCourseStudentOutcome($user_id = 1, $course_id, $course_code, $data){
 		if(is_object($data) && !empty($data)){
 			
-			$ins = "INSERT INTO {$this->_tableCourseStudentOutcome}(id, stsrc, userIn, statusSOId, statusSONameIN, statusSONameEN, CRSE_CODE, descIN, descEN, code) VALUES ";
-			$insDetail = "INSERT INTO {$this->_tableCourseLObj}(stsrc, userIn, id, code, descIN, descEN, teachAndLearnStrategyName, assessmentPlan, weight, isXX, courseSOId, statusSOId, CRSE_CODE) VALUES ";
+			$ins = "INSERT INTO {$this->_tableCourseStudentOutcome}(id, stsrc, userIn, dateIn, statusSOId, statusSONameIN, statusSONameEN, CRSE_CODE, descIN, descEN, code) VALUES ";
+			$insDetail = "INSERT INTO {$this->_tableCourseLObj}(stsrc, userIn, dateIn, id, code, descIN, descEN, teachAndLearnStrategyName, assessmentPlan, weight, isXX, courseSOId, statusSOId, CRSE_CODE) VALUES ";
 			$check_ins = false;
 			$check_insDetail = false;
 			$insLObj2LO = [];
 			foreach($data->studentOutcome as $d){
-				$ins .= "({$this->db->escape($d->id)}, 'I', {$this->db->escape($user_id)}, {$this->db->escape($d->statusSOId)}, {$this->db->escape($d->statusSONameIN)}, {$this->db->escape($d->statusSONameEN)}, {$this->db->escape($course_code)}, {$this->db->escape($d->descIN)}, {$this->db->escape($d->descEN)}, {$this->db->escape($d->code)}),";
+				$ins .= "({$this->db->escape($d->id)}, 'I', {$this->db->escape($user_id)}, GETDATE(), {$this->db->escape($d->statusSOId)}, {$this->db->escape($d->statusSONameIN)}, {$this->db->escape($d->statusSONameEN)}, {$this->db->escape($course_code)}, {$this->db->escape($d->descIN)}, {$this->db->escape($d->descEN)}, {$this->db->escape($d->code)}),";
 				$check_ins = true;
 				
 				foreach($d->learningObjs as $r){
-					$insDetail .= "('I', {$this->db->escape($user_id)}, {$this->db->escape($r->id)}, {$this->db->escape($r->code)}, {$this->db->escape($r->descIN)}, {$this->db->escape($r->descEN)}, {$this->db->escape($r->teachAndLearnStrategyName)}, {$this->db->escape($r->assessmentPlan)}, {$this->db->escape($r->weight)}, {$this->db->escape($r->isXX)}, {$this->db->escape($d->id)}, {$this->db->escape($d->statusSOId)}, {$this->db->escape($course_code)}),";
+					$insDetail .= "('I', {$this->db->escape($user_id)}, GETDATE(), {$this->db->escape($r->id)}, {$this->db->escape($r->code)}, {$this->db->escape($r->descIN)}, {$this->db->escape($r->descEN)}, {$this->db->escape($r->teachAndLearnStrategyName)}, {$this->db->escape($r->assessmentPlan)}, {$this->db->escape($r->weight)}, {$this->db->escape($r->isXX)}, {$this->db->escape($d->id)}, {$this->db->escape($d->statusSOId)}, {$this->db->escape($course_code)}),";
 					$check_insDetail = true;
 					
 					$insLObj2LO[] = "dbo.CMS_INS_CourseLObj2LO {$this->db->escape($course_id)}, {$this->db->escape($course_code)}, {$this->db->escape($r->id)}, {$this->db->escape($user_id)} ";
